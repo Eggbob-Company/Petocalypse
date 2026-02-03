@@ -409,6 +409,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1244440036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6507530153717780000, guid: 55e2a2d712879af4882c6243475759ed, type: 3}
+  m_PrefabInstance: {fileID: 6350756610988787778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1304558635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4940047714799716661, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
+  m_PrefabInstance: {fileID: 5891926118946955659}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1304558640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304558635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f45b037060fa3479a7d88f04df1ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 1244440036}
+  move_speed: 3
 --- !u!1001 &5891926118946955659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -464,7 +494,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4940047714799716661, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1304558640}
   m_SourcePrefab: {fileID: 100100000, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
 --- !u!1001 &6350756610988787778
 PrefabInstance:
