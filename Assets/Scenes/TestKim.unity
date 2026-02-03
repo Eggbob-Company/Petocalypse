@@ -439,6 +439,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 1244440036}
   move_speed: 3
+--- !u!95 &1304558641
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304558635}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e20e4ad169a1f584596cd1262b593e72, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5891926118946955659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -498,6 +519,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4940047714799716661, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1304558640}
+    - targetCorrespondingSourceObject: {fileID: 4940047714799716661, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1304558641}
   m_SourcePrefab: {fileID: 100100000, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
 --- !u!1001 &6350756610988787778
 PrefabInstance:
