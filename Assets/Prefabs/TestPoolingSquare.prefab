@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6961809288320521782}
   - component: {fileID: 1613477320260291492}
   m_Layer: 0
-  m_Name: PoolingSquare
+  m_Name: TestPoolingSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
