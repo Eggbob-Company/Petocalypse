@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
     private Animator _anim;  // 애니메이터 컴포넌트
     private Vector2 _last_move_vector = Vector2.down;  // 초기 상태를 아래를 보고 있게 설정
 
+    // 다른 스크립트에서 읽을 수 있게 프로퍼티 제공
+    public Vector2 LastMoveVector => _last_move_vector;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
