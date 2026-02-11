@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 176052948}
-  - component: {fileID: 176052947}
+  - component: {fileID: 176052949}
   m_Layer: 0
   m_Name: ObjectPoolManager
   m_TagString: Untagged
@@ -139,25 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &176052947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176052946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff7f777f23d5b5b42a2f807744234682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectInfos:
-  - objectName: Object1
-    prefab: {fileID: 5887816873147518294, guid: bb137269ec8d3974b809bc9cfd5d13ac, type: 3}
-    count: 10
-  - objectName: Object2
-    prefab: {fileID: 5887816873147518294, guid: d084de802854ae1419d192856f91dc7c, type: 3}
-    count: 15
 --- !u!4 &176052948
 Transform:
   m_ObjectHideFlags: 0
@@ -173,6 +154,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &176052949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176052946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff7f777f23d5b5b42a2f807744234682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _object_infos:
+  - object_name: Object1
+    prefab: {fileID: 5887816873147518294, guid: bb137269ec8d3974b809bc9cfd5d13ac, type: 3}
+    count: 10
+  - object_name: Object2
+    prefab: {fileID: 5887816873147518294, guid: d084de802854ae1419d192856f91dc7c, type: 3}
+    count: 15
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1603995070}
-  - component: {fileID: 1603995069}
+  - component: {fileID: 1603995071}
   m_Layer: 0
   m_Name: EnemySpawnManager
   m_TagString: Untagged
@@ -409,18 +409,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1603995069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603995068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf43f6549c56d34d999e47e7aecb02c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1603995070
 Transform:
   m_ObjectHideFlags: 0
@@ -436,6 +424,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1603995071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603995068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf43f6549c56d34d999e47e7aecb02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

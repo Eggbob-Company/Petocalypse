@@ -11,7 +11,7 @@ public class ObjectPoolManager : MonoBehaviour
     private class ObjectInfo
     {
         // 오브젝트 이름
-        public string objectName;
+        public string object_name;
         // 오브젝트 풀에서 관리할 오브젝트
         public GameObject prefab;
         // 몇개를 미리 생성해둘건지
@@ -22,19 +22,19 @@ public class ObjectPoolManager : MonoBehaviour
     public static ObjectPoolManager instance;
 
     // 오브젝트풀 매니저 준비 완료표시
-    public bool IsReady { get; private set; }
+    public bool is_ready { get; private set; }
 
     [SerializeField]
-    private ObjectInfo[] objectInfos = null;
+    private ObjectInfo[] _object_infos = null;
 
     // 생성할 오브젝트의 key값 지정을 위한 변수
-    private string objectName;
+    private string _object_name;
 
     // 오브젝트풀들을 관리할 딕셔너리
-    private Dictionary<string, IObjectPool<GameObject>> ojbectPoolDic = new Dictionary<string, IObjectPool<GameObject>>();
+    private Dictionary<string, IObjectPool<GameObject>> _object_pool_dic = new Dictionary<string, IObjectPool<GameObject>>();
 
     // 오브젝트풀에서 오브젝트를 새로 생성할 때 사용할 딕셔너리
-    private Dictionary<string, GameObject> goDic = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> _go_dic = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
@@ -49,40 +49,40 @@ public class ObjectPoolManager : MonoBehaviour
 
     private void Init()
     {
-        IsReady = false;
+        is_ready = false;
 
-        for (int idx = 0; idx < objectInfos.Length; idx++)
+        for (int idx = 0; idx < _object_infos.Length; idx++)
         {
             IObjectPool<GameObject> pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool,
-            OnDestroyPoolObject, true, objectInfos[idx].count, objectInfos[idx].count);
+            OnDestroyPoolObject, true, _object_infos[idx].count, _object_infos[idx].count);
 
-            if (goDic.ContainsKey(objectInfos[idx].objectName))
+            if (_go_dic.ContainsKey(_object_infos[idx].object_name))
             {
-                Debug.LogFormat("{0} 이미 등록된 오브젝트입니다.", objectInfos[idx].objectName);
+                Debug.LogFormat("{0} 이미 등록된 오브젝트입니다.", _object_infos[idx].object_name);
                 return;
             }
 
-            goDic.Add(objectInfos[idx].objectName, objectInfos[idx].prefab);
-            ojbectPoolDic.Add(objectInfos[idx].objectName, pool);
+            _go_dic.Add(_object_infos[idx].object_name, _object_infos[idx].prefab);
+            _object_pool_dic.Add(_object_infos[idx].object_name, pool);
 
             // 미리 오브젝트 생성 해놓기
-            for (int i = 0; i < objectInfos[idx].count; i++)
+            for (int i = 0; i < _object_infos[idx].count; i++)
             {
-                objectName = objectInfos[idx].objectName;
+                _object_name = _object_infos[idx].object_name;
                 PoolAble poolAbleGo = CreatePooledItem().GetComponent<PoolAble>();
                 poolAbleGo.Pool.Release(poolAbleGo.gameObject);
             }
         }
 
         Debug.Log("오브젝트풀링 준비 완료");
-        IsReady = true;
+        is_ready = true;
     }
 
     // 생성
     private GameObject CreatePooledItem()
     {
-        GameObject poolGo = Instantiate(goDic[objectName]);
-        poolGo.GetComponent<PoolAble>().Pool = ojbectPoolDic[objectName];
+        GameObject poolGo = Instantiate(_go_dic[_object_name]);
+        poolGo.GetComponent<PoolAble>().Pool = _object_pool_dic[_object_name];
         return poolGo;
     }
 
@@ -106,14 +106,14 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject GetGo(string goName)
     {
-        objectName = goName;
+        _object_name = goName;
 
-        if (goDic.ContainsKey(goName) == false)
+        if (_go_dic.ContainsKey(goName) == false)
         {
             Debug.LogFormat("{0} 오브젝트풀에 등록되지 않은 오브젝트입니다.", goName);
             return null;
         }
 
-        return ojbectPoolDic[goName].Get();
+        return _object_pool_dic[goName].Get();
     }
 }

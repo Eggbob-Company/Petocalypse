@@ -9,7 +9,7 @@ public class EnemySpawnManager : MonoBehaviour
         StartCoroutine(CoSpawnObject1());
     }
 
-    // Object1을 1초마다 자동 생성하는 코루틴
+    // Object1을 0.5초마다 자동 생성하는 코루틴
     private IEnumerator CoSpawnObject1()
     {
         yield return new WaitUntil(() => ObjectPoolManager.instance != null); // ObjectPoolManager가 준비될 때까지 대기
@@ -19,18 +19,18 @@ public class EnemySpawnManager : MonoBehaviour
             Vector2 random_one = Random.insideUnitCircle * 3f;
             SpawnAtPosition("Object1", new Vector3(random_one.x, random_one.y, 0f));
 
-            yield return new WaitForSeconds(1f); // 1초 대기
+            yield return new WaitForSeconds(0.5f); // 0.5초 대기
         }
     }
 
-    public void SpawnAtPosition(string objectName, Vector3 position)
+    public void SpawnAtPosition(string object_name, Vector3 spawn_position)
     {
         if (ObjectPoolManager.instance == null) return;
 
-        GameObject obj = ObjectPoolManager.instance.GetGo(objectName);
+        GameObject obj = ObjectPoolManager.instance.GetGo(object_name);
         if (obj != null)
         {
-            obj.transform.position = position;
+            obj.transform.position = spawn_position;
         }
     }
 
