@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class TestBullet : PoolAble
+ // PoolAble을 상속받음으로써 오브젝트 풀에 들어갈 수 있게 됨
+public class EnemySpawn : PoolAble
 {
 
     private void OnEnable()

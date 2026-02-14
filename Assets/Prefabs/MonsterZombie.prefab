@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 521705018339036792}
   - component: {fileID: 8874129792692591643}
   - component: {fileID: 2521580994905436119}
-  - component: {fileID: -6635775072122468908}
+  - component: {fileID: 2368016940385522412}
   m_Layer: 0
   m_Name: MonsterZombie
   m_TagString: Enemy
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target_player: {fileID: 0}
   move_speed: 1
---- !u!114 &-6635775072122468908
+--- !u!114 &2368016940385522412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
