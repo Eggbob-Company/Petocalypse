@@ -168,8 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _object_infos:
   - object_name: Object1
-    prefab: {fileID: 5887816873147518294, guid: bb137269ec8d3974b809bc9cfd5d13ac, type: 3}
-    count: 10
+    prefab: {fileID: 3117100203125479387, guid: bacd4e1ca21b5e9479bceb0f8e04ce9b, type: 3}
+    count: 20
   - object_name: Object2
     prefab: {fileID: 5887816873147518294, guid: d084de802854ae1419d192856f91dc7c, type: 3}
     count: 15

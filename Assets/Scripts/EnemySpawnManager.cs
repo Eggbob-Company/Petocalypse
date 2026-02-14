@@ -19,7 +19,7 @@ public class EnemySpawnManager : MonoBehaviour
             Vector2 random_one = Random.insideUnitCircle * 3f;
             SpawnAtPosition("Object1", new Vector3(random_one.x, random_one.y, 0f));
 
-            yield return new WaitForSeconds(0.5f); // 0.5초 대기
+            yield return new WaitForSeconds(0.1f); // 0.5초 대기
         }
     }
 
