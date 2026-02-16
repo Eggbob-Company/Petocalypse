@@ -53,18 +53,5 @@ public class EnemyHealth : MonoBehaviour
             // 체력보다 많은 데미지를 줘서 즉사시킴
             TakeDamage(100.0f);
         }
-
-        //     // 플레이어랑 몬스터랑 닿으면 플레이어에게 데미지를 준다. -> 원래 정상적인 게임이라면 이 코드를 사용. 
-        // if (collision.gameObject.CompareTag("Player"))
-        // {
-        //     // 플레이어 스크립트를 찾아옴
-        //     PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-            
-        //     // 플레이어에게 데미지를 줌 (내 공격력만큼)
-        //     if (player != null)
-        //     {
-        //         player.TakeDamage(10.0f); // 플레이어에게 데미지를 준다. 괄호 안에는 몬스터의 공격력 변수가 들어가면 됨.
-        //     }
-        // }
     }
 }
