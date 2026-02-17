@@ -6,7 +6,7 @@ public class EnemySpawn : PoolAble
 {
     public static Action<Vector2> OnEnemyDeath;
 
-    private void OnEnable()
+    private void OnEnable() // 몬스터 사망 조건이 생긴다면 해당 부분 필요 없음!
     {
         // 활성화될 때마다 2초 후 반환 예약
         // Invoke(nameof(ReturnToPool), 2f);
