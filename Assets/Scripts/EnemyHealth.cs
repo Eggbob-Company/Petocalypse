@@ -53,7 +53,7 @@ public class EnemyHealth : MonoBehaviour
         _current_health = _max_health;
         _is_dead = false;
         
-        Debug.Log($"[{data.name}] 스폰 완료! 세팅된 최대 체력: {_max_health}, 데미지: {_base_damage}");
+        Debug.Log($"[{data.name}] 스폰 완료. 세팅된 최대 체력: {_max_health}, 데미지: {_base_damage}");
     }
 
     // 데미지를 입는 함수 (외부에서 호출 가능)

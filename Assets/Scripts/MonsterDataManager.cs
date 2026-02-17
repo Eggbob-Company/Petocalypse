@@ -47,7 +47,7 @@ public class MonsterDataManager : MonoBehaviour
             _monster_data_dict.Add(data.id, data);
         }
 
-        Debug.Log("[System] 몬스터 데이터베이스 로드 완료! 총 데이터 개수: " + _monster_data_dict.Count);
+        Debug.Log("[System] MonsterData.csv 로드 완료. 총 데이터 개수: " + _monster_data_dict.Count);
     }
 
     // 나중에 스포너가 몬스터를 생성할 때 특정 ID의 데이터를 달라고 요청하는 함수
