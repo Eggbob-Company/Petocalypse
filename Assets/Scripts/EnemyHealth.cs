@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     // 테스트용 ID, 씬에 올려둔 몬스터가 어떤 데이터를 받아올지 결정.
-    // 스포너가 생기면 없어질 예정
+    // 스포너가 생기면 없어질 예정. 스포너가 지정해서 넣어줄 듯
     public int test_monster_id = 1001;
 
-    // csv에서 받아올 스탯
+    // csv 파일에서 받아올 스탯
     private float _max_health;
     private float _base_damage;
     private float _exp_reward;
@@ -20,24 +20,24 @@ public class EnemyHealth : MonoBehaviour
     // 지금은 테스트를 위해 데이터 매니저를 불러서 데이터를 찾아와야 함.
     void Start()
     {
-        // 1. 씬에 있는 매니저 프리팹을 찾아오기.
+        // 씬에 있는 매니저 프리팹을 찾아오기.
         MonsterDataManager manager = FindObjectOfType<MonsterDataManager>();
         
         if (manager != null)
         {
-            // 2. 내 ID(기본값 1001)에 맞는 데이터를 달라고 요청.
+            // 내 ID(기본값 1001)에 맞는 데이터를 달라고 요청.
             MonsterData data = manager.GetMonsterData(test_monster_id);
             
             if (data != null)
             {
-                // 3. 데이터를 성공적으로 받았으면 초기화 함수에 넣기!
+                // 데이터를 성공적으로 받았으면 초기화 함수에 넣기
                 InitHealth(data);
             }
         }
         
         else
         {
-            Debug.LogError("[EnemyHealth] 씬에 MonsterDataManager가 없습니다! 프리팹을 올려주세요.");
+            Debug.LogError("[EnemyHealth] 씬에 MonsterDataManager가 없습니다. 프리팹을 올려주세요.");
         }
     }
     // 데이터 삽입 & 부활 함수
