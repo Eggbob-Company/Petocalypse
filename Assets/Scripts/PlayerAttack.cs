@@ -19,6 +19,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("공격 방식")]
     public AttackType attack_type;  // 공격 방식 선택
 
+    [Header("공격 범위 설정")]
+    public float attack_range = 5.0f; // 일단 하드코딩으로 설정한 사거리 나중에 스킬 사거리 불러오면 될 듯
+
     private float _attack_timer;
     private PlayerMove _player_move;
 
@@ -76,19 +79,20 @@ public class PlayerAttack : MonoBehaviour
 
     Vector2 GetDirectionToNearestEnemy()
     {
-        // 오브젝트 중에 tag가 Enemy인 애들 찾기
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        // 플레이어 위치를 중심으로 사거리(attack_range) 내의 Enemy 태그를 가진 오브젝트 검출
+        int enemy_layer_mask = 1 << LayerMask.NameToLayer("Enemy"); 
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attack_range, enemy_layer_mask);
 
         // 없으면 리턴
         if (enemies.Length == 0)
             return Vector2.zero;
 
-        GameObject nearest_enemy = null;
+        Collider2D nearest_enemy = null;
         float min_dist = float.MaxValue;
         Vector2 my_pos = transform.position;
 
-        // 모든 Enemy 돌면서 플레이어와 거리 비교
-        foreach (GameObject enemy in enemies)
+        // 검출된 Enemy 돌면서 플레이어와 거리 비교
+        foreach (Collider2D enemy in enemies)
         {
             float dist = Vector2.Distance(my_pos, enemy.transform.position);
 
