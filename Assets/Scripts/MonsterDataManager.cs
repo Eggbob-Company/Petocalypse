@@ -13,6 +13,7 @@ public class MonsterDataManager : MonoBehaviour
     public void LoadMonsterData()
     {
         // Resources 폴더에서 MonsterData.csv 파일을 불러온다. (확장자는 빼고 이름만 적기)
+        // csv 파일을 읽어와서 텍스트 덩어리로 만들어줌.
         TextAsset csv_data = Resources.Load<TextAsset>("MonsterData");
 
         if (csv_data == null)
