@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : PoolAble
 {
+    public static Action<Vector2> OnEnemyDeath;
+
     // 테스트용 ID, 씬에 올려둔 몬스터가 어떤 데이터를 받아올지 결정.
     // 스포너가 생기면 없어질 예정. 스포너가 지정해서 넣어줄 듯
     public int test_monster_id = 1001;
@@ -76,20 +77,31 @@ public class EnemyHealth : MonoBehaviour
     // 사망 처리 함수
     void Die()
     {
+        OnEnemyDeath?.Invoke(transform.position);
+        Debug.Log($"{gameObject.name} 사망 신호 발송 및 풀 반환");
+
         _is_dead = true;
-        Debug.Log($"[Enemy] 사망, 경험치 {_exp_reward} 드롭 예정");
+        //Debug.Log($"[Enemy] 사망, 경험치 {_exp_reward} 드롭 예정");
+
 
         // 오브젝트 삭제
-        Destroy(gameObject);
+        // Destroy(gameObject);
         // 지금은 오브젝트 풀링이 적용이 안되어 있어서 제거하지만 나중에 적용되면 Destroy를 지우고
         // gameObject.SetActive(false); 로 변경.
+        ReturnToPool();
+    }
+
+    private void ReturnToPool()
+    {
+        // PoolAble에 정의된 ReleaseObject를 호출하여 풀로 복귀
+        ReleaseObject();
     }
 
     // 충돌 감지 (테스트용: 플레이어와 부딪히면 즉사) -> 플레이어 말고 공격 매체로 변경 가능
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 부딪힌 대상의 태그가 Player인지 확인
-        if (collision.gameObject.CompareTag("Player"))
+        // 부딪힌 대상의 태그가 Skill인지 확인
+        if (collision.gameObject.CompareTag("Skill"))
         {
             // 체력보다 많은 데미지를 줘서 즉사시킴
             TakeDamage(100.0f);

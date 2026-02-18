@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8874129792692591643}
   - component: {fileID: 2521580994905436119}
   - component: {fileID: 8459633840418981989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MonsterZombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -176,4 +176,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98875370c57ee5f46a3d7e566b115590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_health: 10
+  test_monster_id: 1001

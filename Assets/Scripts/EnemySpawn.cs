@@ -12,7 +12,7 @@ public class EnemySpawn : PoolAble
         // Invoke(nameof(ReturnToPool), 2f);
 
         // 테스트용
-        Invoke(nameof(Die), 2f);
+        //Invoke(nameof(Die), 2f);
     }
 
     public void Die()

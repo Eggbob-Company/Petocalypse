@@ -26,7 +26,7 @@ public class EnemySpawnManager : MonoBehaviour
         StartCoroutine(CoSpawnZombie()); // 코루틴 시작
     }
 
-    // 좀비를 0.1초마다 자동 생성하는 코루틴
+    // 좀비를 0.5초마다 자동 생성하는 코루틴
     private IEnumerator CoSpawnZombie()
     {
         yield return new WaitUntil(() => ObjectPoolManager.instance != null); // ObjectPoolManager가 준비될 때까지 대기
@@ -41,7 +41,7 @@ public class EnemySpawnManager : MonoBehaviour
                 SpawnAtPosition("Zombie", spawn_pos);
             }
 
-            yield return new WaitForSeconds(0.1f); // 0.1초 대기
+            yield return new WaitForSeconds(0.5f); // 0.5초 대기
         }
     }
 
