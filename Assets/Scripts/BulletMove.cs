@@ -29,4 +29,9 @@ public class BulletMove : MonoBehaviour
         // 화면 밖으로 나가면 비활성화 (오브젝트 풀링용)
         gameObject.SetActive(false);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("총알 맞았어요");
+    }
 }
