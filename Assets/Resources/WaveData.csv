@@ -1,0 +1,4 @@
+time_min,time_sec,monster_id,amount,interval
+0,0,1001,10,2
+0,30,1001,50,1.5
+1,0,1001,100,1
