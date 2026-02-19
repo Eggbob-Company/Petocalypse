@@ -1,0 +1,6 @@
+key,header,description,memo
+desc_bullet_lv1,1레벨 총알,시작 무기입니다.,
+desc_bullet_lv2,2레벨 총알,데미지 10 증가,
+desc_bullet_lv3,3레벨 총알,쿨타임 0.5초 감소 및 투사체 1개 증가,
+desc_bullet_lv4,4레벨 총알,데미지 10 중가,
+desc_bullet_lv5,5레벨 총알,쿨타임 0.5초 감소 및 투사체 1개 증가,
