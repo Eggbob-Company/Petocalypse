@@ -53,9 +53,9 @@ public class MonsterDataManager : MonoBehaviour
     // 나중에 스포너가 몬스터를 생성할 때 특정 ID의 데이터를 달라고 요청하는 함수
     public MonsterData GetMonsterData(int monster_id)
     {
-        if (_monster_data_dict.ContainsKey(monster_id))
+        if (_monster_data_dict.TryGetValue(monster_id, out MonsterData data))
         {
-            return _monster_data_dict[monster_id];
+            return data;
         }
 
         Debug.LogError($"[System] {monster_id}번 몬스터 데이터를 찾을 수 없습니다");

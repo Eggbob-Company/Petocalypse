@@ -1,0 +1,3 @@
+id,max_hp,recovery,move_speed,might,area,projectile_speed,duration,magnet_range,luck,desc_key
+101,80,0,5,1,1,1.2,1,1,1,desc_chicken
+102,100,0.1,6,1.2,1,1,1,1,1.5,desc_cat
