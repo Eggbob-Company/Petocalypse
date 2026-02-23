@@ -84,10 +84,7 @@ public class EnemyHealth : PoolAble
         //Debug.Log($"[Enemy] 사망, 경험치 {_exp_reward} 드롭 예정");
 
 
-        // 오브젝트 삭제
-        // Destroy(gameObject);
-        // 지금은 오브젝트 풀링이 적용이 안되어 있어서 제거하지만 나중에 적용되면 Destroy를 지우고
-        // gameObject.SetActive(false); 로 변경.
+        // 오브젝트 반납
         ReturnToPool();
     }
 
