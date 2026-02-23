@@ -8,13 +8,13 @@ public class ExpSpawnManager : MonoBehaviour
 
     private void OnEnable()
     {   // 몬스터 사망 이벤트 구독
-        EnemySpawn.OnEnemyDeath += SpawnExp;
+        EnemyHealth.OnEnemyDeath += SpawnExp;
     }
 
     private void OnDisable()
     {
         // 몬스터 사망 이벤트 구독 해제
-        EnemySpawn.OnEnemyDeath -= SpawnExp;
+        EnemyHealth.OnEnemyDeath -= SpawnExp;
     }
 
     private void SpawnExp(Vector2 spawn_position)

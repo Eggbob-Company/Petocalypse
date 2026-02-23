@@ -13,9 +13,15 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private float _spawn_except_height = 5f; // 플레이어 기준 세로 반경(높이의 절반)
 
     private Transform _player_transform;
-
+    private MonsterDataManager _monster_data_manager; // 데이터매니저 참조할 변수
     private void Start()
     {
+        _monster_data_manager = FindObjectOfType<MonsterDataManager>(); // 데이터매니저 탐색
+        if (_monster_data_manager == null)
+        {
+            Debug.LogError("씬에 MonsterDataManager가 존재하지 않습니다.");
+        }
+
         // 태그를 이용해 플레이어 좌표 참조
         GameObject player_go = GameObject.FindWithTag("Player");
         if(player_go != null)
@@ -97,15 +103,20 @@ public class EnemySpawnManager : MonoBehaviour
         if (obj != null)
         {
             obj.transform.position = spawn_position;
+
+            // 몬스터 세팅 초기화
+            EnemyHealth health = obj.GetComponent<EnemyHealth>();
+            if(health != null && _monster_data_manager != null)
+            {
+                MonsterData data = _monster_data_manager.GetMonsterData(health.test_monster_id); // 데이터매니저 호출
+                health.InitHealth(data);
+            }
+
         }
     }
 
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Alpha2)) // 키보드 2 키를 누를 때 오브젝트 랜덤 생성
-        // {
-        //     Vector2 random_two = Random.insideUnitCircle * 3f;
-        //     SpawnAtPosition("Object2", new Vector3(random_two.x, random_two.y, 0f));
-        // }
+        
     }
 }
