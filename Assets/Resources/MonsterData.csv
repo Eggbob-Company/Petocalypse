@@ -1,2 +1,2 @@
 id,name,max_health,move_speed,base_damage,attack_range,attack_rate,exp_reward,monster_type
-1001,Zombie,10,2.5,5,0,1,5,Melee
+1001,Zombie,10,1,5,0,1,5,Melee
