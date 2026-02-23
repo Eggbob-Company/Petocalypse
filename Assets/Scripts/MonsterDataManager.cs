@@ -3,10 +3,15 @@ using System.Collections.Generic;
 
 public class MonsterDataManager : MonoBehaviour
 {
+    // EnemySpawnManager에서 싱글톤 관리를 하긴 하지만 MonsterDataManager 자체에서도 싱글톤이 있는 것이 유리하다고 함.
+    // EnemySpawnManager가 아닌 다른 스크립트에서 몬스터 데이터가 필요할 경우가 있기 때문.
+    public static MonsterDataManager instance;
     private Dictionary<int, MonsterData> _monster_data_dict = new Dictionary<int, MonsterData>();
 
     void Awake()
     {
+        if (instance == null) instance = this;
+        else { Destroy(gameObject); return; }
         LoadMonsterData();
     }
 
@@ -36,12 +41,15 @@ public class MonsterDataManager : MonoBehaviour
 
             // 그릇에 데이터를 담기.
             MonsterData data = new MonsterData();
-            data.id = int.Parse(row[0]);
-            data.name = row[1];
-            data.max_health = float.Parse(row[2]);
-            data.move_speed = float.Parse(row[3]);
-            data.base_damage = float.Parse(row[4]);
-            data.exp_reward = int.Parse(row[5]);
+            data.id = int.Parse(row[0].Trim());
+            data.name = row[1].Trim();
+            data.max_health = float.Parse(row[2].Trim());
+            data.move_speed = float.Parse(row[3].Trim());
+            data.base_damage = float.Parse(row[4].Trim());
+            data.attack_range = float.Parse(row[5].Trim());
+            data.attack_rate = float.Parse(row[6].Trim());
+            data.exp_reward = int.Parse(row[7].Trim());
+            data.monster_type = row[8].Trim();
 
             // 딕셔너리에 저장. (나중에 ID로 빠르게 찾기 위해)
             _monster_data_dict.Add(data.id, data);
