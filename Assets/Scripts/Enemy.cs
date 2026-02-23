@@ -7,7 +7,7 @@ public class Enemy : PoolAble
     public static Transform target; // 모든 Enemy가 추적할 target
 
     [Header("--- Monster Stats ---")]
-    public int monster_id; // 스포너에서 설정 지금은 임시로 프리팹에서 1001 넣음
+    public int monster_id = 1001; // 스포너에서 설정 지금은 임시로 1001 넣음
     public string monster_name;
     public float max_health;
     public float move_speed;
@@ -38,7 +38,7 @@ public class Enemy : PoolAble
         InitMonster();
     }
 
-    void InitMonster()
+    public void InitMonster()
     {
         // MonsterDataManager를 통해 데이터 로드
         MonsterData data = MonsterDataManager.instance.GetMonsterData(monster_id);
