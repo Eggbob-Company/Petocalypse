@@ -16,9 +16,8 @@ public class EnemyHealth : PoolAble
 
     private float _current_health;    // 현재 체력 (내부 계산용)
     private bool _is_dead = false;    // 사망 여부 체크 (중복 사망 방지)
-
-    // start() 부분은 스폰 매니저 코드랑 합치게 되면 없어질 예정.
-    // 지금은 테스트를 위해 데이터 매니저를 불러서 데이터를 찾아와야 함.
+    
+    /*
     void Start()
     {
         // 씬에 있는 매니저 프리팹을 찾아오기.
@@ -41,10 +40,13 @@ public class EnemyHealth : PoolAble
             Debug.LogError("[EnemyHealth] 씬에 MonsterDataManager가 없습니다. 프리팹을 올려주세요.");
         }
     }
+    */
+
     // 데이터 삽입 & 부활 함수
-    // 나중에 스포너가 풀에서 몬스터를 꺼낼 때 이 함수를 부르게 된다.
     public void InitHealth(MonsterData data)
     {
+        if (data == null) return;
+
         // 받아온 데이터 상자에서 내 스탯으로 값을 복사.
         _max_health = data.max_health;
         _base_damage = data.base_damage;
@@ -100,6 +102,7 @@ public class EnemyHealth : PoolAble
         // 부딪힌 대상의 태그가 Skill인지 확인
         if (collision.gameObject.CompareTag("Skill"))
         {
+            Debug.Log($"[Enemy] 총알 피격. 사망 상태 : {_is_dead}");
             // 체력보다 많은 데미지를 줘서 즉사시킴
             TakeDamage(100.0f);
         }
