@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 1224693771053500661}
   - component: {fileID: 4485030075668522459}
   - component: {fileID: 3805681101680592899}
+  - component: {fileID: 35423724462178433}
+  - component: {fileID: 7853582276760151523}
+  - component: {fileID: 5292983423694207305}
   - component: {fileID: 2313957971071595352}
   - component: {fileID: 8066992893886650729}
-  - component: {fileID: 5292983423694207305}
-  - component: {fileID: 35423724462178433}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -152,6 +153,60 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.105
+--- !u!114 &35423724462178433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4940047714799716661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df99ca1439528440a727ff9a4f1fbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 101
+  max_hp: 0
+  recovery: 0
+  move_speed: 0
+  might: 0
+  area: 0
+  projectile: 0
+  duration: 0
+  magnet_range: 0
+  luck: 0
+  desc_key: 
+--- !u!114 &7853582276760151523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4940047714799716661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331dc2fa7ab75394ebb24e201fb23a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _current_hp: 0
+  _is_dead: 0
+--- !u!114 &5292983423694207305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4940047714799716661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837b0b43402fa79438f3963a64965b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack_prefab: {fileID: 0}
+  attack_rate: 1
+  attack_speed: 7
+  attack_type: 1
+  attack_range: 5
 --- !u!114 &2313957971071595352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,43 +242,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5292983423694207305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4940047714799716661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 837b0b43402fa79438f3963a64965b31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack_prefab: {fileID: 0}
-  attack_rate: 1
-  attack_speed: 7
-  attack_type: 1
-  attack_range: 5
---- !u!114 &35423724462178433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4940047714799716661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1df99ca1439528440a727ff9a4f1fbe1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 101
-  max_hp: 0
-  recovery: 0
-  move_speed: 0
-  might: 0
-  area: 0
-  projectile: 0
-  duration: 0
-  magnet_range: 0
-  luck: 0
-  desc_key: 
