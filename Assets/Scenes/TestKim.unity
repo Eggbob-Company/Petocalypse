@@ -804,10 +804,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5292983423694207305, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
-      propertyPath: attack_type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5292983423694207305, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
       propertyPath: attack_prefab
       value: 
       objectReference: {fileID: 1069807118}
