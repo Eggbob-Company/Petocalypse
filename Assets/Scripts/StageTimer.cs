@@ -7,12 +7,11 @@ public class StageTimer : MonoBehaviour
     public static StageTimer instance;
 
     [SerializeField] private Text _time_text;
-    [SerializeField] private GameObject _game_over_popup;
 
     private float _current_time;
     public float current_time => _current_time; // 외부에서 읽기 전용으로 접근
 
-private bool _is_timer_running = true;
+    private bool _is_timer_running = true;
 
     void Awake()
     {
@@ -22,8 +21,6 @@ private bool _is_timer_running = true;
             Destroy(this.gameObject);
             return;
         }
-
-        if (_game_over_popup != null) _game_over_popup.SetActive(false);
     }
 
     private void UpdateTimerUI() // 타이머 UI 띄우는 함수. 분/초로 나눠줌
@@ -46,9 +43,7 @@ private bool _is_timer_running = true;
         {
             _is_timer_running = false;
             
-            /*
-                여기에 스테이지 관리자 호출하는 함수 삽입
-            */
+            StageManager.OnGameOverEvent?.Invoke(false);
         }
     }
 
