@@ -48,7 +48,7 @@ public class Hud : MonoBehaviour
                 // F0, F1, F2... 소수점 자릿수를 표현 (F0은 소수점 아래 필요 없다는 뜻)
             
             case InfoType.Kill:
-                my_text.text = string.Format("{0:F0}", TestGameManager.instance.kill);
+                my_text.text = string.Format("Kill {0:F0}", TestGameManager.instance.kill);
                 break;
             
             case InfoType.Time:
