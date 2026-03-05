@@ -197,6 +197,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27710753}
   m_CullTransparentMesh: 1
+--- !u!1 &312148733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 312148735}
+  - component: {fileID: 312148734}
+  m_Layer: 0
+  m_Name: TestGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &312148734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312148733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exp: 0
+  level: 0
+  gold: 0
+  kill: 0
+  max_game_time: 300
+  game_time: 0
+  health: 100
+  max_health: 100
+  nextExp:
+  - 10
+  - 30
+  - 60
+  - 100
+  - 150
+--- !u!4 &312148735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312148733}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 169.3183, y: 250.88715, z: 0.16380034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &314554122
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +797,7 @@ GameObject:
   - component: {fileID: 612898783}
   - component: {fileID: 612898785}
   - component: {fileID: 612898784}
+  - component: {fileID: 612898786}
   m_Layer: 5
   m_Name: GoldText
   m_TagString: Untagged
@@ -785,7 +844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: G 999,999
+  m_text: G 9,999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16afbeee4f090204cb60837b24f81fe5, type: 2}
   m_sharedMaterial: {fileID: -33672777680049932, guid: 16afbeee4f090204cb60837b24f81fe5, type: 2}
@@ -862,6 +921,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612898782}
   m_CullTransparentMesh: 1
+--- !u!114 &612898786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612898782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d910bfa2346d4a47982775b91d57ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1074,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Kill 999,999
+  m_text: Kill 9,999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16afbeee4f090204cb60837b24f81fe5, type: 2}
   m_sharedMaterial: {fileID: -33672777680049932, guid: 16afbeee4f090204cb60837b24f81fe5, type: 2}
@@ -1387,7 +1459,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 877611587}
-  - component: {fileID: 877611588}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -1415,19 +1486,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &877611588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877611586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d910bfa2346d4a47982775b91d57ad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 5
 --- !u!1 &918460871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1068662478}
   - component: {fileID: 1068662479}
+  - component: {fileID: 1068662480}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -1616,10 +1675,23 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1068662480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068662477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d910bfa2346d4a47982775b91d57ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 5
 --- !u!1 &1069807118 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1639396363065939057, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
@@ -2170,3 +2242,4 @@ SceneRoots:
   - {fileID: 410914942}
   - {fileID: 818441766}
   - {fileID: 709857268}
+  - {fileID: 312148735}
