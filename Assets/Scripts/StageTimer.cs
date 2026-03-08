@@ -9,7 +9,7 @@ public class StageTimer : MonoBehaviour
     [SerializeField] private Text _time_text;
 
     private float _current_time;
-    public float current_time => _current_time; // 외부에서 읽기 전용으로 접근
+    public float CurrentTime => _current_time; // 외부에서 읽기 전용으로 접근
 
     private bool _is_timer_running = true;
 
