@@ -9,5 +9,8 @@ public class MonsterData
     public float max_health;
     public float move_speed;
     public float base_damage;
+    public float attack_range;
+    public float attack_rate;
     public int exp_reward;
+    public string monster_type;
 }

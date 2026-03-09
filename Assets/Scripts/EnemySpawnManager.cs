@@ -105,11 +105,10 @@ public class EnemySpawnManager : MonoBehaviour
             obj.transform.position = spawn_position;
 
             // 몬스터 세팅 초기화
-            EnemyHealth health = obj.GetComponent<EnemyHealth>();
-            if(health != null && _monster_data_manager != null)
+            Enemy enemy = obj.GetComponent<Enemy>();
+            if(enemy != null)
             {
-                MonsterData data = _monster_data_manager.GetMonsterData(health.test_monster_id); // 데이터매니저 호출
-                health.InitHealth(data);
+                enemy.InitMonster();
             }
 
         }

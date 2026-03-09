@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 3674892169497982526}
   - component: {fileID: 521705018339036792}
   - component: {fileID: 8874129792692591643}
-  - component: {fileID: 2521580994905436119}
   - component: {fileID: 8459633840418981989}
+  - component: {fileID: 7623461013272038503}
+  - component: {fileID: -8311102239923010056}
   m_Layer: 6
   m_Name: MonsterZombie
   m_TagString: Enemy
@@ -150,20 +151,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &2521580994905436119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3117100203125479387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2131727c8a26714d9b72064eafa6140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target_player: {fileID: 0}
-  move_speed: 1
 --- !u!114 &8459633840418981989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,4 +163,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98875370c57ee5f46a3d7e566b115590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test_monster_id: 1001
+  _current_health: 0
+  _is_dead: 0
+--- !u!114 &7623461013272038503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117100203125479387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25f9db2c545cf2449f228145ded0c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster_id: 1001
+  monster_name: 
+  max_health: 0
+  move_speed: 0
+  base_damage: 0
+  attack_range: 0
+  attack_rate: 0
+  exp_reward: 0
+  monster_type: 
+--- !u!114 &-8311102239923010056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117100203125479387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cfe4fbe4f19c3945aa5b7adb857231c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
