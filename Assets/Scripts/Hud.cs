@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Build.Content;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro; // TextMeshPro를 쓰려면 사용해야 함.
+
+public class Hud : MonoBehaviour
+{
+    public enum InfoType { Exp, Gold, Level, Kill, Time, Health } // 열거형으로 변수를 만들면 읽고 사용하기 편함.
+    public InfoType type;
+
+    TMP_Text my_text;
+    Slider my_slider;
+
+    void Awake()
+    {
+        my_text = GetComponent<TMP_Text>();
+        my_slider = GetComponent<Slider>();
+    }
+    // 데이터가 Update()에서 갱신이 될 때마다, 그 연산이 다 끝날 때쯤 갱신을 해야 하니까 LateUpdate()를 사용.
+    void LateUpdate()
+    {
+        // 테스트 매니저가 씬에 없으면 에러가 나지 않도록 방어 코드 추가
+        if (TestGameManager.instance == null) return;
+
+        switch (type)
+        {
+            case InfoType.Exp:
+                float current_exp = TestGameManager.instance.exp;
+                float max_exp = TestGameManager.instance.level < TestGameManager.instance.nextExp.Length 
+                    ? TestGameManager.instance.nextExp[TestGameManager.instance.level] : 100f;
+                    // 레빌이 경험치 배열을 넘어가지 않게 방지 코드. 배열을 넘어간다면 그냥 100으로 고정
+                my_slider.value = current_exp / max_exp;
+                break;
+            
+            case InfoType.Gold:
+                my_text.text = string.Format("G {0:N0}", TestGameManager.instance.gold);
+                break;
+                // 포맷 방식에서 N: 천단위 콤마 자동 추가/ 0: 소수점 없음
+            
+            case InfoType.Level:
+                my_text.text = string.Format("Lv.{0:F0}", TestGameManager.instance.level);
+                break;
+                // text에는 string으로 형변환을 해줘야 함. Format은 각 숫자 인자값을 지정된 형태의 문자열로 만들어주는 함수.
+                // 두 가지 이상 매개변수가 들어감.첫 번째는 포맷을 쓸 타입, 두 번째는 그 포맷에 적용되는 데이터
+                // 인자값의 문자열이 들어갈 자리를 {순번} 형태로 작성
+                // F0, F1, F2... 소수점 자릿수를 표현 (F0은 소수점 아래 필요 없다는 뜻)
+            
+            case InfoType.Kill:
+                my_text.text = string.Format("Kill {0:F0}", TestGameManager.instance.kill);
+                break;
+            
+            case InfoType.Time:
+                float remain_time = TestGameManager.instance.max_game_time - TestGameManager.instance.game_time;
+                int min = Mathf.FloorToInt(remain_time / 60); // Mathf 함수에서 소수점을 버리는 함수를 사용해서 분을 표시
+                int sec = Mathf.FloorToInt(remain_time % 60); // Mathf 함수에서 소수점을 버리는 함수를 사용해서 초를 표시
+                my_text.text = string.Format("{0:D2}:{1:D2}", min, sec); // 항상 00 : 00 처럼 두자리로 보이게 하고 싶으니까 D를 써서 자릿수 고정
+                break;
+                // 스테이지 클리어 타임에서 현재 진행시간을 빼서 타이머에 보이게 하기.
+            
+            case InfoType.Health:
+                float current_health = TestGameManager.instance.health;
+                float max_health = TestGameManager.instance.max_health;
+                my_slider.value = current_health / max_health;
+                break;
+        }
+    }
+}
