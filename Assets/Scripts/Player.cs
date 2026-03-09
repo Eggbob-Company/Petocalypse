@@ -52,5 +52,7 @@ public class Player : MonoBehaviour
 
             Debug.Log($"플레이어 데이터 로드 완료 (ID: {id})");
         }
+
+        GetComponent<PlayerHealth>().InitHealth();
     }
 }

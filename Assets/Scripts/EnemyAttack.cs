@@ -39,15 +39,12 @@ public class EnemyAttack : MonoBehaviour
     // 실제 공격 로직 (나중에 원거리 공격 몬스터 생기면 attack_range도 사용해서 코드 변경해야 함)
     public void Attack(GameObject target)
     {
-
-        // 나중에 PlayerHealth.cs가 생기면 이 부분을 주석 해제
-        /*
         PlayerHealth player_health = target.GetComponent<PlayerHealth>();
         if (player_health != null)
         {
             player_health.TakeDamage(_enemy_main.base_damage);
         }
-        */
+        
         Debug.Log($"{_enemy_main.monster_name}가 플레이어를 공격! " + $"데미지: {_enemy_main.base_damage}");
 
         // 공격 후 쿨타임 리셋 (CSV 데이터 기반)
