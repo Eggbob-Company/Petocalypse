@@ -2,86 +2,107 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 공격 방식 설정 (정면 발사, 가장 가까운 적에게 발사)
-public enum AttackType
+[System.Serializable]
+public class SkillSlot
 {
-    Forward,
-    NearestEnemy
+    public int skill_id;
+    public int level;
+    public float attack_timer; // 스킬마다 개별적으로 흐르는 쿨타임 타이머
+
+    public SkillSlot(int id, int lv)
+    {
+        skill_id = id;
+        level = lv;
+        attack_timer = 0f;
+    }
 }
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("공격 설정")]
-    public GameObject attack_prefab;  // 공격할 오브젝트 선택
-    public float attack_rate = 1.0f;  // 몇 초마다 발사할지
-    public float attack_speed = 7.0f;  // 공격 속도
+    // 내가 현재 보유한 스킬들의 리스트
+    public List<SkillSlot> mySkills = new List<SkillSlot>();
 
-    [Header("공격 방식")]
-    public AttackType attack_type;  // 공격 방식 선택
-
-    [Header("공격 범위 설정")]
-    public float attack_range = 5.0f; // 일단 하드코딩으로 설정한 사거리 나중에 스킬 사거리 불러오면 될 듯
-
-    private float _attack_timer;
     private PlayerMove _player_move;
 
-    void Start()
+    void Awake()
     {
         // PlayerMove.cs에서 프로퍼티를 가져오기 위해 PlayerMove.cs 컴포넌트 가져오기
         _player_move = GetComponent<PlayerMove>();
+
+        // 테스트용으로 시작할 때 100번 스킬 3레벨을 하나 추가
+        // 나중에 레벨업 시스템이 완성되면 거기서 추가
+        mySkills.Add(new SkillSlot(100, 3));
     }
 
     void Update()
     {
-        // 시간을 측정해서
-        _attack_timer += Time.deltaTime;
-
-        // 내가 설정한 공격 시간 이상이 되면 발사
-        if (_attack_timer >= attack_rate)
+        foreach (SkillSlot slot in mySkills)
         {
-            Attack();
-            _attack_timer = 0f;
+            // 스킬 데이터 가져오기
+            SkillData data = SkillDataManager.instance.GetSkillData(slot.skill_id, slot.level);
+            if (data == null) continue;
+
+            // 시간을 측정해서
+            slot.attack_timer += Time.deltaTime;
+            
+            // 내가 설정한 공격 시간 이상이 되면 발사
+            if (slot.attack_timer >= data.cooldown)
+            {
+                // 코루틴을 사용하여 연사 시작 (count만큼)
+                StartCoroutine(AttackRoutine(data));
+                slot.attack_timer = 0f; // 해당 스킬 타이머만 리셋
+            }
         }
     }
 
-    void Attack()
+    private IEnumerator AttackRoutine(SkillData data)
     {
-        
-        Vector2 dir = Vector2.zero;
-
-        // 공격 방식 파악
-        switch (attack_type)
+        for (int i = 0; i < data.count; i++)
         {
-            case AttackType.Forward:
-                dir = _player_move.LastMoveVector;
-                break;
+            SpawnBullet(data);
 
-            case AttackType.NearestEnemy:
-                dir = GetDirectionToNearestEnemy();
-                break;
+            // 한 발 쏘고 아주 잠깐(0.1초) 쉬어서 연사 느낌 내기
+            if (data.count > 1) yield return new WaitForSeconds(0.1f);
         }
-
-        // 공격할 방향이 없으면 리턴
-        if (dir == Vector2.zero)
-            return;
-
-        // 공격 오브젝트 파악
-        GameObject obj = Instantiate(
-            attack_prefab,
-            transform.position,
-            Quaternion.identity
-        );
-
-        // BulletMove.cs 호출
-        BulletMove attack  = obj.GetComponent<BulletMove>();
-        attack.Init(attack_speed, dir);
     }
 
-    Vector2 GetDirectionToNearestEnemy()
+    private void SpawnBullet(SkillData data)
+    {
+        // 프리팹 로드 (prefab_name 컬럼 활용)
+        GameObject prefab = Resources.Load<GameObject>($"Prefabs/{data.prefab_name}");
+        if (prefab == null){
+            Debug.LogError($"[System] Prefabs/{data.prefab_name} 경로에서 프리팹을 찾을 수 없습니다!");
+            return;
+        }
+
+        // 방향 결정
+        Vector2 dir = GetDirection(data);
+        if (dir == Vector2.zero) return;
+
+        // 생성 및 데이터 설정
+        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
+        obj.GetComponent<BaseSkill>().Init(data, dir);
+    }
+
+    // 해당 스킬의 attack_type을 확인하여 공격 방향 설정 함수
+    private Vector2 GetDirection(SkillData data)
+    {
+        // 일단 공격 타입 중 Forward와 Nearest만 구현
+        if (data.attack_type == AttackType.Forward)
+            return _player_move.LastMoveVector;
+            
+        if (data.attack_type == AttackType.Nearest)
+            return GetDirectionToNearestEnemy(data.range);
+
+        return _player_move.LastMoveVector;
+    }
+
+    // 가장 가까운 적 방향 찾는 함수 (range 매개변수 추가)
+    private Vector2 GetDirectionToNearestEnemy(float range)
     {
         // 플레이어 위치를 중심으로 사거리(attack_range) 내의 Enemy 태그를 가진 오브젝트 검출
         int enemy_layer_mask = 1 << LayerMask.NameToLayer("Enemy"); 
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attack_range, enemy_layer_mask);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, enemy_layer_mask);
 
         // 없으면 리턴
         if (enemies.Length == 0)
@@ -103,6 +124,9 @@ public class PlayerAttack : MonoBehaviour
                 nearest_enemy = enemy;
             }
         }
+
+        // 모든 적이 죽어있는 상태일 수도 있으므로 방어 코드 추가
+        if (nearest_enemy == null) return Vector2.zero;
 
         // 가장 가까운 적의 방향 벡터 계산 후 반환
         return ((Vector2)nearest_enemy.transform.position - my_pos).normalized;

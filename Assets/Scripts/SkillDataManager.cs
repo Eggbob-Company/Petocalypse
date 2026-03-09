@@ -46,14 +46,19 @@ public class SkillDataManager : MonoBehaviour
 
             SkillData data = new SkillData();
             // 각 칸의 데이터를 타입에 맞게 파싱 (Trim으로 유령 공백 제거)
-            data.id = int.Parse(row[0].Trim());
-            data.level = int.Parse(row[1].Trim());
-            data.damage = float.Parse(row[2].Trim());
-            data.cooldown = float.Parse(row[3].Trim());
-            data.count = int.Parse(row[4].Trim());
-            data.speed = float.Parse(row[5].Trim());
-            data.penetrate = int.Parse(row[6].Trim());
-            data.desc_key = row[7].Trim();
+            data.id          = int.Parse(row[0].Trim());
+            data.level       = int.Parse(row[1].Trim());
+            data.damage      = float.Parse(row[2].Trim());
+            data.cooldown    = float.Parse(row[3].Trim());
+            data.count       = int.Parse(row[4].Trim());
+            data.speed       = float.Parse(row[5].Trim());
+            data.area        = float.Parse(row[6].Trim());
+            data.range       = float.Parse(row[7].Trim());
+            data.penetrate   = int.Parse(row[8].Trim());
+            data.duration    = float.Parse(row[9].Trim());
+            data.attack_type = (AttackType)int.Parse(row[10].Trim());
+            data.prefab_name = row[11].Trim();
+            data.desc_key    = row[12].Trim();
 
             // "ID_레벨" 형태의 키 생성 (예: "100_1")
             string key = $"{data.id}_{data.level}";

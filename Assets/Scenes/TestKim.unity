@@ -655,76 +655,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1069807118 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1639396363065939057, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-  m_PrefabInstance: {fileID: 1761830709}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1761830709
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1639396363065939057, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_Name
-      value: Bullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -544.1626
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -957.75696
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918385480587951843, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5883923444860138691, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8188334065681876463, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
 --- !u!1 &1867975577
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,9 +734,13 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5292983423694207305, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
+      propertyPath: skill_level
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5292983423694207305, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
       propertyPath: attack_prefab
       value: 
-      objectReference: {fileID: 1069807118}
+      objectReference: {fileID: 0}
     - target: {fileID: 7869391102788871191, guid: 1e3c91ac7258fd048a1c4059bde57967, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.481
@@ -1149,7 +1083,6 @@ SceneRoots:
   - {fileID: 709857268}
   - {fileID: 497020370}
   - {fileID: 550070021}
-  - {fileID: 1761830709}
   - {fileID: 410914942}
   - {fileID: 179846249591289532}
   - {fileID: 2723890832688833304}
