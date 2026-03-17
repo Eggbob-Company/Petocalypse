@@ -28,9 +28,7 @@ public class Hud : MonoBehaviour
         {
             case InfoType.Exp:
                 float current_exp = TestGameManager.instance.exp;
-                float max_exp = TestGameManager.instance.level < TestGameManager.instance.nextExp.Length 
-                    ? TestGameManager.instance.nextExp[TestGameManager.instance.level] : 100f;
-                    // 레빌이 경험치 배열을 넘어가지 않게 방지 코드. 배열을 넘어간다면 그냥 100으로 고정
+                float max_exp = ExpDataManager.instance.GetRequiredExp(TestGameManager.instance.level);
                 my_slider.value = current_exp / max_exp;
                 break;
             

@@ -13,7 +13,10 @@ public class ExpSpawn : PoolAble // 오브젝트 풀 사용을 위한 PoolAble �
         if (collision.CompareTag("Player"))
         {
             Debug.Log("경험치 획득");
-            // + 플레이어의 경험치 수치 증가시키는 코드
+            
+            // 경험치 추가
+            TestGameManager.instance.GetExp(5);
+
             ReturnToPool();
         }
     }
