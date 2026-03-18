@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseSkill : MonoBehaviour
+public class BaseSkill : PoolAble
 {
     // protected 생성자는 private와 다른건 동일하지만 이 클래스를 상속받는 자식 클래스에서도 접근할 수 있게 함. (private 기준 변수명 사용)
     protected SkillData _data;
@@ -84,6 +84,15 @@ public class BaseSkill : MonoBehaviour
         _is_init = false;
         
         // *** 오브젝트 풀링 시 여기를 Destroy가 아닌 풀로 반납하는 코드 넣으면 될 듯
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        if (this.Pool != null) 
+        {
+            this.Pool.Release(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
