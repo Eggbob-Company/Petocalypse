@@ -5,7 +5,10 @@ public class TestGameManager : MonoBehaviour
     // 다른 스크립트에서 쉽게 접근할 수 있도록 싱글톤(인스턴스) 패턴 사용
     public static TestGameManager instance;
 
-    [Header("테스트 데이터")]
+    [Header("UI Connect")]
+    public GameOverPopUp game_over_ui;
+
+    [Header("Test Data")]
     public float exp = 0f;
     public int level = 1;
     public int max_level = 5; // 임시 만렙
@@ -76,6 +79,11 @@ public class TestGameManager : MonoBehaviour
             gold += 150;      // 골드 150 획득
             kill += 1;        // 1킬 추가
             health -= 10f;    // 몬스터 잡다가 체력 10 깎임
+
+            if (health <= 0)
+            {
+                game_over_ui.Show();// GameOverPopUp.cs에서 팝업 호출
+            }
 
             // // 만약 경험치가 다음 레벨업 목표치를 넘었다면 레벨업
             // if (level < nextExp.Length && exp >= nextExp[level])
