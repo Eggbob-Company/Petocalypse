@@ -6,7 +6,9 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어 조작")]
     public Joystick joystick;  // 조이스틱 연결
-    public float move_speed = 3f;  // 플레이어 이동 속도
+    
+    public int player_id = 101; // 플레이어 id
+    public float move_speed;  // 플레이어 이동 속도
 
     private Rigidbody2D _rb;  // 물리 엔진을 사용하기 위한 컴포넌트
     private Vector2 _move_vector;  // 조이스틱 입력값을 담을 벡터
@@ -20,6 +22,19 @@ public class PlayerMove : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponentInChildren<Animator>();
+
+        if (PlayerDataManager.instance != null)
+        {
+            var data = PlayerDataManager.instance.GetPlayerData(player_id);
+            if (data != null)
+            {
+                move_speed = data.move_speed;
+            }
+            else
+            {
+                Debug.LogError($"ID : {player_id}에 해당하는 데이터를 찾을 수 없습니다.");
+            }
+        }
     }
 
     void Update()
