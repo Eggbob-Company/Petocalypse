@@ -2337,6 +2337,9 @@ MonoBehaviour:
   - object_name: Exp
     prefab: {fileID: 1181869677815601849, guid: 6061b901917dbde4aa026737833245d0, type: 3}
     count: 0
+  - object_name: Bullet
+    prefab: {fileID: 1639396363065939057, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
+    count: 10
 --- !u!4 &1867975579
 Transform:
   m_ObjectHideFlags: 0
