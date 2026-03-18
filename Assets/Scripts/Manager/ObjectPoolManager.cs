@@ -34,7 +34,7 @@ public class ObjectPoolManager : MonoBehaviour
     private Dictionary<string, IObjectPool<GameObject>> _object_pool_dic = new Dictionary<string, IObjectPool<GameObject>>();
 
     // 오브젝트풀에서 오브젝트를 새로 생성할 때 사용할 딕셔너리
-    private Dictionary<string, GameObject> _go_dic = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> _prefab_dic = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
@@ -53,25 +53,17 @@ public class ObjectPoolManager : MonoBehaviour
 
         for (int idx = 0; idx < _object_infos.Length; idx++)
         {
-            IObjectPool<GameObject> pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool,
-            OnDestroyPoolObject, true, _object_infos[idx].count, _object_infos[idx].count);
-
-            if (_go_dic.ContainsKey(_object_infos[idx].object_name))
+            // 모든 프리팹 정보를 딕셔너리에 저장
+            if(!_prefab_dic.ContainsKey(_object_infos[idx].object_name))
             {
-                Debug.LogFormat("{0} 이미 등록된 오브젝트입니다.", _object_infos[idx].object_name);
-                return;
+                _prefab_dic.Add(_object_infos[idx].object_name, _object_infos[idx].prefab);
             }
 
-            _go_dic.Add(_object_infos[idx].object_name, _object_infos[idx].prefab);
-            _object_pool_dic.Add(_object_infos[idx].object_name, pool);
-
-            // 미리 오브젝트 생성 해놓기
-            for (int i = 0; i < _object_infos[idx].count; i++)
+            if(_object_infos[idx].count > 0)
             {
-                _object_name = _object_infos[idx].object_name;
-                PoolAble poolAbleGo = CreatePooledItem().GetComponent<PoolAble>();
-                poolAbleGo.Pool.Release(poolAbleGo.gameObject);
+                RegisterNewPool(_object_infos[idx].object_name, _object_infos[idx].prefab, _object_infos[idx].count);
             }
+
         }
 
         Debug.Log("오브젝트풀링 준비 완료");
@@ -81,39 +73,72 @@ public class ObjectPoolManager : MonoBehaviour
     // 생성
     private GameObject CreatePooledItem()
     {
-        GameObject poolGo = Instantiate(_go_dic[_object_name]);
-        poolGo.GetComponent<PoolAble>().Pool = _object_pool_dic[_object_name];
-        return poolGo;
+        GameObject go = Instantiate(_prefab_dic[_object_name]);
+        go.GetComponent<PoolAble>().Pool = _object_pool_dic[_object_name];
+        return go;
     }
 
     // 대여
-    private void OnTakeFromPool(GameObject poolGo)
+    private void OnTakeFromPool(GameObject go)
     {
-        poolGo.SetActive(true);
+        go.SetActive(true);
     }
 
     // 반환
-    private void OnReturnedToPool(GameObject poolGo)
+    private void OnReturnedToPool(GameObject go)
     {
-        poolGo.SetActive(false);
+        go.SetActive(false);
     }
 
     // 삭제
-    private void OnDestroyPoolObject(GameObject poolGo)
+    private void OnDestroyPoolObject(GameObject go)
     {
-        Destroy(poolGo);
+        Destroy(go);
     }
 
-    public GameObject GetGo(string goName)
+    public GameObject GetGo(string go_name)
     {
-        _object_name = goName;
-
-        if (_go_dic.ContainsKey(goName) == false)
+        // 오브젝트 풀 생성이 되지 않은 이름이라면
+        if(!_object_pool_dic.ContainsKey(go_name))
         {
-            Debug.LogFormat("{0} 오브젝트풀에 등록되지 않은 오브젝트입니다.", goName);
-            return null;
+            if(_prefab_dic.ContainsKey(go_name)) // 딕셔너리 이름과 일치
+            {
+                Debug.Log($"{go_name} 풀이 없어 새로 생성합니다.");
+                RegisterNewPool(go_name, _prefab_dic[go_name], 20);
+            }
+            else // 딕셔너리 이름과 불일치
+            {
+                Debug.Log($"{go_name} 딕셔너리에 등록되지 않은 이름입니다.");
+                return null;
+            }
         }
 
-        return _object_pool_dic[goName].Get();
+        _object_name = go_name; // CreatePooledItem에서 사용할 변수 업데이트
+        return _object_pool_dic[go_name].Get();
+    }
+
+    public void RegisterNewPool(string go_name, GameObject prefab, int count)
+    {
+        if(_object_pool_dic.ContainsKey(go_name)) return;
+
+        // 풀 생성을 Init이 아니라 여기서 처리
+        IObjectPool<GameObject> pool = new ObjectPool<GameObject>(
+            createFunc: CreatePooledItem,
+            actionOnGet: OnTakeFromPool,
+            actionOnRelease: OnReturnedToPool,
+            actionOnDestroy: OnDestroyPoolObject,
+            collectionCheck: true,
+            defaultCapacity: count,
+            maxSize: 1000
+        );
+
+        _object_pool_dic.Add(go_name, pool);
+        _object_name = go_name;
+    
+        for(int i = 0; i < count; i++)
+        {
+            PoolAble pool_able_go = CreatePooledItem().GetComponent<PoolAble>();
+            pool_able_go.Pool.Release(pool_able_go.gameObject);
+        }
     }
 }
