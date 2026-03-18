@@ -2336,7 +2336,7 @@ MonoBehaviour:
     count: 30
   - object_name: Exp
     prefab: {fileID: 1181869677815601849, guid: 6061b901917dbde4aa026737833245d0, type: 3}
-    count: 50
+    count: 0
 --- !u!4 &1867975579
 Transform:
   m_ObjectHideFlags: 0
