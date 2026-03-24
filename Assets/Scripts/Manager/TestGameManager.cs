@@ -80,18 +80,25 @@ public class TestGameManager : MonoBehaviour
         // 골드 획득 or 체력 회복 팝업 추가
     }
 
-    // 플레이어 체력이 변할 때 호출되는 함수
+    // 플레이어 체력 이벤트 구독 시 호출되는 함수
     void UpdateHealthData(float hp)
     {
         health = hp;
     }
 
+    // 플레이어 사망 이벤트 구독 시 호출되는 함수
     void ShowGameOverUI()
     {
         if (game_over_ui != null)
         {
             game_over_ui.Show();  // GameOverPopUp.cs에서 팝업 호출
         }
+    }
+
+    // 몬스터가 죽을 때 마다 호출되는 함수
+    public void KillCount()
+    {
+        kill++;
     }
 
     void Update()
