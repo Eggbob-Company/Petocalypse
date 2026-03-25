@@ -8,8 +8,8 @@ public class DamageText : PoolAble
 {
     private TextMeshPro _damage_text;
     private float _move_speed = 0.15f;
-    private float _alpha_speed = 1.5f;
-    private float _destroy_time = 0.4f;
+    private float _alpha_speed = 2f;
+    private float _destroy_time = 0.7f;
     private float _timer;
     private Color _text_color;
 
@@ -20,6 +20,8 @@ public class DamageText : PoolAble
 
     public void Init(float damage)
     {
+        if(_damage_text == null) _damage_text = GetComponent<TextMeshPro>();
+
         _damage_text.text = Mathf.RoundToInt(damage).ToString(); // 대미지 값 지정
 
         // 투명도 값 초기화
@@ -33,7 +35,7 @@ public class DamageText : PoolAble
 
     private void Update()
     {
-        transform.Translate(Vector3.up * _move_speed * Time.deltaTime); // 텍스트를 위로 둥둥 뜨게 함
+        transform.Translate(Vector2.up * _move_speed * Time.deltaTime); // 텍스트를 위로 둥둥 뜨게 함
 
         _timer += Time.deltaTime; // 동작 타이머 업데이트
 
