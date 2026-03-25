@@ -18,6 +18,8 @@ public class PausePopUp : MonoBehaviour
     // HUD의 PauseBtn 클릭 시 호출
     public void TogglePause()
     {
+        Debug.Log("일시정지 버튼 눌림! 현재 _is_paused 상태: " + _is_paused);
+
         _is_paused = !_is_paused; // bool 변수인 _is_paused의 현재 상태를 바꾸는 것. false -> true, true -> false
 
         if (_is_paused)
@@ -42,7 +44,8 @@ public class PausePopUp : MonoBehaviour
     //'Retry' 버튼 클릭 시 호출
     public void OnClickRetry()
     {
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
+        pause_pop_up.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
