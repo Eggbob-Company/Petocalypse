@@ -27,14 +27,14 @@ public class TestGameManager : MonoBehaviour
     void Start()
     {
         // 플레이어의 체력 이벤트 구독
-        Player.instance.helath.OnHPChanged += UpdateHealthData;
+        Player.instance.health.OnHPChanged += UpdateHealthData;
 
         // 플레이어의 죽음 이벤트 구독 
-        Player.instance.helath.OnDead += ShowGameOverUI;
+        Player.instance.health.OnDead += ShowGameOverUI;
 
         // 초기 최대 체력, 현재 체력 값 세팅
         max_health = Player.instance.max_hp;
-        health = Player.instance.helath.CurrentHP;
+        health = Player.instance.health.CurrentHP;
     }
 
     // 경험치 획득 시 호출되는 함수
