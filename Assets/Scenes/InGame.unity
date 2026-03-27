@@ -828,7 +828,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 312148735}
-  - component: {fileID: 312148734}
+  - component: {fileID: 312148736}
   m_Layer: 0
   m_Name: InGameManager
   m_TagString: Untagged
@@ -836,28 +836,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &312148734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312148733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game_over_ui: {fileID: 1638170732}
-  exp: 0
-  level: 0
-  max_level: 5
-  gold: 0
-  kill: 0
-  max_game_time: 300
-  game_time: 0
-  health: 100
-  max_health: 100
 --- !u!4 &312148735
 Transform:
   m_ObjectHideFlags: 0
@@ -873,6 +851,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &312148736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312148733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game_over_ui: {fileID: 1638170732}
+  exp: 0
+  level: 1
+  max_level: 5
+  gold: 0
+  kill: 0
+  max_game_time: 300
+  game_time: 0
+  health: 0
+  max_health: 0
 --- !u!1 &314554122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5198,14 +5198,14 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1814681711}
   - {fileID: 619394802}
+  - {fileID: 352805292}
   - {fileID: 1867975579}
   - {fileID: 497020370}
   - {fileID: 550070021}
-  - {fileID: 352805292}
   - {fileID: 2000975613}
+  - {fileID: 552632969}
   - {fileID: 818441766}
   - {fileID: 709857268}
   - {fileID: 312148735}
   - {fileID: 1728607936}
   - {fileID: 1508687973}
-  - {fileID: 552632969}
