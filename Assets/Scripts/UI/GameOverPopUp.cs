@@ -12,8 +12,8 @@ public class GameOverPopUp : MonoBehaviour
     //팝업창을 띄우는 기능
     public void Show()
     {
-        final_kill_text.text = string.Format("KILL {0:N0}", TestGameManager.instance.kill);
-        final_gold_text.text = string.Format("G {0:N0}", TestGameManager.instance.gold);
+        final_kill_text.text = string.Format("KILL {0:N0}", InGameManager.instance.kill);
+        final_gold_text.text = string.Format("G {0:N0}", InGameManager.instance.gold);
 
         // 팝업 활성화 및 게임 정지
         game_over_popup.SetActive(true);

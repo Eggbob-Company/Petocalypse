@@ -15,7 +15,7 @@ public class ExpSpawn : PoolAble // 오브젝트 풀 사용을 위한 PoolAble �
             Debug.Log("경험치 획득");
             
             // 경험치 추가
-            TestGameManager.instance.GetExp(5);
+            InGameManager.instance.GetExp(5);
 
             ReturnToPool();
         }
