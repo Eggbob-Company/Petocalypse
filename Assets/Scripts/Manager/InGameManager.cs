@@ -80,12 +80,13 @@ public class InGameManager : MonoBehaviour
         // 골드 획득 or 체력 회복 팝업 추가
     }
 
-    // 플레이어 체력이 변할 때 호출되는 함수
+    // 플레이어 체력 이벤트 구독 시 호출되는 함수
     void UpdateHealthData(float hp)
     {
         health = hp;
     }
 
+    // 플레이어 사망 이벤트 구독 시 호출되는 함수
     void ShowGameOverUI()
     {
         if (game_over_ui != null)
@@ -94,31 +95,16 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+    // 몬스터가 죽을 때마다 호출되는 함수
+    public void KillCount()
+    {
+        kill++;
+    }
+
     void Update()
     {
         // 시간은 자동으로 흐르게
         game_time += Time.deltaTime;
-
-        // 스페이스바를 누르면 몬스터를 한 마리 잡았다고 가정하고 수치를 올리기
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // exp += 5f;        // 경험치 5 획득
-            gold += 150;      // 골드 150 획득
-            kill += 1;        // 1킬 추가
-            // health -= 10f;    // 몬스터 잡다가 체력 10 깎임
-
-            // if (health <= 0)
-            // {
-            //     game_over_ui.Show();// GameOverPopUp.cs에서 팝업 호출
-            // }
-
-            // // 만약 경험치가 다음 레벨업 목표치를 넘었다면 레벨업
-            // if (level < nextExp.Length && exp >= nextExp[level])
-            // {
-            //     exp -= nextExp[level]; // 쓴 경험치 빼고
-            //     level++;               // 레벨 1 증가
-            // }
-
-        }
+        
     }
 }

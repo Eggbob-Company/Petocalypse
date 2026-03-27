@@ -56,6 +56,9 @@ public class EnemyHealth : MonoBehaviour
         OnEnemyDeath?.Invoke(transform.position);
         Debug.Log($"{gameObject.name} 사망 신호 발송 및 풀 반환");
 
+        // kill 카운트 증가
+        InGameManager.instance.KillCount();
+
         // 본체인 Enemy.cs에게 사망 알림
         _enemy_main.OnDeath();
     }
