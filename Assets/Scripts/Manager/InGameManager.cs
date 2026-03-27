@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class TestGameManager : MonoBehaviour
+public class InGameManager : MonoBehaviour
 {
     // 다른 스크립트에서 쉽게 접근할 수 있도록 싱글톤(인스턴스) 패턴 사용
-    public static TestGameManager instance;
+    public static InGameManager instance;
 
     [Header("UI Connect")]
     public GameOverPopUp game_over_ui;
@@ -21,7 +21,7 @@ public class TestGameManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this; // 이 스크립트 TestGameManager를 인스턴스에 집어넣어서 찾기 쉽게
+        instance = this; // 이 스크립트 InGameManager를 인스턴스에 집어넣어서 찾기 쉽게
     }
 
     void Start()
