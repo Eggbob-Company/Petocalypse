@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,24 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float _current_hp;
     [SerializeField] private bool _is_dead = false;
 
+    // 외부에서 읽기용 프로퍼티
+    public float CurrentHP => _current_hp;
+
+    // 현재 체력을 전달하는 이벤트 생성
+    public Action<float> OnHPChanged;
+
+    // 플레이어가 죽었을 때 발생하는 이벤트 생성
+    public Action OnDead;
+
     public void InitHealth()
     {
         // Player.cs에 로드된 데이터를 기반으로 변수 초기화
         // 현재 체력 = 최대 체력으로 설정 / 사망 상태 false 설정
         _current_hp = Player.instance.max_hp;
         _is_dead = false;
+
+        // 초기화 시 이벤트 발생
+        OnHPChanged?.Invoke(_current_hp);
 
         // 초당 체력 회복(recovery) 루틴 시작
         if (Player.instance.recovery > 0)
@@ -36,6 +49,9 @@ public class PlayerHealth : MonoBehaviour
         _current_hp -= damage;
         Debug.Log($"플레이어 피격! 남은 체력: {_current_hp}");
 
+        // 체력 감소 시 이벤트 발생
+        OnHPChanged?.Invoke(_current_hp);
+
         // 체력이 0 이하가 되면 사망 처리
         if (_current_hp <= 0)
         {
@@ -53,11 +69,8 @@ public class PlayerHealth : MonoBehaviour
 
         Debug.Log("플레이어 사망!");
 
-        // 사망 팝업 띄우기 (UIManager가 있다고 가정)
-        // UIManager.instance.ShowGameOverPopup();
-        
-        // 시간 정지 등의 추가 로직
-        Time.timeScale = 0;
+        // 사망 신호 보내기
+        OnDead?.Invoke();
     }
 
     // recovery 데이터를 활용한 체력 회복 코루틴
@@ -73,6 +86,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 // csv 데이터에 있는 recovery 값 만큼 체력 회복
                 _current_hp += Player.instance.recovery;
+
+                // 체력 회복 시 이벤트 발생
+                OnHPChanged?.Invoke(_current_hp);
                 
                 // 최대 체력 초과 방지
                 if (_current_hp > Player.instance.max_hp)
@@ -81,15 +97,5 @@ public class PlayerHealth : MonoBehaviour
                 }
             }
         }
-    }
-
-    // 임시로 플레이어의 체력 변화와 사망 상태를 표시하기 위한 코드
-    // 나중에 팝업 만들어지면 삭제
-    private void OnGUI()
-    {
-        // 화면 좌측 상단에 노란색 글씨로 체력 표시
-        GUI.color = Color.yellow;
-        GUI.Label(new Rect(10, 10, 200, 20), $"HP: {_current_hp:F1} / {Player.instance.max_hp}");
-        GUI.Label(new Rect(10, 30, 200, 20), $"Status: {(_is_dead ? "DEAD" : "ALIVE")}");
     }
 }

@@ -20,9 +20,13 @@ public class Player : MonoBehaviour
     public float luck;
     public string desc_key;
 
+    public PlayerHealth health;
+
     void Awake()
     {
         instance = this;
+
+        health = GetComponent<PlayerHealth>();
     }
 
     void Start()
