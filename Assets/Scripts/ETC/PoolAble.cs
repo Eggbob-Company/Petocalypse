@@ -8,6 +8,13 @@ public class PoolAble : MonoBehaviour
 
     public void ReleaseObject()
     {
-        Pool.Release(gameObject);
+        if(Pool != null) // 풀로 반납
+        {
+            Pool.Release(gameObject);
+        }
+        else // 풀에 소속되지 않은 오브젝트일 경우: 예외 처리로 그냥 파괴
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game_over_ui: {fileID: 0}
   exp: 0
   level: 0
   max_level: 5
@@ -463,6 +464,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1123215711261293886, guid: 55e2a2d712879af4882c6243475759ed, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1592265356735362878, guid: 55e2a2d712879af4882c6243475759ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2340,6 +2345,9 @@ MonoBehaviour:
   - object_name: Bullet
     prefab: {fileID: 1639396363065939057, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
     count: 10
+  - object_name: DamageText
+    prefab: {fileID: 4316625361297443667, guid: d50a1c42f1935834c8a25a3caee6b870, type: 3}
+    count: 30
 --- !u!4 &1867975579
 Transform:
   m_ObjectHideFlags: 0

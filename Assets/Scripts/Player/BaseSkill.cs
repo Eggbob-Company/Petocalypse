@@ -66,7 +66,16 @@ public class BaseSkill : PoolAble
         {
             // 데미지 주기 (damage * Player.might)
             float final_damage = _data.damage * Player.instance.might;
-            collision.GetComponent<EnemyHealth>()?.TakeDamage(final_damage);
+
+            // collision.GetComponent<EnemyHealth>()?.TakeDamage(final_damage);
+
+            // 대미지 텍스트 소환을 위해 TakeDamage 관련 조건문을 분리함
+            EnemyHealth enemy_health = collision.GetComponent<EnemyHealth>();
+            if (enemy_health)
+            {
+                enemy_health.TakeDamage(final_damage); // 대미지 주기
+                SpawnDamageText(collision.transform.position, final_damage); // 오브젝트풀에서 대미지 텍스트 꺼내옴 & 대미지 값 인가
+            }
 
             // 관통 횟수 차감
             _current_penetrate--;
@@ -79,20 +88,27 @@ public class BaseSkill : PoolAble
         }
     }
 
+    private void SpawnDamageText(Vector2 position, float damage)
+    {
+        GameObject text_go = ObjectPoolManager.instance.GetGo("DamageText");
+
+        if (text_go != null)
+        {   
+            Vector2 spawn_pos = position + Vector2.up * 0.5f;
+            text_go.transform.position = spawn_pos;
+
+            // DamageText의 Init 호출
+            if (text_go.TryGetComponent<DamageText>(out var damage_text))
+            {
+                damage_text.Init(damage); // 대미지 값 보내서 텍스트 설정 초기화
+            }
+        }
+    }
+
     protected virtual void Deactivate()
     {
         _is_init = false;
-        
-        // *** 오브젝트 풀링 시 여기를 Destroy가 아닌 풀로 반납하는 코드 넣으면 될 듯
-        //Destroy(gameObject);
 
-        if (this.Pool != null) 
-        {
-            this.Pool.Release(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        ReleaseObject(); // 오브젝트 풀로 반환
     }
 }
