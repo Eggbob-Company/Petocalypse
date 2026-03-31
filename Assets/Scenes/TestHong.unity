@@ -4788,6 +4788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1814681711}
   - component: {fileID: 1814681710}
+  - component: {fileID: 1814681712}
   m_Layer: 0
   m_Name: Tracking Camera
   m_TagString: Untagged
@@ -4850,6 +4851,22 @@ Transform:
   - {fileID: 1122604442}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1814681712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814681709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 6144824575251799066, guid: eba43f137f824f1438be64c3c5c37dcc, type: 3}
+  m_Damping: 0
+  m_MaxWindowSize: -1
+  m_Padding: 0
 --- !u!1 &1867975577
 GameObject:
   m_ObjectHideFlags: 0
