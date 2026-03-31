@@ -53,7 +53,18 @@ public class PlayerMove : MonoBehaviour
         // 현재 위치 + (방향 * 속도 * 시간 보정)
         Vector2 current_pos = _rb.position;
         Vector2 move_amount = _move_vector * move_speed * Time.fixedDeltaTime;
-        _rb.MovePosition(current_pos + move_amount);
+        Vector2 target_pos = current_pos + move_amount;
+
+        float min_x = -9f, 
+              max_x = 9f, 
+              min_y = -12f, 
+              max_y = 12f;
+
+        // Clamp 함수로 범위 제한: 순서대로 제한할 변수, 최솟값, 최댓값
+        target_pos.x = Mathf.Clamp(target_pos.x, min_x, max_x);
+        target_pos.y = Mathf.Clamp(target_pos.y, min_y, max_y);
+
+        _rb.MovePosition(target_pos);
     }
 
     void Animate()
