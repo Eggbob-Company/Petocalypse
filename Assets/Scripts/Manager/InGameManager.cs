@@ -53,7 +53,7 @@ public class InGameManager : MonoBehaviour
         while (exp >= req_exp)
         {
             // 만렙 미만이면 일반 레벨업 보상
-            if (level < max_level)
+            if (level <= max_level)
             {
                 LevelUp(req_exp);
             }

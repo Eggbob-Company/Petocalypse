@@ -18,7 +18,7 @@ public class LevelUpPopUp : MonoBehaviour
         foreach (GameObject slot in all_slots) slot.SetActive(false);
 
         // 만렙 여부에 따른 슬롯 활성화 분기
-        if (InGameManager.instance.level >= InGameManager.instance.max_level)
+        if (InGameManager.instance.level > InGameManager.instance.max_level)
         {
             // 만렙 모드: FullLevel 1, 2번 슬롯만 활성화
             all_slots[3].SetActive(true);
