@@ -7,6 +7,10 @@ public class InGameManager : MonoBehaviour
 
     [Header("UI Connect")]
     public GameOverPopUp game_over_ui;
+    public LevelUpPopUp level_up_ui;
+
+    [Header("Level Data")]
+    public int pending_level_up_count = 0; // 레벨 경험치가 한 번에 들어왔을 때, 팝업을 띄워야 하는 수
 
     [Header("Test Data")]
     public float exp = 0f;
@@ -45,11 +49,11 @@ public class InGameManager : MonoBehaviour
         // 레벨 업까지 필요한 경험치 가져오기
         int req_exp = ExpDataManager.instance.GetRequiredExp(level);
 
-        // 경험치가 가득 찼다면 레벨업 실행
-        if (exp >= req_exp)
+        // 초과된 경험치가 없을 때까지 반복
+        while (exp >= req_exp)
         {
             // 만렙 미만이면 일반 레벨업 보상
-            if (level < max_level)
+            if (level <= max_level)
             {
                 LevelUp(req_exp);
             }
@@ -58,6 +62,17 @@ public class InGameManager : MonoBehaviour
             {
                 MaxLevelUP(req_exp);
             }
+
+            pending_level_up_count++; // 팝업을 띄워야 할 횟수 누적
+            req_exp = ExpDataManager.instance.GetRequiredExp(level); //다음 경험치 필요 요구량을 계산하기 위해 한 번 더 정리
+
+            // 만렙 이후 경험치까지 다 소진했다면 탈출
+            if (level >= max_level && exp < req_exp) break;
+        }
+        // 팝업이 아직 안 떠 있다면 첫 번째 팝업 호출
+        if (pending_level_up_count > 0 && !level_up_ui.level_up_pop_up.activeSelf)
+        {
+            level_up_ui.Show();
         }
     }
 
