@@ -58,6 +58,8 @@ public class TestInGameManager : MonoBehaviour
 
     public void TeleportToBoss() // 이동 버튼용
     {
+        ClearMapObjects(); // 맵에 있던 오브젝트 삭제
+
         // 현재 맵 범위를 보스용으로 교체
         _current_map_min = boss_map_min;
         _current_map_max = boss_map_max;
@@ -78,6 +80,22 @@ public class TestInGameManager : MonoBehaviour
             cameraRange.SetRange();
         }
 
+    }
+    public void ClearMapObjects()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        GameObject[] exps = GameObject.FindGameObjectsWithTag("Exp");
+        foreach (GameObject exp in exps)
+        {
+            Destroy(exp);
+        }
+
+        Debug.Log("맵에 남은 오브젝트 제거 완료");
     }
 
     // 경험치 획득 시 호출되는 함수
