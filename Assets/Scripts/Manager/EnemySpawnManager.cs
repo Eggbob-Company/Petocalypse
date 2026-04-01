@@ -29,7 +29,7 @@ public class EnemySpawnManager : MonoBehaviour
             _player_transform = player_go.transform;
         }
 
-        StartCoroutine(CoSpawnZombie()); // 코루틴 시작
+        // StartCoroutine(CoSpawnZombie()); // 코루틴 시작
     }
 
     // 좀비를 0.5초마다 자동 생성하는 코루틴
@@ -51,7 +51,7 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
-    private Vector2 GetRandomSpawnPosition()
+    public Vector2 GetRandomSpawnPosition()
     {
         if(_player_transform == null) return Vector2.zero;
 
