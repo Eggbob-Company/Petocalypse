@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class InGameManager : MonoBehaviour
 {
@@ -7,6 +8,25 @@ public class InGameManager : MonoBehaviour
 
     [Header("UI Connect")]
     public GameOverPopUp game_over_ui;
+    public LevelUpPopUp level_up_ui;
+
+    [Header("Map Settings")]
+    public Vector2 stage_map_min;    // 일반 맵 왼쪽 아래
+    public Vector2 stage_map_max;    // 일반 맵 오른쪽 위
+    public Vector2 boss_map_min;     // 보스 맵 왼쪽 아래
+    public Vector2 boss_map_max;     // 보스 맵 오른쪽 위
+    public Vector2 boss_spawn_pos;   // 보스 맵 이동 시 좌표
+
+    // 현재 게임에 적용 중인 실시간 범위
+    private Vector2 _current_map_min;
+    private Vector2 _current_map_max;
+
+    // 다른 스크립트가 참조할 프로퍼티
+    public Vector2 MapMin => _current_map_min;
+    public Vector2 MapMax => _current_map_max;
+
+    [Header("Level Data")]
+    public int pending_level_up_count = 0; // 레벨 경험치가 한 번에 들어왔을 때, 팝업을 띄워야 하는 수
 
     [Header("Test Data")]
     public float exp = 0f;
@@ -22,6 +42,9 @@ public class InGameManager : MonoBehaviour
     void Awake()
     {
         instance = this; // 이 스크립트 InGameManager를 인스턴스에 집어넣어서 찾기 쉽게
+
+        _current_map_min = stage_map_min;
+        _current_map_max = stage_map_max;
     }
 
     void Start()
@@ -37,6 +60,49 @@ public class InGameManager : MonoBehaviour
         health = Player.instance.health.CurrentHP;
     }
 
+    public void TeleportToBoss() // 이동 버튼용
+    {
+        ClearMapObjects(); // 맵에 있던 오브젝트 삭제
+
+        // 현재 맵 범위를 보스용으로 교체
+        _current_map_min = boss_map_min;
+        _current_map_max = boss_map_max;
+
+        // 플레이어 보스방으로 텔레포트
+        if (Player.instance != null)
+        {
+            Player.instance.transform.position = boss_spawn_pos;
+        }
+
+        CinemachineVirtualCamera vcam = FindObjectOfType<CinemachineVirtualCamera>();
+        if(vcam != null) vcam.transform.position = boss_spawn_pos;
+        
+        // 카메라 범위 업데이트
+        CameraRange cameraRange = FindObjectOfType<CameraRange>();
+        if (cameraRange != null)
+        {
+            cameraRange.SetRange();
+        }
+
+    }
+
+    public void ClearMapObjects()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        GameObject[] exps = GameObject.FindGameObjectsWithTag("Exp");
+        foreach (GameObject exp in exps)
+        {
+            Destroy(exp);
+        }
+
+        Debug.Log("맵에 남은 오브젝트 제거 완료");
+    }
+    
     // 경험치 획득 시 호출되는 함수
     public void GetExp(float get_exp)
     {
@@ -45,11 +111,11 @@ public class InGameManager : MonoBehaviour
         // 레벨 업까지 필요한 경험치 가져오기
         int req_exp = ExpDataManager.instance.GetRequiredExp(level);
 
-        // 경험치가 가득 찼다면 레벨업 실행
-        if (exp >= req_exp)
+        // 초과된 경험치가 없을 때까지 반복
+        while (exp >= req_exp)
         {
             // 만렙 미만이면 일반 레벨업 보상
-            if (level < max_level)
+            if (level <= max_level)
             {
                 LevelUp(req_exp);
             }
@@ -58,6 +124,17 @@ public class InGameManager : MonoBehaviour
             {
                 MaxLevelUP(req_exp);
             }
+
+            pending_level_up_count++; // 팝업을 띄워야 할 횟수 누적
+            req_exp = ExpDataManager.instance.GetRequiredExp(level); //다음 경험치 필요 요구량을 계산하기 위해 한 번 더 정리
+
+            // 만렙 이후 경험치까지 다 소진했다면 탈출
+            if (level >= max_level && exp < req_exp) break;
+        }
+        // 팝업이 아직 안 떠 있다면 첫 번째 팝업 호출
+        if (pending_level_up_count > 0 && !level_up_ui.level_up_pop_up.activeSelf)
+        {
+            level_up_ui.Show();
         }
     }
 
