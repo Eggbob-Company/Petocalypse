@@ -819,65 +819,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pause_pop_up: {fileID: 266527753}
---- !u!1 &312148733
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 312148735}
-  - component: {fileID: 312148736}
-  m_Layer: 0
-  m_Name: TestInGameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &312148735
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312148733}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 169.3183, y: 250.88715, z: 0.16380034}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &312148736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312148733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53141b97b17592242ae86e1f5d9dda01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game_over_ui: {fileID: 1638170732}
-  stage_map_min: {x: -9, y: -12}
-  stage_map_max: {x: 9, y: 12}
-  boss_map_min: {x: 40, y: -12}
-  boss_map_max: {x: 58, y: 12}
-  boss_spawn_pos: {x: 49, y: 0}
-  exp: 0
-  level: 1
-  max_level: 5
-  gold: 0
-  kill: 0
-  max_game_time: 300
-  game_time: 0
-  health: 0
-  max_health: 0
 --- !u!1 &314554122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3825,7 +3766,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 312148736}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TestInGameManager, Assembly-CSharp
         m_MethodName: TeleportToBoss
         m_Mode: 1
@@ -4347,6 +4288,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398783082}
   m_CullTransparentMesh: 1
+--- !u!1 &1441645429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1441645431}
+  - component: {fileID: 1441645430}
+  m_Layer: 0
+  m_Name: InGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1441645430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441645429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game_over_ui: {fileID: 1638170732}
+  level_up_ui: {fileID: 0}
+  stage_map_min: {x: -9, y: -12}
+  stage_map_max: {x: 9, y: 12}
+  boss_map_min: {x: 40, y: -12}
+  boss_map_max: {x: 58, y: 12}
+  boss_spawn_pos: {x: 49, y: 0}
+  pending_level_up_count: 0
+  exp: 0
+  level: 1
+  max_level: 5
+  gold: 0
+  kill: 0
+  max_game_time: 300
+  game_time: 0
+  health: 0
+  max_health: 0
+--- !u!4 &1441645431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441645429}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.02516964, y: 0.6105599, z: -0.13620457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448850860
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,9 +5604,9 @@ SceneRoots:
   - {fileID: 552632969}
   - {fileID: 818441766}
   - {fileID: 709857268}
-  - {fileID: 312148735}
   - {fileID: 1728607936}
   - {fileID: 1508687973}
   - {fileID: 981216317}
   - {fileID: 1589877633}
   - {fileID: 1233519461}
+  - {fileID: 1441645431}

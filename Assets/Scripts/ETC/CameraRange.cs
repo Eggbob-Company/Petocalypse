@@ -6,8 +6,8 @@ public class CameraRange : MonoBehaviour
 {
     public void SetRange()
     {
-        Vector2 min = TestInGameManager.instance.MapMin;
-        Vector2 max = TestInGameManager.instance.MapMax;
+        Vector2 min = InGameManager.instance.MapMin;
+        Vector2 max = InGameManager.instance.MapMax;
 
         PolygonCollider2D poly = GetComponent<PolygonCollider2D>();
 

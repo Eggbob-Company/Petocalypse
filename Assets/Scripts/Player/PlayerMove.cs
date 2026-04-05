@@ -57,12 +57,12 @@ public class PlayerMove : MonoBehaviour
 
         float min_x = -9f, max_x = 9f, min_y = -12f, max_y = 12f; // 테스트매니저와 충돌 방지용 코드
 
-        if(TestInGameManager.instance != null)
+        if(InGameManager.instance != null)
         {
-            min_x = TestInGameManager.instance.MapMin.x;
-            max_x = TestInGameManager.instance.MapMax.x;
-            min_y = TestInGameManager.instance.MapMin.y;
-            max_y = TestInGameManager.instance.MapMax.y;
+            min_x = InGameManager.instance.MapMin.x;
+            max_x = InGameManager.instance.MapMax.x;
+            min_y = InGameManager.instance.MapMin.y;
+            max_y = InGameManager.instance.MapMax.y;
 
             // Clamp 함수로 범위 제한: 순서대로 제한할 변수, 최솟값, 최댓값
             target_pos.x = Mathf.Clamp(target_pos.x, min_x, max_x);
