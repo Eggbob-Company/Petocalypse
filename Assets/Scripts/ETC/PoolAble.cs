@@ -8,6 +8,8 @@ public class PoolAble : MonoBehaviour
 
     public void ReleaseObject()
     {
+        if (!gameObject.activeSelf) return; // 반납했으면 실행하짐 말기. (방어코드)
+
         if(Pool != null) // 풀로 반납
         {
             Pool.Release(gameObject);
