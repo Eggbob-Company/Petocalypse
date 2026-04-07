@@ -84,6 +84,13 @@ public class InGameManager : MonoBehaviour
             cameraRange.SetRange();
         }
 
+        // 몬스터 소환 범위 업데이트
+        EnemySpawnManager spawnManager = FindObjectOfType<EnemySpawnManager>();
+        if (spawnManager != null)
+        {
+            spawnManager.SetMapRange();
+        }
+
     }
 
     public void ClearMapObjects()

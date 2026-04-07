@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    [Header("Map Settings")]
-    [SerializeField] private Vector2 _map_min; // 맵 왼쪽 아래 좌표
-    [SerializeField] private Vector2 _map_max; // 맵 오른쪽 위 좌표
+    private Vector2 _map_min;
+    private Vector2 _map_max;
 
     [Header("Spawn Settings")] // 스폰 제외할 범위(플레이어 기준 사각형)
     [SerializeField] private float _spawn_except_width = 5f;  // 플레이어 기준 가로 반경(너비의 절반)
@@ -22,32 +21,13 @@ public class EnemySpawnManager : MonoBehaviour
             Debug.LogError("씬에 MonsterDataManager가 존재하지 않습니다.");
         }
 
+        SetMapRange(); // 소환에 필요한 맵 범위 초기화
+
         // 태그를 이용해 플레이어 좌표 참조
         GameObject player_go = GameObject.FindWithTag("Player");
         if(player_go != null)
         {
             _player_transform = player_go.transform;
-        }
-
-        // StartCoroutine(CoSpawnZombie()); // 코루틴 시작
-    }
-
-    // 좀비를 0.5초마다 자동 생성하는 코루틴
-    private IEnumerator CoSpawnZombie()
-    {
-        yield return new WaitUntil(() => ObjectPoolManager.instance != null); // ObjectPoolManager가 준비될 때까지 대기
-
-        while (true)
-        {
-            Vector2 spawn_pos = GetRandomSpawnPosition();
-
-            // 좌표가 유효하다면
-            if(spawn_pos != Vector2.zero)
-            {
-                SpawnAtPosition("Zombie", spawn_pos);
-            }
-
-            yield return new WaitForSeconds(0.5f); // 0.5초 대기
         }
     }
 
@@ -114,8 +94,13 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void SetMapRange() // 소환할 맵 범위 업데이트
     {
-        
+        if(InGameManager.instance != null)
+        {
+            _map_min = InGameManager.instance.MapMin;
+            _map_max = InGameManager.instance.MapMax;
+            Debug.Log("몬스터 소환 범위 업데이트 완료");
+        }
     }
 }
