@@ -3893,7 +3893,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1789253534}
-  m_Father: {fileID: 818441766}
+  m_Father: {fileID: 1508687973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4649,7 +4649,6 @@ RectTransform:
   - {fileID: 1265672966}
   - {fileID: 918460872}
   - {fileID: 877611587}
-  - {fileID: 673704020}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7465,6 +7464,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 673704020}
   - {fileID: 817021533}
   - {fileID: 266527754}
   m_Father: {fileID: 0}
@@ -8284,6 +8284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game_over_popup: {fileID: 1638170730}
+  game_result_text: {fileID: 807942759}
   final_kill_text: {fileID: 1043700831}
   final_gold_text: {fileID: 1569031643}
 --- !u!1 &1721427020
