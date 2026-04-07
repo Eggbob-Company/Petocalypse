@@ -29,9 +29,6 @@ public class PlayerAttack : MonoBehaviour
         // PlayerMove.cs에서 프로퍼티를 가져오기 위해 PlayerMove.cs 컴포넌트 가져오기
         _player_move = GetComponent<PlayerMove>();
 
-        // 테스트용으로 시작할 때 100번 스킬 3레벨을 하나 추가
-        // 나중에 레벨업 시스템이 완성되면 거기서 추가
-        mySkills.Add(new SkillSlot(100, 3));
     }
 
     void Update()
@@ -141,5 +138,33 @@ public class PlayerAttack : MonoBehaviour
 
         // 가장 가까운 적의 방향 벡터 계산 후 반환
         return ((Vector2)nearest_enemy.transform.position - my_pos).normalized;
+    }
+
+    public void AddOrUpgradeSkill(int skill_id) // 스킬 팝업에서 선택한 스킬들을 스킬 슬롯에 추가
+    {
+        // 이미 가지고 있는지 확인
+        SkillSlot target_slot = null;
+        foreach (var slot in mySkills)
+        {
+            if (slot.skill_id == skill_id)
+            {
+                target_slot = slot;
+                break;
+            }
+        }
+
+        // 처리 로직
+        if (target_slot != null)
+        {
+            // 이미 있다면 레벨업
+            target_slot.level++;
+            Debug.Log($"{skill_id}번 스킬이 {target_slot.level}레벨로 강화되었습니다.");
+        }
+        else
+        {
+            // 없다면 새로 추가 (1레벨로 시작)
+            mySkills.Add(new SkillSlot(skill_id, 1));
+            Debug.Log($"{skill_id}번 스킬을 새로 습득했습니다.");
+        }
     }
 }

@@ -49,6 +49,9 @@ public class InGameManager : MonoBehaviour
 
     void Start()
     {
+        // 시작하자마자 스킬 1개를 고르고 시작.
+        pending_level_up_count = 1;
+        LevelUpPopUp.instance.Show();
         // 플레이어의 체력 이벤트 구독
         Player.instance.health.OnHPChanged += UpdateHealthData;
 

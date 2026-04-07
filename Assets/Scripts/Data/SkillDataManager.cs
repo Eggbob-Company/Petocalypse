@@ -59,6 +59,7 @@ public class SkillDataManager : MonoBehaviour
             data.attack_type = (AttackType)int.Parse(row[10].Trim());
             data.prefab_name = row[11].Trim();
             data.desc_key    = row[12].Trim();
+            data.icon_name    = row[13].Trim();
 
             // "ID_레벨" 형태의 키 생성 (예: "100_1")
             string key = $"{data.id}_{data.level}";
@@ -79,5 +80,20 @@ public class SkillDataManager : MonoBehaviour
 
         Debug.LogWarning($"[System] {id}번의 {level}레벨 스킬 데이터를 찾을 수 없습니다.");
         return null;
+    }
+
+    // 모든 고유 스킬 ID 리스트를 반환하는 함수
+    public List<int> GetAllSkillIds()
+    {
+        HashSet<int> unique_ids = new HashSet<int>();
+
+        // 딕셔너리의 모든 값(SkillData)을 돌면서 ID만 수집
+        foreach (var data in _skill_dict.Values)
+        {
+            unique_ids.Add(data.id);
+        }
+
+        // HashSet을 List로 변환해서 반환 (HashSet은 자동으로 중복을 제거)
+        return new List<int>(unique_ids);
     }
 }
