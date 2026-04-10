@@ -4,50 +4,123 @@ using UnityEngine;
 
 public class LevelUpPopUp : MonoBehaviour
 {
-    public GameObject level_up_pop_up; // LevelUpPopUp 오브젝트 자신
+    public static LevelUpPopUp instance;
+    public GameObject level_up_pop_up; 
     
     [Header("Slots (0~2: Skill / 3~4: FullLevel)")]
-    public GameObject[] all_slots; // 인스펙터에서 5개를 순서대로 연결
+    public GameObject[] all_slots; 
+
+    // 가중치 계산을 위한 구조체
+    private struct SkillWeightInfo
+    {
+        public SkillData data;
+        public float weight;
+        public SkillWeightInfo(SkillData data, float weight) { this.data = data; this.weight = weight; }
+    }
+
+    void Awake()
+    {
+        if (instance == null) instance = this;
+    }
 
     public void Show()
     {
         level_up_pop_up.SetActive(true);
-        Time.timeScale = 0f; // 게임 일시정지
+        Time.timeScale = 0f; 
 
-        // 모든 슬롯 초기화 (비활성화)
         foreach (GameObject slot in all_slots) slot.SetActive(false);
 
-        // 만렙 여부에 따른 슬롯 활성화 분기
         if (InGameManager.instance.level > InGameManager.instance.max_level)
         {
-            // 만렙 모드: FullLevel 1, 2번 슬롯만 활성화
+            // 만렙 모드: 3, 4번 슬롯만 활성화
             all_slots[3].SetActive(true);
             all_slots[4].SetActive(true);
         }
         else
         {
-            // 일반 모드: Skill 1, 2, 3번 슬롯 활성화
-            all_slots[0].SetActive(true);
-            all_slots[1].SetActive(true);
-            all_slots[2].SetActive(true);
+            // 일반 스킬을 골라야 할 때는 가중치를 반영해 랜덤 추출된 스킬 정보를 각 슬롯에 삽입
+            List<SkillData> selected_skills = GetWeightedRandomSkills(3);
+
+            for (int i = 0; i < selected_skills.Count; i++)
+            {
+                all_slots[i].SetActive(true);
+                // 각 슬롯에 붙어있는 SkillUiItem 컴포넌트를 가져와서 초기화
+                SkillUiItem item = all_slots[i].GetComponent<SkillUiItem>();
+                if (item != null)
+                {
+                    item.Init(selected_skills[i]);
+                }
+            }
         }
     }
 
-    // 모든 버튼의 On Click() 이벤트에 이 함수를 연결
+    // 가중치 기반 랜덤 스킬 리스트 반환
+    private List<SkillData> GetWeightedRandomSkills(int count)
+    {
+        List<SkillData> result_list = new List<SkillData>();
+        List<SkillWeightInfo> candidates = new List<SkillWeightInfo>();
+
+        // 모든 스킬 후보군 조사
+        foreach (int id in SkillDataManager.instance.GetAllSkillIds())
+        {
+            int current_lv = GetCurrentSkillLevel(id);
+            int next_lv = current_lv + 1;
+
+            // 다음 레벨 데이터 가져오기 (없으면 만렙이므로 패스)
+            SkillData data = SkillDataManager.instance.GetSkillData(id, next_lv);
+            if (data == null) continue;
+
+            // 가중치 설정 (없던 거면 100, 있던 거면 50)
+            float weight = (current_lv == 0) ? 100f : 50f;
+            candidates.Add(new SkillWeightInfo(data, weight));
+        }
+
+        // 룰렛 휠 방식으로 중복 없이 count만큼 뽑기
+        for (int i = 0; i < count && candidates.Count > 0; i++)
+        {
+            float total_weight = 0;
+            foreach (var c in candidates) total_weight += c.weight;
+
+            float pivot = Random.Range(0f, total_weight);
+            float current_sum = 0;
+
+            for (int j = 0; j < candidates.Count; j++)
+            {
+                current_sum += candidates[j].weight;
+                if (pivot <= current_sum)
+                {
+                    result_list.Add(candidates[j].data);
+                    candidates.RemoveAt(j); // 중복 방지 RemoveAt()은 C#에서 제공하는 함수, 특정값을 지워라
+                    break;
+                }
+            }
+        }
+        return result_list;
+    }
+
+    // 플레이어가 현재 해당 스킬을 몇 레벨 가지고 있는지 확인
+    private int GetCurrentSkillLevel(int id)
+    {
+        PlayerAttack player_attack = Player.instance.GetComponent<PlayerAttack>();
+        if (player_attack == null) return 0;
+
+        foreach (var slot in player_attack.mySkills)
+        {
+            if (slot.skill_id == id) return slot.level;
+        }
+        return 0;
+    }
+
     public void OnSelect()
     {
-        // 1. 누적된 팝업 횟수 하나 차감
         InGameManager.instance.pending_level_up_count--;
 
-        // 2. 남은 팝업이 있는지 체크
         if (InGameManager.instance.pending_level_up_count > 0)
         {
-            // 아직 남았다면 다시 Show (새로운 랜덤 데이터를 뽑는 로직이 여기 들어갈 예정)
-            Show();
+            Show(); // 다시 호출하여 새로운 랜덤 스킬 세팅
         }
         else
         {
-            // 다 끝났다면 닫고 게임 재개
             Close();
         }
     }
@@ -55,6 +128,6 @@ public class LevelUpPopUp : MonoBehaviour
     public void Close()
     {
         level_up_pop_up.SetActive(false);
-        Time.timeScale = 1f; // 게임 재개
+        Time.timeScale = 1f;
     }
 }

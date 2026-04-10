@@ -17,6 +17,8 @@ public class SkillData
     public AttackType attack_type;
     public string prefab_name;
     public string desc_key;
+
+    public string icon_name;
 }
 
 public enum AttackType

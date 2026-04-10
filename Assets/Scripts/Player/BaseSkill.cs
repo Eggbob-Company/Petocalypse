@@ -107,6 +107,8 @@ public class BaseSkill : PoolAble
 
     protected virtual void Deactivate()
     {
+        if (!gameObject.activeSelf) return; // 비활성화 상태면 실행하지 마라
+
         _is_init = false;
 
         ReleaseObject(); // 오브젝트 풀로 반환
