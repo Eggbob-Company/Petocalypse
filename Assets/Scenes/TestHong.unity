@@ -3944,7 +3944,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1441645430}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InGameManager, Assembly-CSharp
         m_MethodName: TeleportToBoss
         m_Mode: 1
@@ -7243,7 +7243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1441645431}
-  - component: {fileID: 1441645430}
+  - component: {fileID: 1441645432}
   m_Layer: 0
   m_Name: InGameManager
   m_TagString: Untagged
@@ -7251,35 +7251,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1441645430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441645429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game_over_ui: {fileID: 1638170732}
-  level_up_ui: {fileID: 843394364}
-  stage_map_min: {x: -9, y: -12}
-  stage_map_max: {x: 9, y: 12}
-  boss_map_min: {x: 40, y: -12}
-  boss_map_max: {x: 58, y: 12}
-  boss_spawn_pos: {x: 49, y: 0}
-  pending_level_up_count: 0
-  exp: 0
-  level: 1
-  max_level: 5
-  gold: 0
-  kill: 0
-  max_game_time: 300
-  game_time: 0
-  health: 0
-  max_health: 0
 --- !u!4 &1441645431
 Transform:
   m_ObjectHideFlags: 0
@@ -7295,6 +7266,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1441645432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441645429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game_over_ui: {fileID: 1638170732}
+  level_up_ui: {fileID: 1043907752}
+  stage_map_min: {x: -9, y: -12}
+  stage_map_max: {x: 9, y: 12}
+  boss_map_min: {x: 40, y: -12}
+  boss_map_max: {x: 58, y: 12}
+  boss_spawn_pos: {x: 49, y: 0}
+  is_boss_stage: 0
+  is_game_over: 0
+  pending_level_up_count: 0
+  exp: 0
+  level: 1
+  max_level: 5
+  gold: 0
+  kill: 0
+  max_game_time: 300
+  game_time: 0
+  health: 0
+  max_health: 0
 --- !u!1 &1448850860
 GameObject:
   m_ObjectHideFlags: 0

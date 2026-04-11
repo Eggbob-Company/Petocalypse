@@ -21,6 +21,10 @@ public class InGameManager : MonoBehaviour
     private Vector2 _current_map_min;
     private Vector2 _current_map_max;
 
+    [Header("Game State")]
+    public bool is_boss_stage = false; // 보스 맵 진입 여부
+    public bool is_game_over = false;  // 게임 종료 여부
+
     // 다른 스크립트가 참조할 프로퍼티
     public Vector2 MapMin => _current_map_min;
     public Vector2 MapMax => _current_map_max;
@@ -49,22 +53,26 @@ public class InGameManager : MonoBehaviour
 
     void Start()
     {
-        // 시작하자마자 스킬 1개를 고르고 시작.
-        pending_level_up_count = 1;
-        LevelUpPopUp.instance.Show();
         // 플레이어의 체력 이벤트 구독
         Player.instance.health.OnHPChanged += UpdateHealthData;
 
-        // 플레이어의 죽음 이벤트 구독 
-        Player.instance.health.OnDead += ShowGameOverUI;
+        // 플레이어 사망 시 게임 결과 호출 
+        Player.instance.health.OnDead += () => ShowGameOverUI(false);
 
         // 초기 최대 체력, 현재 체력 값 세팅
         max_health = Player.instance.max_hp;
         health = Player.instance.health.CurrentHP;
     }
 
+    // 승리 조건: 보스 처치 시 보스 스크립트에서 호출할 것
+    public void Victory()
+    {
+        ShowGameOverUI(true);
+    }
+
     public void TeleportToBoss() // 이동 버튼용
     {
+        is_boss_stage = true; // 보스 스테이지 진입 표시
         ClearMapObjects(); // 맵에 있던 오브젝트 삭제
 
         // 현재 맵 범위를 보스용으로 교체
@@ -173,12 +181,14 @@ public class InGameManager : MonoBehaviour
         health = hp;
     }
 
-    // 플레이어 사망 이벤트 구독 시 호출되는 함수
-    void ShowGameOverUI()
+    public void ShowGameOverUI(bool isVictory)
     {
-        if (game_over_ui != null)
+        if(is_game_over) return; // 이미 종료되었다면 무시
+        is_game_over = true;
+
+        if(game_over_ui != null)
         {
-            game_over_ui.Show();  // GameOverPopUp.cs에서 팝업 호출
+            game_over_ui.Show(isVictory); // GameOverPopUp.cs에서 팝업 호출
         }
     }
 
@@ -190,8 +200,19 @@ public class InGameManager : MonoBehaviour
 
     void Update()
     {
+        if(is_game_over) return;
+
         // 시간은 자동으로 흐르게
-        game_time += Time.deltaTime;
+        if (game_time < max_game_time)
+        {
+            game_time += Time.deltaTime;
+
+            if (game_time >= max_game_time)
+            {
+                game_time = max_game_time;
+                ShowGameOverUI(false); // 시간 초과로 패배 처리
+            }
+        }
         
     }
 }
