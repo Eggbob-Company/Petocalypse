@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         if (data != null)
         {
             // CSV 컬럼명과 1:1 매칭
-            max_hp = data.max_hp;
+            max_hp = data.max_hp + GameDataManager.instance.bonus_max_hp;
             recovery = data.recovery;
             move_speed = data.move_speed;
             might = data.might;

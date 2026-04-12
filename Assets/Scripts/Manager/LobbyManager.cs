@@ -12,4 +12,10 @@ public class LobbyManager : MonoBehaviour
         // 실제 넘어가고 싶은 씬의 이름
         SceneManager.LoadScene("InGame");
     }
+
+    public void OnClickReinforce()
+    {
+        // 실제 넘어가고 싶은 씬의 이름
+        SceneManager.LoadScene("Reinforce");
+    }
 }

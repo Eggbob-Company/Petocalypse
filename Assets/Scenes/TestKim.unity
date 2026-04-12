@@ -340,13 +340,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 33
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1056,13 +1056,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5113207, g: 0.69590855, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1463,7 +1463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &268762405
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1530,7 +1530,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 299623126}
-  - component: {fileID: 299623127}
   m_Layer: 5
   m_Name: LevelUpPopUp
   m_TagString: Untagged
@@ -1559,25 +1558,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &299623127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299623125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 164b0dd8997f64f4c9cc16ed95940f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level_up_pop_up: {fileID: 299623125}
-  all_slots:
-  - {fileID: 902716273}
-  - {fileID: 628745696}
-  - {fileID: 1631980107}
-  - {fileID: 1199672503}
-  - {fileID: 1735990126}
 --- !u!1 &312148733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,12 +1603,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game_over_ui: {fileID: 1638170732}
-  level_up_ui: {fileID: 299623127}
+  level_up_ui: {fileID: 1010543816}
   stage_map_min: {x: -9, y: -12}
   stage_map_max: {x: 9, y: 12}
   boss_map_min: {x: 40, y: -12}
   boss_map_max: {x: 58, y: 12}
   boss_spawn_pos: {x: 49, y: 0}
+  is_boss_stage: 0
+  is_game_over: 0
   pending_level_up_count: 0
   exp: 0
   level: 1
@@ -1804,7 +1786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &318361196
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2035,7 +2017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &505201315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2946,7 +2928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &616616552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3098,6 +3080,7 @@ GameObject:
   - component: {fileID: 628745700}
   - component: {fileID: 628745699}
   - component: {fileID: 628745698}
+  - component: {fileID: 628745701}
   m_Layer: 5
   m_Name: Skill 2
   m_TagString: Untagged
@@ -3127,8 +3110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302, y: -310}
-  m_SizeDelta: {x: 188, y: 540}
+  m_AnchoredPosition: {x: 500, y: -310}
+  m_SizeDelta: {x: 316.66666, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &628745698
 MonoBehaviour:
@@ -3174,9 +3157,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 299623127}
-        m_TargetAssemblyTypeName: LevelUpPopUp, Assembly-CSharp
-        m_MethodName: OnSelect
+      - m_Target: {fileID: 628745701}
+        m_TargetAssemblyTypeName: SkillUiItem, Assembly-CSharp
+        m_MethodName: OnClickSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3224,6 +3207,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628745696}
   m_CullTransparentMesh: 1
+--- !u!114 &628745701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628745696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6141ea6c494b64fa9a46bf8dc1a3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_icon: {fileID: 1888469807}
+  text_name: {fileID: 1803808570}
+  text_level: {fileID: 157871005}
+  text_desc: {fileID: 1479392433}
+  new_badge: {fileID: 1325051297}
+  level_up_badge: {fileID: 1706665577}
 --- !u!1 &635614790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,13 +3695,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 33
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4185,7 +4186,6 @@ RectTransform:
   - {fileID: 1265672966}
   - {fileID: 918460872}
   - {fileID: 877611587}
-  - {fileID: 1832922180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4389,6 +4389,7 @@ GameObject:
   - component: {fileID: 902716277}
   - component: {fileID: 902716276}
   - component: {fileID: 902716275}
+  - component: {fileID: 902716278}
   m_Layer: 5
   m_Name: Skill 1
   m_TagString: Untagged
@@ -4418,8 +4419,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 104, y: -310}
-  m_SizeDelta: {x: 188, y: 540}
+  m_AnchoredPosition: {x: 173.33333, y: -310}
+  m_SizeDelta: {x: 316.66666, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902716275
 MonoBehaviour:
@@ -4465,9 +4466,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 299623127}
-        m_TargetAssemblyTypeName: LevelUpPopUp, Assembly-CSharp
-        m_MethodName: OnSelect
+      - m_Target: {fileID: 902716278}
+        m_TargetAssemblyTypeName: SkillUiItem, Assembly-CSharp
+        m_MethodName: OnClickSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4515,6 +4516,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902716273}
   m_CullTransparentMesh: 1
+--- !u!114 &902716278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902716273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6141ea6c494b64fa9a46bf8dc1a3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_icon: {fileID: 930384591}
+  text_name: {fileID: 1325746005}
+  text_level: {fileID: 1787954296}
+  text_desc: {fileID: 11446819}
+  new_badge: {fileID: 505201314}
+  level_up_badge: {fileID: 268762404}
 --- !u!1 &909062798
 GameObject:
   m_ObjectHideFlags: 0
@@ -4745,7 +4764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5113207, g: 0.69590855, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4782,6 +4801,7 @@ GameObject:
   - component: {fileID: 1010543814}
   - component: {fileID: 1010543813}
   - component: {fileID: 1010543812}
+  - component: {fileID: 1010543816}
   m_Layer: 5
   m_Name: LevelUpCanvas
   m_TagString: Untagged
@@ -4872,6 +4892,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1010543816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010543811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164b0dd8997f64f4c9cc16ed95940f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_up_pop_up: {fileID: 299623125}
+  all_slots:
+  - {fileID: 902716273}
+  - {fileID: 628745696}
+  - {fileID: 1631980107}
+  - {fileID: 1199672503}
+  - {fileID: 1735990126}
 --- !u!1 &1023239942
 GameObject:
   m_ObjectHideFlags: 0
@@ -5557,8 +5596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
-    m_Right: 10
+    m_Left: 15
+    m_Right: 15
     m_Top: 40
     m_Bottom: 20
   m_ChildAlignment: 4
@@ -6083,7 +6122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1199672504
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6151,7 +6190,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 299623127}
+      - m_Target: {fileID: 1010543816}
         m_TargetAssemblyTypeName: LevelUpPopUp, Assembly-CSharp
         m_MethodName: OnSelect
         m_Mode: 1
@@ -6499,7 +6538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1325051298
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6647,7 +6686,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -6781,7 +6820,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7311,13 +7350,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 33
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7457,6 +7496,7 @@ RectTransform:
   m_Children:
   - {fileID: 817021533}
   - {fileID: 266527754}
+  - {fileID: 1832922180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7610,6 +7650,7 @@ GameObject:
   - component: {fileID: 1631980111}
   - component: {fileID: 1631980110}
   - component: {fileID: 1631980109}
+  - component: {fileID: 1631980112}
   m_Layer: 5
   m_Name: Skill 3
   m_TagString: Untagged
@@ -7639,8 +7680,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -310}
-  m_SizeDelta: {x: 188, y: 540}
+  m_AnchoredPosition: {x: 826.6666, y: -310}
+  m_SizeDelta: {x: 316.66666, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1631980109
 MonoBehaviour:
@@ -7686,9 +7727,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 299623127}
-        m_TargetAssemblyTypeName: LevelUpPopUp, Assembly-CSharp
-        m_MethodName: OnSelect
+      - m_Target: {fileID: 1631980112}
+        m_TargetAssemblyTypeName: SkillUiItem, Assembly-CSharp
+        m_MethodName: OnClickSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7736,6 +7777,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631980107}
   m_CullTransparentMesh: 1
+--- !u!114 &1631980112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631980107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6141ea6c494b64fa9a46bf8dc1a3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_icon: {fileID: 202702722}
+  text_name: {fileID: 1346560769}
+  text_level: {fileID: 1699389437}
+  text_desc: {fileID: 786781139}
+  new_badge: {fileID: 318361195}
+  level_up_badge: {fileID: 616616551}
 --- !u!1 &1638170730
 GameObject:
   m_ObjectHideFlags: 0
@@ -7787,6 +7846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game_over_popup: {fileID: 1638170730}
+  game_result_text: {fileID: 807942759}
   final_kill_text: {fileID: 1043700831}
   final_gold_text: {fileID: 1569031643}
 --- !u!1 &1699389435
@@ -7873,13 +7933,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7940,7 +8000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1706665578
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8118,7 +8178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1735990127
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8186,7 +8246,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 299623127}
+      - m_Target: {fileID: 1010543816}
         m_TargetAssemblyTypeName: LevelUpPopUp, Assembly-CSharp
         m_MethodName: OnSelect
         m_Mode: 1
@@ -8356,13 +8416,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8764,7 +8824,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8929,7 +8989,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 893025463}
-  m_Father: {fileID: 818441766}
+  m_Father: {fileID: 1508687973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9081,6 +9141,15 @@ MonoBehaviour:
   - object_name: Bullet
     prefab: {fileID: 1639396363065939057, guid: 9e6ce6ebe90415542901e13d38a276d2, type: 3}
     count: 50
+  - object_name: Bullet_red
+    prefab: {fileID: 1502964358931225443, guid: 1bc4a9064b9bc5f4d852d186bca3e379, type: 3}
+    count: 50
+  - object_name: Bullet_blue
+    prefab: {fileID: 8104342679814421660, guid: 8a0477509e00fb1408d7d16ec4aac9f8, type: 3}
+    count: 50
+  - object_name: Bullet_green
+    prefab: {fileID: 8139109573483334749, guid: d2f2fd4ab7759f740a1d40dfc25a77bb, type: 3}
+    count: 50
   - object_name: DamageText
     prefab: {fileID: 4316625361297443667, guid: d50a1c42f1935834c8a25a3caee6b870, type: 3}
     count: 50
@@ -9149,7 +9218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5113207, g: 0.69590855, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
