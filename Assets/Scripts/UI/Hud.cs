@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro; // TextMeshPro를 쓰려면 사용해야 함.

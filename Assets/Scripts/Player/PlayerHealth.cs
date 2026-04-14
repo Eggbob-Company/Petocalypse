@@ -61,6 +61,22 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void MaxLevelUpHeal(float amount)
+    {
+        if (_is_dead) return;
+
+        _current_hp += amount;
+
+        // 최대 체력 초과 방지 (InGameManager의 max_health 변수 활용)
+        if (_current_hp > InGameManager.instance.max_health)
+        {
+            _current_hp = InGameManager.instance.max_health;
+        }
+
+        // 체력 변경 이벤트 호출 (UI 업데이트)
+        OnHPChanged?.Invoke(_current_hp);
+    }
+
     private void Die()
     {
         if (_is_dead) return;
