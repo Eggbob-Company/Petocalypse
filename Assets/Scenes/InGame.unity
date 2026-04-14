@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5113207, g: 0.69590855, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5113207, g: 0.69590855, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1604,6 +1604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game_over_ui: {fileID: 1638170732}
   level_up_ui: {fileID: 1010543816}
+  health_reward_amount: 30
+  gold_reward_amount: 100
   stage_map_min: {x: -9, y: -12}
   stage_map_max: {x: 9, y: 12}
   boss_map_min: {x: 40, y: -12}
@@ -6162,6 +6164,7 @@ GameObject:
   - component: {fileID: 1199672507}
   - component: {fileID: 1199672506}
   - component: {fileID: 1199672505}
+  - component: {fileID: 1199672508}
   m_Layer: 5
   m_Name: FullLevel 1
   m_TagString: Untagged
@@ -6236,9 +6239,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1010543816}
-        m_TargetAssemblyTypeName: LevelUpPopUp, Assembly-CSharp
-        m_MethodName: OnSelect
+      - m_Target: {fileID: 1199672508}
+        m_TargetAssemblyTypeName: SkillUiItem, Assembly-CSharp
+        m_MethodName: OnClickSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6286,6 +6289,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199672503}
   m_CullTransparentMesh: 1
+--- !u!114 &1199672508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199672503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6141ea6c494b64fa9a46bf8dc1a3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_icon: {fileID: 242687765}
+  text_name: {fileID: 570087386}
+  text_level: {fileID: 143512084}
+  text_desc: {fileID: 1090802902}
+  new_badge: {fileID: 0}
+  level_up_badge: {fileID: 0}
 --- !u!1 &1244765357
 GameObject:
   m_ObjectHideFlags: 0
@@ -8218,6 +8239,7 @@ GameObject:
   - component: {fileID: 1735990130}
   - component: {fileID: 1735990129}
   - component: {fileID: 1735990128}
+  - component: {fileID: 1735990131}
   m_Layer: 5
   m_Name: FullLevel 2
   m_TagString: Untagged
@@ -8292,9 +8314,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1010543816}
-        m_TargetAssemblyTypeName: LevelUpPopUp, Assembly-CSharp
-        m_MethodName: OnSelect
+      - m_Target: {fileID: 1735990131}
+        m_TargetAssemblyTypeName: SkillUiItem, Assembly-CSharp
+        m_MethodName: OnClickSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8342,6 +8364,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735990126}
   m_CullTransparentMesh: 1
+--- !u!114 &1735990131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735990126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6141ea6c494b64fa9a46bf8dc1a3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_icon: {fileID: 192431890}
+  text_name: {fileID: 1791274762}
+  text_level: {fileID: 1152983337}
+  text_desc: {fileID: 640231007}
+  new_badge: {fileID: 0}
+  level_up_badge: {fileID: 0}
 --- !u!1 &1748622844
 GameObject:
   m_ObjectHideFlags: 0
@@ -9749,7 +9789,7 @@ SceneRoots:
   - {fileID: 818441766}
   - {fileID: 709857268}
   - {fileID: 312148735}
+  - {fileID: 981740168}
   - {fileID: 1728607936}
   - {fileID: 1508687973}
   - {fileID: 1010543815}
-  - {fileID: 981740168}

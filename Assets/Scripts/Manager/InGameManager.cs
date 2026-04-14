@@ -31,7 +31,7 @@ public class InGameManager : MonoBehaviour
 
     [Header("Level Data")]
     public int pending_level_up_count = 0; // 레벨 경험치가 한 번에 들어왔을 때, 팝업을 띄워야 하는 수
-
+    
     [Header("Test Data")]
     public float exp = 0f;
     public int level = 1;
