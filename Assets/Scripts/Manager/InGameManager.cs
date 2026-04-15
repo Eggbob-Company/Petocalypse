@@ -79,6 +79,14 @@ public class InGameManager : MonoBehaviour
         is_boss_stage = true; // 보스 스테이지 진입 표시
         ClearMapObjects(); // 맵에 있던 오브젝트 삭제
 
+        GameObject boss_prefab = Resources.Load<GameObject>("Prefabs/Enemy/Boss");
+        if (boss_prefab != null)
+        {
+            Instantiate(boss_prefab, boss_spawn_pos + new Vector2(0, 5), Quaternion.identity);
+            Debug.Log("보스 프리팹 소환 완료!");
+        }
+        else Debug.Log("보스 프리팹을 찾을 수 없습니다.");
+
         // 현재 맵 범위를 보스용으로 교체
         _current_map_min = boss_map_min;
         _current_map_max = boss_map_max;
@@ -103,6 +111,7 @@ public class InGameManager : MonoBehaviour
         EnemySpawnManager spawnManager = FindObjectOfType<EnemySpawnManager>();
         if (spawnManager != null)
         {
+            // 잡몹 몬스터 웨이브 변경
             spawnManager.SetMapRange();
         }
 
