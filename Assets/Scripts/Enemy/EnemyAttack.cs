@@ -45,7 +45,7 @@ public class EnemyAttack : MonoBehaviour
             player_health.TakeDamage(_enemy_main.base_damage);
         }
         
-        Debug.Log($"{_enemy_main.monster_name}가 플레이어를 공격! " + $"데미지: {_enemy_main.base_damage}");
+        Debug.Log($"{_enemy_main.enemy_name}가 플레이어를 공격! " + $"데미지: {_enemy_main.base_damage}");
 
         // 공격 후 쿨타임 리셋 (CSV 데이터 기반)
         _attack_timer = _enemy_main.attack_rate;
