@@ -45,7 +45,7 @@ public class WaveDataManager : MonoBehaviour
             // 각 칸의 데이터를 타입에 맞게 파싱 (Trim으로 유령 공백 제거)
             data.time_min = int.Parse(row[0].Trim());
             data.time_sec = int.Parse(row[1].Trim());
-            data.monster_id = int.Parse(row[2].Trim());
+            data.enemy_id = int.Parse(row[2].Trim());
             data.amount = int.Parse(row[3].Trim());
             data.interval = float.Parse(row[4].Trim());
             

@@ -12,13 +12,13 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private float _spawn_except_height = 5f; // 플레이어 기준 세로 반경(높이의 절반)
 
     private Transform _player_transform;
-    private MonsterDataManager _monster_data_manager; // 데이터매니저 참조할 변수
+    private EnemyDataManager _enemy_data_manager; // 데이터매니저 참조할 변수
     private void Start()
     {
-        _monster_data_manager = FindObjectOfType<MonsterDataManager>(); // 데이터매니저 탐색
-        if (_monster_data_manager == null)
+        _enemy_data_manager = FindObjectOfType<EnemyDataManager>(); // 데이터매니저 탐색
+        if (_enemy_data_manager == null)
         {
-            Debug.LogError("씬에 MonsterDataManager가 존재하지 않습니다.");
+            Debug.LogError("씬에 EnemyDataManager가 존재하지 않습니다.");
         }
 
         SetMapRange(); // 소환에 필요한 맵 범위 초기화
@@ -88,7 +88,7 @@ public class EnemySpawnManager : MonoBehaviour
             Enemy enemy = obj.GetComponent<Enemy>();
             if(enemy != null)
             {
-                enemy.InitMonster();
+                enemy.InitEnemy();
             }
 
         }

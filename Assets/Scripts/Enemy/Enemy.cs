@@ -6,16 +6,16 @@ public class Enemy : PoolAble
 {
     public static Transform target; // 모든 Enemy가 추적할 target
 
-    [Header("--- Monster Stats ---")]
-    public int monster_id = 1001; // 스포너에서 설정 지금은 임시로 1001 넣음
-    public string monster_name;
+    [Header("--- Enemy Stats ---")]
+    public int enemy_id = 1001; // 스포너에서 설정 지금은 임시로 1001 넣음
+    public string enemy_name;
     public float max_health;
     public float move_speed;
     public float base_damage;
     public float attack_range;
     public float attack_rate;
     public int exp_reward;
-    public string monster_type;
+    public string enemy_type;
 
     private Rigidbody2D _rb;
 
@@ -35,23 +35,23 @@ public class Enemy : PoolAble
 
         // // Player를 타겟으로 등록
         // if (Player.instance != null) target = Player.instance;
-        InitMonster();
+        InitEnemy();
     }
 
-    public void InitMonster()
+    public void InitEnemy()
     {
-        // MonsterDataManager를 통해 데이터 로드
-        MonsterData data = MonsterDataManager.instance.GetMonsterData(monster_id);
+        // EnemyDataManager를 통해 데이터 로드
+        EnemyData data = EnemyDataManager.instance.GetEnemyData(enemy_id);
         if (data == null) return;
 
-        monster_name = data.name;
+        enemy_name = data.name;
         max_health = data.max_health;
         move_speed = data.move_speed;
         base_damage = data.base_damage;
         attack_range = data.attack_range;
         attack_rate = data.attack_rate;
         exp_reward = data.exp_reward;
-        monster_type = data.monster_type;
+        enemy_type = data.enemy_type;
     }
 
     public void OnDeath()

@@ -1,29 +1,29 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class MonsterDataManager : MonoBehaviour
+public class EnemyDataManager : MonoBehaviour
 {
-    // EnemySpawnManager에서 싱글톤 관리를 하긴 하지만 MonsterDataManager 자체에서도 싱글톤이 있는 것이 유리하다고 함.
-    // EnemySpawnManager가 아닌 다른 스크립트에서 몬스터 데이터가 필요할 경우가 있기 때문.
-    public static MonsterDataManager instance;
-    private Dictionary<int, MonsterData> _monster_data_dict = new Dictionary<int, MonsterData>();
+    // EnemySpawnManager에서 싱글톤 관리를 하긴 하지만 EnemyDataManager 자체에서도 싱글톤이 있는 것이 유리하다고 함.
+    // EnemySpawnManager가 아닌 다른 스크립트에서 에너미 데이터가 필요할 경우가 있기 때문.
+    public static EnemyDataManager instance;
+    private Dictionary<int, EnemyData> _enemy_data_dict = new Dictionary<int, EnemyData>();
 
     void Awake()
     {
         if (instance == null) instance = this;
         else { Destroy(gameObject); return; }
-        LoadMonsterData();
+        LoadEnemyData();
     }
 
-    public void LoadMonsterData()
+    public void LoadEnemyData()
     {
-        // Resources 폴더에서 MonsterData.csv 파일을 불러온다. (확장자는 빼고 이름만 적기)
+        // Resources 폴더에서 EnemyData.csv 파일을 불러온다. (확장자는 빼고 이름만 적기)
         // csv 파일을 읽어와서 텍스트 덩어리로 만들어줌.
-        TextAsset csv_data = Resources.Load<TextAsset>("MonsterData");
+        TextAsset csv_data = Resources.Load<TextAsset>("EnemyData");
 
         if (csv_data == null)
         {
-            Debug.LogError("[System] MonsterData.csv 파일을 찾을 수 없음. Resources 폴더를 확인해주세요.");
+            Debug.LogError("[System] EnemyData.csv 파일을 찾을 수 없음. Resources 폴더를 확인해주세요.");
             return;
         }
 
@@ -40,7 +40,7 @@ public class MonsterDataManager : MonoBehaviour
             string[] row = lines[i].Split(',');
 
             // 그릇에 데이터를 담기.
-            MonsterData data = new MonsterData();
+            EnemyData data = new EnemyData();
             data.id = int.Parse(row[0].Trim());
             data.name = row[1].Trim();
             data.max_health = float.Parse(row[2].Trim());
@@ -49,24 +49,24 @@ public class MonsterDataManager : MonoBehaviour
             data.attack_range = float.Parse(row[5].Trim());
             data.attack_rate = float.Parse(row[6].Trim());
             data.exp_reward = int.Parse(row[7].Trim());
-            data.monster_type = row[8].Trim();
+            data.enemy_type = row[8].Trim();
 
             // 딕셔너리에 저장. (나중에 ID로 빠르게 찾기 위해)
-            _monster_data_dict.Add(data.id, data);
+            _enemy_data_dict.Add(data.id, data);
         }
 
-        Debug.Log("[System] MonsterData.csv 로드 완료. 총 데이터 개수: " + _monster_data_dict.Count);
+        Debug.Log("[System] EnemyData.csv 로드 완료. 총 데이터 개수: " + _enemy_data_dict.Count);
     }
 
-    // 나중에 스포너가 몬스터를 생성할 때 특정 ID의 데이터를 달라고 요청하는 함수
-    public MonsterData GetMonsterData(int monster_id)
+    // 나중에 스포너가 에너미를 생성할 때 특정 ID의 데이터를 달라고 요청하는 함수
+    public EnemyData GetEnemyData(int enemy_id)
     {
-        if (_monster_data_dict.TryGetValue(monster_id, out MonsterData data))
+        if (_enemy_data_dict.TryGetValue(enemy_id, out EnemyData data))
         {
             return data;
         }
 
-        Debug.LogError($"[System] {monster_id}번 몬스터 데이터를 찾을 수 없습니다");
+        Debug.LogError($"[System] {enemy_id}번 에너미 데이터를 찾을 수 없습니다");
         return null;
     }
 }
