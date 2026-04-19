@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class HPBarTracking : MonoBehaviour
 {
     [SerializeField] private Transform _target; // 추적할 대상 (Player)
 

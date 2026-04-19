@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class SkillUiItem : MonoBehaviour
+public class SkillUIItem : MonoBehaviour
 {
     [Header("UI Components")]
     public Image image_icon;
