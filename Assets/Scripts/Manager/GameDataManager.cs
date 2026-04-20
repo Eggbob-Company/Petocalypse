@@ -11,6 +11,7 @@ public class GameDataManager : MonoBehaviour
     public int gold = 0; // 보유 골드
     public int bonus_max_hp = 0; // 강화된 HP
     public int bonus_speed = 0; // 강화된 Speed
+    public float bonus_recovery = 0f; // 강화된 Recovery
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class GameDataManager : MonoBehaviour
         PlayerPrefs.SetInt("TotalGold", gold);
         PlayerPrefs.SetInt("BonusHP", bonus_max_hp);
         PlayerPrefs.SetInt("BonusSpeed", bonus_speed);
+        PlayerPrefs.SetFloat("BonusRecovery", bonus_recovery);
         PlayerPrefs.Save();
         Debug.Log("데이터 저장 완료!");
     }
@@ -42,6 +44,7 @@ public class GameDataManager : MonoBehaviour
         gold = PlayerPrefs.GetInt("TotalGold", 0);
         bonus_max_hp = PlayerPrefs.GetInt("BonusHP", 0);
         bonus_speed = PlayerPrefs.GetInt("BonusSpeed", 0);
+        bonus_recovery = PlayerPrefs.GetFloat("BonusRecovery", 0);
         Debug.Log($"데이터 로드 완료!");
     }
 
