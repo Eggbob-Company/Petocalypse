@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5802408277596746468}
   - component: {fileID: 6280078666316783999}
   - component: {fileID: 2971979253203776453}
-  - component: {fileID: 7885343519512640692}
   - component: {fileID: 32194480233091847}
+  - component: {fileID: 6655083673547803068}
   m_Layer: 6
   m_Name: ZombieKing
   m_TagString: Enemy
@@ -188,18 +188,6 @@ MonoBehaviour:
   attack_rate: 0
   exp_reward: 0
   enemy_type: 
---- !u!114 &7885343519512640692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6868527507706691438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cfe4fbe4f19c3945aa5b7adb857231c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &32194480233091847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +202,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _current_health: 0
   _is_dead: 0
+--- !u!114 &6655083673547803068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868527507706691438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fef663a2163b247bc927bf5d22b50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fire_point: {fileID: 0}
+  projectile_count: 8

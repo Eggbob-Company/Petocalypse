@@ -76,14 +76,6 @@ public class BaseSkill : PoolAble
                 SpawnDamageText(collision.transform.position, final_damage); // 오브젝트풀에서 대미지 텍스트 꺼내옴 & 대미지 값 인가
             }
 
-            // 때린 대상이 보스일 경우
-            BossHealth boss_health = collision.GetComponent<BossHealth>();
-            if (boss_health != null)
-            {
-                boss_health.TakeDamage(final_damage); // 대미지 주기
-                SpawnDamageText(collision.transform.position, final_damage); 
-            }
-
             // 관통 횟수 차감
             _current_penetrate--;
 
