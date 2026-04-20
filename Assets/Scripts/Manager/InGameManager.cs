@@ -42,6 +42,7 @@ public class InGameManager : MonoBehaviour
     public float game_time = 0f;
     public float health;
     public float max_health;
+    public int boss_id = 2001;
 
     void Awake()
     {
@@ -79,10 +80,17 @@ public class InGameManager : MonoBehaviour
         is_boss_stage = true; // 보스 스테이지 진입 표시
         ClearMapObjects(); // 맵에 있던 오브젝트 삭제
 
-        GameObject boss_prefab = Resources.Load<GameObject>("Prefabs/Enemy/Boss");
+        GameObject boss_prefab = Resources.Load<GameObject>("Prefabs/Enemy/ZombieKing");
         if (boss_prefab != null)
         {
-            Instantiate(boss_prefab, boss_spawn_pos + new Vector2(0, 5), Quaternion.identity);
+            GameObject boss_instance = Instantiate(boss_prefab, boss_spawn_pos + new Vector2(0, 5), Quaternion.identity);            
+            // 보스 세팅 초기화
+            Enemy enemy = boss_instance.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                enemy.InitEnemy(boss_id);
+            }
+            
             Debug.Log("보스 프리팹 소환 완료!");
         }
         else Debug.Log("보스 프리팹을 찾을 수 없습니다.");

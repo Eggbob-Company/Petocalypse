@@ -7,7 +7,7 @@ public class Enemy : PoolAble
     public static Transform target; // 모든 Enemy가 추적할 target
 
     [Header("--- Enemy Stats ---")]
-    public int enemy_id = 1001; // 스포너에서 설정 지금은 임시로 1001 넣음
+    public int enemy_id;
     public string enemy_name;
     public float max_health;
     public float move_speed;
@@ -26,19 +26,16 @@ public class Enemy : PoolAble
 
     void OnEnable() // 오브젝트 풀링을 고려해 OnEnable에서 초기화
     {
-        // 현재 Player.cs를 생성하지 않았기 때문에 테스트를 위해 임시로 "Player" 태그를 가진 오브젝트를 찾아 타겟으로 설정
-        if (target == null)
-        {
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null) target = player.transform;
-        }
+        if (Player.instance != null) target = Player.instance.transform;
+    }
 
-        // // Player를 타겟으로 등록
-        // if (Player.instance != null) target = Player.instance;
+    public void InitEnemy(int id) // 외부에서 호출하는 초기화 함수
+    {
+        enemy_id = id;
         InitEnemy();
     }
 
-    public void InitEnemy()
+    public void InitEnemy() // InitEnemy(id)가 호출하는 함수 : 오버로딩
     {
         // EnemyDataManager를 통해 데이터 로드
         EnemyData data = EnemyDataManager.instance.GetEnemyData(enemy_id);
@@ -52,6 +49,12 @@ public class Enemy : PoolAble
         attack_rate = data.attack_rate;
         exp_reward = data.exp_reward;
         enemy_type = data.enemy_type;
+
+        EnemyHealth enemy_health = GetComponent<EnemyHealth>();
+        if (enemy_health != null)
+        {
+            enemy_health.InitHealth(max_health);
+        }
     }
 
     public void OnDeath()
@@ -66,10 +69,10 @@ public class Enemy : PoolAble
         if (target == null) return;
 
         // 플레이어 방향 벡터 계산
-        Vector2 dirVec = (Vector2)target.transform.position - _rb.position;
-        Vector2 nextVec = dirVec.normalized * move_speed * Time.fixedDeltaTime;
+        Vector2 dir_vec = (Vector2)target.transform.position - _rb.position;
+        Vector2 next_vec = dir_vec.normalized * move_speed * Time.fixedDeltaTime;
         
         // 물리 엔진을 이용한 위치 이동
-        _rb.MovePosition(_rb.position + nextVec);
+        _rb.MovePosition(_rb.position + next_vec);
     }
 }

@@ -20,12 +20,14 @@ public class EnemyHealth : MonoBehaviour
 
     void OnEnable()
     {
-        if (_enemy_main != null)
-        {
-            // 현재 체력 = 최대 체력으로 설정 / 사망 상태 false 설정
-            _current_health = _enemy_main.max_health;
-            _is_dead = false;
-        }
+        _is_dead = false;
+    }
+
+    public void InitHealth(float max)
+    {
+        _current_health = max;
+        _is_dead = false;
+        Debug.Log($"[EnemyHealth] 체력 초기화 완료");
     }
 
     // 데미지를 입는 함수 (외부에서 호출 가능)
@@ -36,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
 
         // 체력 감소
         _current_health -= damage;
-        Debug.Log($"[Enemy] 남은 체력: {_current_health}");
+        Debug.Log($"[Enemy] 입은 대미지: {damage} | 남은 체력: {_current_health}");
 
         // 체력이 0 이하가 되면 사망 처리
         if (_current_health <= 0)
@@ -47,32 +49,27 @@ public class EnemyHealth : MonoBehaviour
 
     // 사망 처리 함수
     void Die()
-    {
+    {   
         // 이미 죽은 상태라면 데미지 로직 무시
         if (_is_dead) return;
-        
-        _is_dead = true;
 
-        OnEnemyDeath?.Invoke(transform.position);
-        Debug.Log($"{gameObject.name} 사망 신호 발송 및 풀 반환");
-
-        // kill 카운트 증가
-        InGameManager.instance.KillCount();
-
-        // 본체인 Enemy.cs에게 사망 알림
-        _enemy_main.OnDeath();
-    }
-
-    // 테스트용으로 이 위치에 "Skill" 태그와 부딪히면 데미지 입게 해놓은 것
-    // 추후에는 이 위치에서 삭제하고 스킬 스크립트에 EnemyHealth.TakeDamage(skill_damage)로 호출할 예정
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // 부딪힌 대상의 태그가 Skill인지 확인
-        if (collision.gameObject.CompareTag("Skill"))
+        if(_enemy_main.enemy_type == "Boss")
         {
-            Debug.Log($"[Enemy] 총알 피격. 사망 상태 : {_is_dead}");
-            // 체력보다 많은 데미지를 줘서 즉사시킴
-            TakeDamage(100.0f);
+            InGameManager.instance.Victory();
         }
+        else
+        {
+            _is_dead = true;
+
+            OnEnemyDeath?.Invoke(transform.position);
+            Debug.Log($"{gameObject.name} 사망 신호 발송 및 풀 반환");
+
+            // kill 카운트 증가
+            InGameManager.instance.KillCount();
+
+            // 본체인 Enemy.cs에게 사망 알림
+            _enemy_main.OnDeath();
+        }
+        
     }
 }

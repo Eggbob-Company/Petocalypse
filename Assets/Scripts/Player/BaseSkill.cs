@@ -66,6 +66,7 @@ public class BaseSkill : PoolAble
         {
             // 데미지 주기 (damage * Player.might)
             float final_damage = _data.damage * Player.instance.might;
+            Debug.Log($"[BaseSkill] final_damage : {final_damage}");
 
             // 때린 대상이 일반 몬스터일 경우
             EnemyHealth enemy_health = collision.GetComponent<EnemyHealth>();
