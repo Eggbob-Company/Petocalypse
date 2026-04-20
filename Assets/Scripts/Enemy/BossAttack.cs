@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Boss))]
 public class BossAttack : MonoBehaviour
 {
     [Header("--- Attack Settings ---")]
@@ -9,34 +8,37 @@ public class BossAttack : MonoBehaviour
     [Header("--- Spread Attack ---")]
     public int projectile_count = 8; // 발사할 총알 개수
 
-    private Boss _boss;
+    private Enemy _enemy_main;
     private Transform _target;
     private float _attack_timer = 0f;
 
     void Awake()
     {
-        _boss = GetComponent<Boss>();
+        _enemy_main = GetComponent<Enemy>();
     }
 
     void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null) _target = player.transform;
-
-        if (fire_point == null) fire_point = transform; 
+        if (Enemy.target != null) _target = Enemy.target;
+        else
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null) _target = player.transform;
+        }
+        if (fire_point == null) fire_point = transform;
     }
 
     void Update()
     {
-        if (_target == null || _boss == null) return;
+        if (_target == null || _enemy_main == null) return;
 
         float distance = Vector2.Distance(transform.position, _target.position);
 
-        if (distance <= _boss.attack_range)
+        if (distance <= _enemy_main.attack_range)
         {
             _attack_timer += Time.deltaTime;
             
-            if (_attack_timer >= _boss.attack_rate)
+            if (_attack_timer >= _enemy_main.attack_rate)
             {
                 ShootSpread(); // 8방향 발사 함수 호출
                 _attack_timer = 0f; 
@@ -68,10 +70,11 @@ public class BossAttack : MonoBehaviour
             bullet.transform.rotation = Quaternion.identity;
 
             // 방향 설정
-            BossBullet bulletScript = bullet.GetComponent<BossBullet>();
-            if (bulletScript != null)
+            BossBullet boss_bullet = bullet.GetComponent<BossBullet>();
+            if (boss_bullet != null)
             {
-                bulletScript.SetDirection(fireDirection);
+                boss_bullet.SetDirection(fireDirection);
+                boss_bullet.damage = _enemy_main.base_damage;
             }
         }
     }

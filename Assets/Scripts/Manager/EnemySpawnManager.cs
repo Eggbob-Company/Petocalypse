@@ -75,7 +75,7 @@ public class EnemySpawnManager : MonoBehaviour
         return new Vector2(random_x, random_y); // 좌표 추출, spawn_pos에 저장됨
     }
 
-    public void SpawnAtPosition(string object_name, Vector2 spawn_position) // 좌표 위치에서 소환
+    public void SpawnAtPosition(string object_name, int enemy_id, Vector2 spawn_position) // 좌표 위치에서 소환
     {
         if (ObjectPoolManager.instance == null) return;
 
@@ -88,7 +88,7 @@ public class EnemySpawnManager : MonoBehaviour
             Enemy enemy = obj.GetComponent<Enemy>();
             if(enemy != null)
             {
-                enemy.InitEnemy();
+                enemy.InitEnemy(enemy_id);
             }
 
         }

@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 2332472905611731093}
   - component: {fileID: 5802408277596746468}
   - component: {fileID: 6280078666316783999}
-  - component: {fileID: -4123466964844955634}
-  - component: {fileID: 8990311522317054131}
-  - component: {fileID: 8749773774106151821}
+  - component: {fileID: 2971979253203776453}
+  - component: {fileID: 32194480233091847}
+  - component: {fileID: 6655083673547803068}
   m_Layer: 6
-  m_Name: Boss
+  m_Name: ZombieKing
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ PolygonCollider2D:
       - {x: 0.5, y: 0}
       - {x: 0.25, y: 0.43359375}
   m_UseDelaunayMesh: 0
---- !u!114 &-4123466964844955634
+--- !u!114 &2971979253203776453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,19 +176,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 6868527507706691438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ec86d68ebe1294887d5602837995eb, type: 3}
+  m_Script: {fileID: 11500000, guid: f25f9db2c545cf2449f228145ded0c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster_id: 2001
-  monster_name: 
+  enemy_id: 1001
+  enemy_name: 
   max_health: 0
   move_speed: 0
   base_damage: 0
   attack_range: 0
   attack_rate: 0
   exp_reward: 0
-  monster_type: 
---- !u!114 &8990311522317054131
+  enemy_type: 
+--- !u!114 &32194480233091847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868527507706691438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98875370c57ee5f46a3d7e566b115590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _current_health: 0
+  _is_dead: 0
+--- !u!114 &6655083673547803068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,16 +216,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fire_point: {fileID: 0}
   projectile_count: 8
---- !u!114 &8749773774106151821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6868527507706691438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e92d07deebb26741bfaa55f7048256c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  current_health: 0
