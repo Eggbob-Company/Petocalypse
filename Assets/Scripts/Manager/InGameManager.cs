@@ -80,6 +80,15 @@ public class InGameManager : MonoBehaviour
         is_boss_stage = true; // 보스 스테이지 진입 표시
         ClearMapObjects(); // 맵에 있던 오브젝트 삭제
 
+        // ExpSpawnManager에서 exp 소환 이벤트 구독 해제 함수 호출
+        ExpSpawnManager exp_spawn_manager = FindObjectOfType<ExpSpawnManager>();
+        if (exp_spawn_manager != null)
+        {
+            exp_spawn_manager.StopSpawnExp();
+        }
+
+        // 보스용 타이머로 변경
+
         GameObject boss_prefab = Resources.Load<GameObject>("Prefabs/Enemy/ZombieKing");
         if (boss_prefab != null)
         {
@@ -95,6 +104,8 @@ public class InGameManager : MonoBehaviour
         }
         else Debug.Log("보스 프리팹을 찾을 수 없습니다.");
 
+        // 보스용 HP바 활성화
+
         // 현재 맵 범위를 보스용으로 교체
         _current_map_min = boss_map_min;
         _current_map_max = boss_map_max;
@@ -109,18 +120,18 @@ public class InGameManager : MonoBehaviour
         if(vcam != null) vcam.transform.position = boss_spawn_pos;
         
         // 카메라 범위 업데이트
-        CameraRange cameraRange = FindObjectOfType<CameraRange>();
-        if (cameraRange != null)
+        CameraRange camera_range = FindObjectOfType<CameraRange>();
+        if (camera_range != null)
         {
-            cameraRange.SetRange();
+            camera_range.SetRange();
         }
 
         // 몬스터 소환 범위 업데이트
-        EnemySpawnManager spawnManager = FindObjectOfType<EnemySpawnManager>();
-        if (spawnManager != null)
+        EnemySpawnManager enemy_spawn_manager = FindObjectOfType<EnemySpawnManager>();
+        if (enemy_spawn_manager != null)
         {
             // 잡몹 몬스터 웨이브 변경
-            spawnManager.SetMapRange();
+            enemy_spawn_manager.SetMapRange();
         }
 
     }

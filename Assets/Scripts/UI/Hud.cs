@@ -27,6 +27,15 @@ public class Hud : MonoBehaviour
         switch (type)
         {
             case InfoType.Exp:
+                // 보스맵으로 이동하면 exp 바가 사라지도록
+                if (InGameManager.instance.is_boss_stage)
+                {
+                    if(my_slider.gameObject.activeSelf)
+                    {
+                        my_slider.gameObject.SetActive(false);
+                    }
+                    return;
+                }
                 float current_exp = InGameManager.instance.exp;
                 float max_exp = ExpDataManager.instance.GetRequiredExp(InGameManager.instance.level);
                 my_slider.value = current_exp / max_exp;
