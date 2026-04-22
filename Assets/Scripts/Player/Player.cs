@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
             max_hp = data.max_hp + GameDataManager.instance.bonus_max_hp;
             recovery = data.recovery + GameDataManager.instance.bonus_recovery;
             move_speed = data.move_speed + GameDataManager.instance.bonus_speed;
-            might = data.might;
+            might = data.might + GameDataManager.instance.bonus_might;
             area = data.area;
             projectile = data.projectile_speed;
             duration = data.duration;
