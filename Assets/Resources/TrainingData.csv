@@ -1,5 +1,5 @@
 id,name,upgrade_value,base_cost,cost_mult,max_level,desc_key
 100,Max_HP,10,100,50,5,desc_max_hp
 200,Speed,1,100,50,3,desc_speed
-300,Recovery,0.2,100,50,3,desc_recovery
+300,Recovery,0.2,100,50,5,desc_recovery
 400,Might,0.2,100,50,5,desc_might
