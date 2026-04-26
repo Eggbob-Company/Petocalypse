@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 357836158}
   - component: {fileID: 357836157}
   m_Layer: 0
-  m_Name: ReinforceDataManager
+  m_Name: TrainingDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 429129452}
   - component: {fileID: 429129451}
   m_Layer: 0
-  m_Name: ReinforceHandler
+  m_Name: TrainingHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
