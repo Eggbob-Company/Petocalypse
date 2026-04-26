@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/InGame.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Reinforce.unity
-    guid: 111c91d8a2511284ebb550307d97d548
+    path: Assets/Scenes/Training.unity
+    guid: 342e247bf48c62e44980716f8cf0b10c
   m_configObjects: {}

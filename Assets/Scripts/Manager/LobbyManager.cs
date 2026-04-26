@@ -13,9 +13,9 @@ public class LobbyManager : MonoBehaviour
         SceneManager.LoadScene("InGame");
     }
 
-    public void OnClickReinforce()
+    public void OnClickTraining()
     {
         // 실제 넘어가고 싶은 씬의 이름
-        SceneManager.LoadScene("Reinforce");
+        SceneManager.LoadScene("Training");
     }
 }
