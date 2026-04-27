@@ -35,6 +35,10 @@ public class LevelUpPopUp : MonoBehaviour
             // 만렙 모드: 3, 4번 슬롯만 활성화
             all_slots[3].SetActive(true);
             all_slots[4].SetActive(true);
+
+            all_slots[3].GetComponent<SkillUIItem>().InitMaxLevel(0); // 골드 슬롯
+            all_slots[4].GetComponent<SkillUIItem>().InitMaxLevel(1); // 체력 슬롯
+
         }
         else
         {

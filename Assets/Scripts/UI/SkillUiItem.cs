@@ -18,6 +18,9 @@ public class SkillUIItem : MonoBehaviour
 
     private PlayerAttack _player_attack; // 참조를 저장할 변수
 
+    private bool _is_reward_slot = false;
+    private int _reward_type = 0; // 0: 골드, 1: 체력
+
     // Start는 게임 시작 시 딱 한 번 실행됩니다.
     void Start()
     {
@@ -49,6 +52,32 @@ public class SkillUIItem : MonoBehaviour
         UpdateBadgeStatus(_skill_data.id);
     }
 
+    public void InitMaxLevel(int type)
+    {
+        _is_reward_slot = true;
+        _reward_type = type;
+
+        // 만렙 보상 시 배지 비활성화
+        if (new_badge != null) new_badge.SetActive(false);
+        if (level_up_badge != null) level_up_badge.SetActive(false);
+
+        if (type == 0) // 골드
+        {
+            text_name.text = "Take a Gold";
+            text_level.text = "";
+            text_desc.text = $"즉시 {InGameManager.instance.gold_reward_amount} 골드를 획득합니다.";
+            image_icon.sprite = Resources.Load<Sprite>("Icons/Earn_gold");
+        }
+        else // 체력
+        {
+            text_name.text = "Heal";
+            text_level.text = "";
+            text_desc.text = $"즉시 체력을 {InGameManager.instance.health_reward_amount} 회복합니다.";
+            image_icon.sprite = Resources.Load<Sprite>("Icons/Recovery_health");
+        }
+
+    }
+
     private void UpdateBadgeStatus(int skill_id)
     {
         
@@ -74,8 +103,23 @@ public class SkillUIItem : MonoBehaviour
     // 버튼 클릭 이벤트
     public void OnClickSkill()
     {
+        if (_is_reward_slot)
+        {
+            if (_reward_type == 0) // 골드 보상 실행
+            {
+                InGameManager.instance.gold += InGameManager.instance.gold_reward_amount;
+                Debug.Log($"골드 획득! 현재 골드: {InGameManager.instance.gold}");
+            }
+            else // 체력 보상 실행
+            {
+                Player.instance.health.MaxLevelUpHeal(InGameManager.instance.health_reward_amount);
+                Debug.Log($"체력 회복! 현재 체력: {Player.instance.health.CurrentHP}");
+            }
+            _is_reward_slot = false;
+            LevelUpPopUp.instance.OnSelect();
+        }
         
-        if (_player_attack != null)
+        else if (_player_attack != null)
         {
             // PlayerAttack 리스트에 스킬 추가 또는 레벨업 수행
             _player_attack.AddOrUpgradeSkill(_skill_data.id);
