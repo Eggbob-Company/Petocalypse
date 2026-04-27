@@ -5,6 +5,7 @@ public class InGameManager : MonoBehaviour
 {
     // 다른 스크립트에서 쉽게 접근할 수 있도록 싱글톤(인스턴스) 패턴 사용
     public static InGameManager instance;
+    public EnemyHealth boss_health;
 
     [Header("UI Connect")]
     public GameOverPopUp game_over_ui;
@@ -92,7 +93,8 @@ public class InGameManager : MonoBehaviour
         GameObject boss_prefab = Resources.Load<GameObject>("Prefabs/Enemy/ZombieKing");
         if (boss_prefab != null)
         {
-            GameObject boss_instance = Instantiate(boss_prefab, boss_spawn_pos + new Vector2(0, 5), Quaternion.identity);            
+            GameObject boss_instance = Instantiate(boss_prefab, boss_spawn_pos + new Vector2(0, 5), Quaternion.identity);
+            boss_health = boss_instance.GetComponent<EnemyHealth>();
             // 보스 세팅 초기화
             Enemy enemy = boss_instance.GetComponent<Enemy>();
             if(enemy != null)
