@@ -7,7 +7,7 @@ using TMPro; // TextMeshPro를 쓰려면 사용해야 함.
 
 public class Hud : MonoBehaviour
 {
-    public enum InfoType { Exp, Gold, Level, Kill, Time, Health } // 열거형으로 변수를 만들면 읽고 사용하기 편함.
+    public enum InfoType { Exp, Gold, Level, Kill, Time, Health, BossHP } // 열거형으로 변수를 만들면 읽고 사용하기 편함.
     public InfoType type;
 
     TMP_Text my_text;
@@ -17,6 +17,7 @@ public class Hud : MonoBehaviour
     {
         my_text = GetComponent<TMP_Text>();
         my_slider = GetComponent<Slider>();
+        EnemyHealth enemy_health = GetComponent<EnemyHealth>();
     }
     // 데이터가 Update()에서 갱신이 될 때마다, 그 연산이 다 끝날 때쯤 갱신을 해야 하니까 LateUpdate()를 사용.
     void LateUpdate()
@@ -27,6 +28,15 @@ public class Hud : MonoBehaviour
         switch (type)
         {
             case InfoType.Exp:
+                // 보스맵으로 이동하면 exp 바가 사라지도록
+                if (InGameManager.instance.is_boss_stage)
+                {
+                    if(my_slider.gameObject.activeSelf)
+                    {
+                        my_slider.gameObject.SetActive(false);
+                    }
+                    return;
+                }
                 float current_exp = InGameManager.instance.exp;
                 float max_exp = ExpDataManager.instance.GetRequiredExp(InGameManager.instance.level);
                 my_slider.value = current_exp / max_exp;
@@ -61,6 +71,12 @@ public class Hud : MonoBehaviour
                 float current_health = InGameManager.instance.health;
                 float max_health = InGameManager.instance.max_health;
                 my_slider.value = current_health / max_health;
+                break;
+
+            case InfoType.BossHP:
+                float current_boss_health = InGameManager.instance.boss_health.CurrentHP; // 현재 보스 체력 가져오기
+                float max_boss_health = InGameManager.instance.boss_health.MaxHP; // 최대 보스 체력 가져오기
+                my_slider.value = current_boss_health / max_boss_health;
                 break;
         }
     }

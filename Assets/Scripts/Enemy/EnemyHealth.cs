@@ -7,8 +7,13 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("--- Status ---")]
     // [SerializeField]를 추가하여 private 기능을 사용하며 인스펙터 창에서 해당 변수 값 표시되게끔 함
-    [SerializeField] private float _current_health; // 현재 체력 (내부 계산용)
+    [SerializeField] private float _current_hp; // 현재 체력 (내부 계산용)
+    [SerializeField] private float _max_hp; // 최대 체력
     [SerializeField] private bool _is_dead = false; // 사망 여부 체크 (중복 사망 방지)
+
+    // 외부에서 읽기용 프로퍼티
+    public float CurrentHP => _current_hp;
+    public float MaxHP => _max_hp;
 
     private Enemy _enemy_main;
 
@@ -25,7 +30,8 @@ public class EnemyHealth : MonoBehaviour
 
     public void InitHealth(float max)
     {
-        _current_health = max;
+        _current_hp = max;
+        _max_hp = max;
         _is_dead = false;
         Debug.Log($"[EnemyHealth] 체력 초기화 완료");
     }
@@ -37,11 +43,11 @@ public class EnemyHealth : MonoBehaviour
         if (_is_dead) return;
 
         // 체력 감소
-        _current_health -= damage;
-        Debug.Log($"[Enemy] 입은 대미지: {damage} | 남은 체력: {_current_health}");
+        _current_hp -= damage;
+        Debug.Log($"[Enemy] 입은 대미지: {damage} | 남은 체력: {_current_hp}");
 
         // 체력이 0 이하가 되면 사망 처리
-        if (_current_health <= 0)
+        if (_current_hp <= 0)
         {
             Die();
         }
