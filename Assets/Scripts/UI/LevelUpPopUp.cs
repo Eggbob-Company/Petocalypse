@@ -36,8 +36,8 @@ public class LevelUpPopUp : MonoBehaviour
             all_slots[3].SetActive(true);
             all_slots[4].SetActive(true);
 
-            all_slots[3].GetComponent<SkillUiItem>().InitMaxLevel(0); // 골드 슬롯
-            all_slots[4].GetComponent<SkillUiItem>().InitMaxLevel(1); // 체력 슬롯
+            all_slots[3].GetComponent<SkillUIItem>().InitMaxLevel(0); // 골드 슬롯
+            all_slots[4].GetComponent<SkillUIItem>().InitMaxLevel(1); // 체력 슬롯
 
         }
         else
@@ -48,8 +48,8 @@ public class LevelUpPopUp : MonoBehaviour
             for (int i = 0; i < selected_skills.Count; i++)
             {
                 all_slots[i].SetActive(true);
-                // 각 슬롯에 붙어있는 SkillUiItem 컴포넌트를 가져와서 초기화
-                SkillUiItem item = all_slots[i].GetComponent<SkillUiItem>();
+                // 각 슬롯에 붙어있는 SkillUIItem 컴포넌트를 가져와서 초기화
+                SkillUIItem item = all_slots[i].GetComponent<SkillUIItem>();
                 if (item != null)
                 {
                     item.Init(selected_skills[i]);
