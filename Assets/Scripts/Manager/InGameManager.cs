@@ -33,6 +33,13 @@ public class InGameManager : MonoBehaviour
     [Header("Level Data")]
     public int pending_level_up_count = 0; // 레벨 경험치가 한 번에 들어왔을 때, 팝업을 띄워야 하는 수
     
+    [Header("Max Level Reward Settings")]
+    public float health_reward_amount = 30f;
+    public int gold_reward_amount = 100;
+
+    // 만렙 보상 여부를 체크하는 깃발
+    public bool is_max_reward_trigger = false;
+
     [Header("Test Data")]
     public float exp = 0f;
     public int level = 1;
@@ -167,14 +174,16 @@ public class InGameManager : MonoBehaviour
         while (exp >= req_exp)
         {
             // 만렙 미만이면 일반 레벨업 보상
-            if (level <= max_level)
+            if (level < max_level)
             {
                 LevelUp(req_exp);
+                is_max_reward_trigger = false; // 레벨 6이 되지 않게 하기 위해
             }
             // 만렙 이상이면 만렙 이후 레벨업 보상
             else
             {
                 MaxLevelUP(req_exp);
+                is_max_reward_trigger = true;
             }
 
             pending_level_up_count++; // 팝업을 띄워야 할 횟수 누적
