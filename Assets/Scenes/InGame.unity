@@ -1623,6 +1623,7 @@ MonoBehaviour:
   game_time: 0
   health: 0
   max_health: 0
+  boss_id: 2001
 --- !u!1 &314554122
 GameObject:
   m_ObjectHideFlags: 0
@@ -4822,6 +4823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 0
   bonus_max_hp: 0
+  bonus_speed: 0
 --- !u!4 &981740168
 Transform:
   m_ObjectHideFlags: 0
@@ -9239,6 +9241,9 @@ MonoBehaviour:
   - object_name: DamageText
     prefab: {fileID: 4316625361297443667, guid: d50a1c42f1935834c8a25a3caee6b870, type: 3}
     count: 50
+  - object_name: BossBullet
+    prefab: {fileID: 1621616760382292397, guid: 5dabbb9ebf3e08244b45e23e77a9d736, type: 3}
+    count: 10
 --- !u!4 &1867975579
 Transform:
   m_ObjectHideFlags: 0

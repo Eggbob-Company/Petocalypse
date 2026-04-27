@@ -6,7 +6,7 @@ public class WaveData
     // CSV의 헤더 이름과 완전히 똑같이 적어야 한다.
     public int time_min;
     public int time_sec;
-    public int monster_id;
+    public int enemy_id;
     public int amount;
     public float interval;
 

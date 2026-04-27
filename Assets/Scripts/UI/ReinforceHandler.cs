@@ -8,13 +8,30 @@ using UnityEngine.SceneManagement; // 씬 이동을 위해 추가
 public class ReinforceHandler : MonoBehaviour
 {
     [Header("UI References")]
+    // 보유 골드
     public TMP_Text gold_text;
+    // hp 강화 관련
     public TMP_Text upgrade_hp_text;
     public TMP_Text hp_need_gold_text;
     public Button upgrade_hp_button;
+    // speed 강화 관련
+    public TMP_Text upgrade_speed_text;
+    public TMP_Text speed_need_gold_text;
+    public Button upgrade_speed_button;
+    // recovery 강화 관련
+    public TMP_Text upgrade_recovery_text;
+    public TMP_Text recovery_need_gold_text;
+    public Button upgrade_recovery_button;
+    // might 강화 관련
+    public TMP_Text upgrade_might_text;
+    public TMP_Text might_need_gold_text;
+    public Button upgrade_might_button;
     
     [Header("Settings")]
     public int hp_upgrade_cost;
+    public int speed_upgrade_cost;
+    public int recovery_upgrade_cost;
+    public int might_upgrade_cost;
 
     void Start()
     {
@@ -29,15 +46,20 @@ public class ReinforceHandler : MonoBehaviour
         SceneManager.LoadScene("Lobby");
     }
 
-    // 강화에 필요한 비용을 계산하는 함수
+    // 강화에 필요한 비용을 계산하는 함수 (강화할 때 마다 50원씩 증가)
     void UpdateCost()
     {
-        if (GameDataManager.instance != null)
-        {
-            hp_upgrade_cost = 100 + (GameDataManager.instance.bonus_max_hp * 5);
-        }
+        // hp 강화 비용 계산
+        if (GameDataManager.instance != null) hp_upgrade_cost = 100 + (GameDataManager.instance.bonus_max_hp * 5);
+        // speed 강화 비용 계산
+        if (GameDataManager.instance != null) speed_upgrade_cost = 100 + (GameDataManager.instance.bonus_speed * 50);
+        // recovery 강화 비용 계산
+        if (GameDataManager.instance != null) recovery_upgrade_cost = 100 + (int)(GameDataManager.instance.bonus_recovery * 250);
+        // might 강화 비용 계산
+        if (GameDataManager.instance != null) might_upgrade_cost = 100 + (int)(GameDataManager.instance.bonus_might * 250);
     }
 
+    // HP 강화 로직
     public void OnClickUpgradeHP()
     {
         // 보유 골드량이 강화에 필요한 돈보다 많은지 확인
@@ -62,15 +84,103 @@ public class ReinforceHandler : MonoBehaviour
         }
     }
 
+    // Speed 강화 로직
+    public void OnClickUpgradeSpeed()
+    {
+        // 보유 골드량이 강화에 필요한 돈보다 많은지 확인
+        // 아래 골드가 부족하면 버튼 비활성화를 해놨기에 굳이 필요하진 않지만 혹시모를 상황을 대비하기 위해 추가함
+        if (GameDataManager.instance.gold >= speed_upgrade_cost)
+        {
+            // 강화에 소모된 골드만큼 보유 골드량 감소 및 이동 속도 1 증가
+            GameDataManager.instance.gold -= speed_upgrade_cost;
+            GameDataManager.instance.bonus_speed += 1;
+            
+            // 변경사항 저장
+            GameDataManager.instance.SaveData();
+
+            // 강화 비용 및 화면 갱신
+            UpdateCost();
+            UpdateUI();
+            Debug.Log("강화 성공!");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+    // Recovery 강화 로직
+    public void OnClickUpgradeRecovery()
+    {
+        // 보유 골드량이 강화에 필요한 돈보다 많은지 확인
+        // 아래 골드가 부족하면 버튼 비활성화를 해놨기에 굳이 필요하진 않지만 혹시모를 상황을 대비하기 위해 추가함
+        if (GameDataManager.instance.gold >= recovery_upgrade_cost)
+        {
+            // 강화에 소모된 골드만큼 보유 골드량 감소 및 채력 재생 0.2 증가
+            GameDataManager.instance.gold -= recovery_upgrade_cost;
+            GameDataManager.instance.bonus_recovery += 0.2f;
+            
+            // 변경사항 저장
+            GameDataManager.instance.SaveData();
+
+            // 강화 비용 및 화면 갱신
+            UpdateCost();
+            UpdateUI();
+            Debug.Log("강화 성공!");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+    // Might 강화 로직
+    public void OnClickUpgradeMight()
+    {
+        // 보유 골드량이 강화에 필요한 돈보다 많은지 확인
+        // 아래 골드가 부족하면 버튼 비활성화를 해놨기에 굳이 필요하진 않지만 혹시모를 상황을 대비하기 위해 추가함
+        if (GameDataManager.instance.gold >= might_upgrade_cost)
+        {
+            // 강화에 소모된 골드만큼 보유 골드량 감소 및 채력 재생 0.2 증가
+            GameDataManager.instance.gold -= might_upgrade_cost;
+            GameDataManager.instance.bonus_might += 0.2f;
+            
+            // 변경사항 저장
+            GameDataManager.instance.SaveData();
+
+            // 강화 비용 및 화면 갱신
+            UpdateCost();
+            UpdateUI();
+            Debug.Log("강화 성공!");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
     // 화면의 텍스트들 새로고침
     public void UpdateUI()
     {
         gold_text.text = $"보유 골드: {GameDataManager.instance.gold}G";
-        hp_need_gold_text.text = $"필요 골드: {hp_upgrade_cost}G";
+
         upgrade_hp_text.text = $"추가 HP: +{GameDataManager.instance.bonus_max_hp}";
+        hp_need_gold_text.text = $"필요 골드: {hp_upgrade_cost}G";
+
+        upgrade_speed_text.text = $"추가 Speed: +{GameDataManager.instance.bonus_speed}";
+        speed_need_gold_text.text = $"필요 골드: {speed_upgrade_cost}G";
+
+        upgrade_recovery_text.text = $"추가 Recovery: +{GameDataManager.instance.bonus_recovery}";
+        recovery_need_gold_text.text = $"필요 골드: {recovery_upgrade_cost}G";
+
+        upgrade_might_text.text = $"추가 Might: +{GameDataManager.instance.bonus_might}";
+        might_need_gold_text.text = $"필요 골드: {might_upgrade_cost}G";
         
         // (보너스) 돈 없으면 버튼 비활성화 시키기
         upgrade_hp_button.interactable = (GameDataManager.instance.gold >= hp_upgrade_cost);
+        upgrade_speed_button.interactable = (GameDataManager.instance.gold >= speed_upgrade_cost);
+        upgrade_recovery_button.interactable = (GameDataManager.instance.gold >= recovery_upgrade_cost);
+        upgrade_might_button.interactable = (GameDataManager.instance.gold >= might_upgrade_cost);
     }
 
     // 테스트용: 골드 획득
@@ -82,11 +192,14 @@ public class ReinforceHandler : MonoBehaviour
         Debug.Log("골드 100 획득!");
     }
 
-    // 테스트용: 획득한 Hp와 Gold 초기화
+    // 테스트용: 증가된 스탯들과 Gold 초기화
     public void ResetData()
     {
         GameDataManager.instance.gold = 0;
         GameDataManager.instance.bonus_max_hp = 0;
+        GameDataManager.instance.bonus_speed = 0;
+        GameDataManager.instance.bonus_recovery = 0;
+        GameDataManager.instance.bonus_might = 0;
         GameDataManager.instance.SaveData();
         UpdateCost();
         UpdateUI();

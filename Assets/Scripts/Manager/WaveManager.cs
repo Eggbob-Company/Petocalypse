@@ -43,8 +43,8 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator CoSpawnWave(WaveData data)
     {
-        // 몬스터 id로 MonsterData csv에 name 반환
-        string monster_name = MonsterDataManager.instance.GetMonsterData(data.monster_id).name;
+        // 몬스터 id로 EnemyData csv에 name 반환
+        string enemy_name = EnemyDataManager.instance.GetEnemyData(data.enemy_id).name;
 
         for (int i = 0; i < data.amount; i++)
         {
@@ -53,7 +53,7 @@ public class WaveManager : MonoBehaviour
 
             if (spawn_pos != Vector2.zero)
             {
-                _spawn_manager.SpawnAtPosition(monster_name, spawn_pos);
+                _spawn_manager.SpawnAtPosition(enemy_name, data.enemy_id, spawn_pos);
             }
 
             // csv에 설정된 interval만큼 대기 후 소환

@@ -44,9 +44,9 @@ public class Player : MonoBehaviour
         {
             // CSV 컬럼명과 1:1 매칭
             max_hp = data.max_hp + GameDataManager.instance.bonus_max_hp;
-            recovery = data.recovery;
-            move_speed = data.move_speed;
-            might = data.might;
+            recovery = data.recovery + GameDataManager.instance.bonus_recovery;
+            move_speed = data.move_speed + GameDataManager.instance.bonus_speed;
+            might = data.might + GameDataManager.instance.bonus_might;
             area = data.area;
             projectile = data.projectile_speed;
             duration = data.duration;
