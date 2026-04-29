@@ -10,6 +10,7 @@ public class InGameManager : MonoBehaviour
     [Header("UI Connect")]
     public GameOverPopUp game_over_ui;
     public LevelUpPopUp level_up_ui;
+    public GameObject boss_hp_bar;
 
     [Header("Map Settings")]
     public Vector2 stage_map_min;    // 일반 맵 왼쪽 아래
@@ -113,7 +114,8 @@ public class InGameManager : MonoBehaviour
         }
         else Debug.Log("보스 프리팹을 찾을 수 없습니다.");
 
-        // 보스용 HP바 활성화
+        // 보스 HP바 활성화
+        if (boss_hp_bar != null) boss_hp_bar.SetActive(true);
 
         // 현재 맵 범위를 보스용으로 교체
         _current_map_min = boss_map_min;
