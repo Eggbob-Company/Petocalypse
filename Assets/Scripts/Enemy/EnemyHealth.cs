@@ -59,16 +59,16 @@ public class EnemyHealth : MonoBehaviour
         // 이미 죽은 상태라면 데미지 로직 무시
         if (_is_dead) return;
 
+        _is_dead = true;
+
         if(_enemy_main.enemy_type == "Boss")
         {
             InGameManager.instance.Victory();
+            Destroy(gameObject);
         }
         else
         {
-            _is_dead = true;
-
             OnEnemyDeath?.Invoke(transform.position);
-            Debug.Log($"{gameObject.name} 사망 신호 발송 및 풀 반환");
 
             // kill 카운트 증가
             InGameManager.instance.KillCount();

@@ -10,6 +10,7 @@ public class InGameManager : MonoBehaviour
     [Header("UI Connect")]
     public GameOverPopUp game_over_ui;
     public LevelUpPopUp level_up_ui;
+    public GameObject boss_hp_bar;
 
     [Header("Map Settings")]
     public Vector2 stage_map_min;    // 일반 맵 왼쪽 아래
@@ -46,7 +47,8 @@ public class InGameManager : MonoBehaviour
     public int max_level = 5; // 임시 만렙
     public int gold = 0;
     public int kill = 0;
-    public float max_game_time = 300f; // 기본 5분 
+    public float max_game_time = 300f; // 기본 5분
+    public float boss_limit_time = 180f; // 보스 타이머: 3분
     public float game_time = 0f;
     public float health;
     public float max_health;
@@ -95,7 +97,8 @@ public class InGameManager : MonoBehaviour
             exp_spawn_manager.StopSpawnExp();
         }
 
-        // 보스용 타이머로 변경
+        game_time = 0f;
+        max_game_time = boss_limit_time;
 
         GameObject boss_prefab = Resources.Load<GameObject>("Prefabs/Enemy/ZombieKing");
         if (boss_prefab != null)
@@ -113,7 +116,8 @@ public class InGameManager : MonoBehaviour
         }
         else Debug.Log("보스 프리팹을 찾을 수 없습니다.");
 
-        // 보스용 HP바 활성화
+        // 보스 HP바 활성화
+        if (boss_hp_bar != null) boss_hp_bar.SetActive(true);
 
         // 현재 맵 범위를 보스용으로 교체
         _current_map_min = boss_map_min;
@@ -169,6 +173,7 @@ public class InGameManager : MonoBehaviour
 
         // 레벨 업까지 필요한 경험치 가져오기
         int req_exp = ExpDataManager.instance.GetRequiredExp(level);
+        Debug.Log($"현재 경험치: {exp} / 필요 경험치: {req_exp}");
 
         // 초과된 경험치가 없을 때까지 반복
         while (exp >= req_exp)

@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d910bfa2346d4a47982775b91d57ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  type: 6
 --- !u!114 &47186825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,6 +1783,7 @@ MonoBehaviour:
   boss_health: {fileID: 0}
   game_over_ui: {fileID: 1638170732}
   level_up_ui: {fileID: 1010543816}
+  boss_hp_bar: {fileID: 47186822}
   stage_map_min: {x: -9, y: -12}
   stage_map_max: {x: 9, y: 12}
   boss_map_min: {x: 40, y: -12}
@@ -1791,6 +1792,9 @@ MonoBehaviour:
   is_boss_stage: 0
   is_game_over: 0
   pending_level_up_count: 0
+  health_reward_amount: 30
+  gold_reward_amount: 100
+  is_max_reward_trigger: 0
   exp: 0
   level: 1
   max_level: 5
@@ -5039,6 +5043,7 @@ MonoBehaviour:
   bonus_max_hp: 0
   bonus_speed: 0
   bonus_recovery: 0
+  bonus_might: 0
 --- !u!4 &981740168
 Transform:
   m_ObjectHideFlags: 0

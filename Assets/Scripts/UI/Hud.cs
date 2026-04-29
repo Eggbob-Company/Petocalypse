@@ -73,9 +73,18 @@ public class Hud : MonoBehaviour
                 break;
 
             case InfoType.BossHP:
-                float current_boss_health = InGameManager.instance.boss_health.CurrentHP; // 현재 보스 체력 가져오기
-                float max_boss_health = InGameManager.instance.boss_health.MaxHP; // 최대 보스 체력 가져오기
-                my_slider.value = current_boss_health / max_boss_health;
+                if(InGameManager.instance.boss_health){
+                    float current_boss_health = InGameManager.instance.boss_health.CurrentHP; // 현재 보스 체력 가져오기
+                    float max_boss_health = InGameManager.instance.boss_health.MaxHP; // 최대 보스 체력 가져오기
+                    my_slider.value = current_boss_health / max_boss_health;
+
+                    my_slider.value = (max_boss_health > 0) ? current_boss_health / max_boss_health : 0;
+                }
+                else
+                {
+                    // 보스가 없으면 HP바를 0으로 만듦
+                    my_slider.value = 0;
+                }
                 break;
         }
     }
