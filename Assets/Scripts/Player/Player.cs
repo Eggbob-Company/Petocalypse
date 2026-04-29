@@ -42,11 +42,17 @@ public class Player : MonoBehaviour
         
         if (data != null)
         {
+            // 훈련소로 인해 증가된 스탯
+            float bonus_hp = GameDataManager.instance.GetStatValue(100);
+            float bonus_speed = GameDataManager.instance.GetStatValue(200);
+            float bonus_recovery = GameDataManager.instance.GetStatValue(300);
+            float bonus_might = GameDataManager.instance.GetStatValue(400);
+
             // CSV 컬럼명과 1:1 매칭
-            max_hp = data.max_hp + GameDataManager.instance.bonus_max_hp;
-            recovery = data.recovery + GameDataManager.instance.bonus_recovery;
-            move_speed = data.move_speed + GameDataManager.instance.bonus_speed;
-            might = data.might + GameDataManager.instance.bonus_might;
+            max_hp = data.max_hp + bonus_hp;
+            recovery = data.recovery + bonus_recovery;
+            move_speed = data.move_speed + bonus_speed;
+            might = data.might + bonus_might;
             area = data.area;
             projectile = data.projectile_speed;
             duration = data.duration;

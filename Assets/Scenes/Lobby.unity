@@ -220,7 +220,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 0
-  bonus_max_hp: 0
+  level_hp: 0
+  level_speed: 0
+  level_recovery: 0
+  level_might: 0
 --- !u!4 &81640739
 Transform:
   m_ObjectHideFlags: 0
@@ -1006,7 +1009,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2016883775}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: OnClickReinforce
+        m_MethodName: OnClickTraining
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
