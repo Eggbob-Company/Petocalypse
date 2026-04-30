@@ -189,6 +189,7 @@ public class InGameManager : MonoBehaviour
             {
                 MaxLevelUP(req_exp);
                 is_max_reward_trigger = true;
+                Debug.Log("만렙 달성");
             }
 
             pending_level_up_count++; // 팝업을 띄워야 할 횟수 누적
