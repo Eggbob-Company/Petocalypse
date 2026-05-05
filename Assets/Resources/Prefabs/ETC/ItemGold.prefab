@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9cb31fe66118a4098647117635a2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item_type: 0
+  item_type: 2
   max_bounce: 3
   x_force: 3
   y_force: 15
