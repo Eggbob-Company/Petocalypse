@@ -18,16 +18,16 @@ public class Item : MonoBehaviour
     private int _current_bounce = 0; // 현재까지 반동 횟수
     private bool _is_grounded = true; // 땅에 닿았는가
 
-    private float max_height;
-    private float current_height;
+    private float _max_height;
+    private float _current_height;
 
     public Transform sprite;
     public Transform shadow;
 
     void Start()
     {
-        current_height = Random.Range(y_force - 1, y_force); // 처음 튀어오를 높이 랜덤 설정
-        max_height = current_height;
+        _current_height = Random.Range(y_force - 1, y_force); // 처음 튀어오를 높이 랜덤 설정
+        _max_height = _current_height;
         Initialize(new Vector2(Random.Range(-x_force, x_force), Random.Range(-x_force, x_force)));
     }
 
@@ -35,12 +35,12 @@ public class Item : MonoBehaviour
     {
         if(!_is_grounded)
         {
-            current_height += -gravity * Time.deltaTime;
-            sprite.position += new Vector3(0, current_height, 0) * Time.deltaTime;
+            _current_height += -gravity * Time.deltaTime;
+            sprite.position += new Vector3(0, _current_height, 0) * Time.deltaTime;
             transform.position += (Vector3)_direction * Time.deltaTime;
 
-            float totalVelocity = Mathf.Abs(current_height) + Mathf.Abs(max_height);
-            float scaleXY = Mathf.Abs(current_height) / totalVelocity;
+            float totalVelocity = Mathf.Abs(_current_height) + Mathf.Abs(_max_height);
+            float scaleXY = Mathf.Abs(_current_height) / totalVelocity;
             shadow.localScale = Vector2.one * Mathf.Clamp(scaleXY, 0.5f, 1.0f);
 
             CheckGroundHit();
@@ -50,9 +50,9 @@ public class Item : MonoBehaviour
     void Initialize(Vector2 direction) // 초기값 설정
     {
         _is_grounded = false;
-        max_height /= 1.5f;
+        _max_height /= 1.5f;
         _direction = direction;
-        current_height = max_height;
+        _current_height = _max_height;
         _current_bounce++;
     }
 
