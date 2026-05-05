@@ -3812,7 +3812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item_box_prefab: {fileID: 6260340715139146180, guid: fdda174186c4dd64ba5484e3e3ea8fa5, type: 3}
-  spawn_interval: 15
+  spawn_interval: 30
 --- !u!4 &700988486
 Transform:
   m_ObjectHideFlags: 0

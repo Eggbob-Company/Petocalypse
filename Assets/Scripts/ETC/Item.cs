@@ -9,14 +9,14 @@ public class Item : MonoBehaviour
 
     
     [Header("--- Drop Effect Setting ---")]
-    public int max_bounce = 3;
-    public float x_force = 3f;
-    public float y_force = 15f;
+    public int max_bounce = 3; // 최대 반동 횟수
+    public float x_force = 3f; // x축으로 튀는 힘
+    public float y_force = 15f; // y축으로 튀는 힘
     public float gravity = 25f;
 
-    private Vector2 _direction;
-    private int _current_bounce = 0;
-    private bool _is_grounded = true;
+    private Vector2 _direction; // 아이템이 튀어오르는 방향과 속도를 저장하는 벡터
+    private int _current_bounce = 0; // 현재까지 반동 횟수
+    private bool _is_grounded = true; // 땅에 닿았는가
 
     private float max_height;
     private float current_height;
@@ -26,7 +26,7 @@ public class Item : MonoBehaviour
 
     void Start()
     {
-        current_height = Random.Range(y_force - 1, y_force);
+        current_height = Random.Range(y_force - 1, y_force); // 처음 튀어오를 높이 랜덤 설정
         max_height = current_height;
         Initialize(new Vector2(Random.Range(-x_force, x_force), Random.Range(-x_force, x_force)));
     }
@@ -47,7 +47,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    void Initialize(Vector2 direction)
+    void Initialize(Vector2 direction) // 초기값 설정
     {
         _is_grounded = false;
         max_height /= 1.5f;
@@ -56,7 +56,7 @@ public class Item : MonoBehaviour
         _current_bounce++;
     }
 
-    void CheckGroundHit()
+    void CheckGroundHit() // 아이템이 땅에 닿았는지 확인
     {
         if (sprite.position.y < shadow.position.y)
         {
