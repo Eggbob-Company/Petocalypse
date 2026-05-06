@@ -9,6 +9,7 @@ TagManager:
   - Exp
   - Ground
   - Area
+  - Item
   layers:
   - Default
   - TransparentFX

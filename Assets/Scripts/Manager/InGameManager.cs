@@ -163,6 +163,12 @@ public class InGameManager : MonoBehaviour
             Destroy(exp);
         }
 
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+        foreach (GameObject item in items)
+        {
+            Destroy(item);
+        }
+
         Debug.Log("맵에 남은 오브젝트 제거 완료");
     }
     
