@@ -30,7 +30,7 @@ public class LevelUpPopUp : MonoBehaviour
 
         foreach (GameObject slot in all_slots) slot.SetActive(false);
 
-        if (InGameManager.instance.level > InGameManager.instance.max_level)
+        if (InGameManager.instance.is_max_reward_trigger)
         {
             // 만렙 모드: 3, 4번 슬롯만 활성화
             all_slots[3].SetActive(true);
