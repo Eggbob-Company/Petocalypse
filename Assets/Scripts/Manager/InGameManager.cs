@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using System.Collections;
 
 public class InGameManager : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class InGameManager : MonoBehaviour
 
     // 만렙 보상 여부를 체크하는 깃발
     public bool is_max_reward_trigger = false;
+    // 자석 효과 활성화 여부 체크
+    public bool is_magnet_active = false;
 
     [Header("Test Data")]
     public float exp = 0f;
@@ -209,6 +212,21 @@ public class InGameManager : MonoBehaviour
         {
             level_up_ui.Show();
         }
+    }
+
+    // 자석 기능 활성화 함수
+    public void ActivateMagnet(float duration)
+    {
+        StopCoroutine("MagnetRoutine"); // 이미 실행 중이면 중단하고 새로 시작
+        StartCoroutine(MagnetRoutine(duration));
+    }
+
+    // 자석 지속 시간 관리 코루틴
+    private IEnumerator MagnetRoutine(float duration)
+    {
+        is_magnet_active = true; // 자석 활성화
+        yield return new WaitForSeconds(duration); // duration만큼 대기
+        is_magnet_active = false; // 자석 비활성화
     }
 
     // 일반 레벨업 보상

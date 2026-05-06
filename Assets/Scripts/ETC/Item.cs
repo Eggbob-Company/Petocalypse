@@ -87,16 +87,18 @@ public class Item : MonoBehaviour
 
     void ApplyEffect()
     {
-        // 추후 효과 구현
         switch (item_type)
         {
             case ItemType.Magnet:
+                InGameManager.instance.ActivateMagnet(3.0f);
                 Debug.Log("아이템 : 자석 효과");
                 break;
             case ItemType.Heal:
+                Player.instance.health.MaxLevelUpHeal(InGameManager.instance.health_reward_amount);
                 Debug.Log("아이템 : 체력 회복");
                 break;
             case ItemType.Gold:
+                InGameManager.instance.gold += 10;
                 Debug.Log("아이템 : 골드 획득");
                 break;
         }
