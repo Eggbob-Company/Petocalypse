@@ -259,6 +259,11 @@ public class InGameManager : MonoBehaviour
         if(is_game_over) return; // 이미 종료되었다면 무시
         is_game_over = true;
 
+        // 게임 끝나면 게임매니저에 있는 골드에 인게임에서 획득한 골드 더하기
+        GameDataManager.instance.gold += gold;
+        // 데이터 저장
+        GameDataManager.instance.SaveData(); 
+
         if(game_over_ui != null)
         {
             game_over_ui.Show(isVictory); // GameOverPopUp.cs에서 팝업 호출
