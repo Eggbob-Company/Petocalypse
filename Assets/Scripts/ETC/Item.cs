@@ -87,10 +87,10 @@ public class Item : MonoBehaviour
 
     void ApplyEffect()
     {
-        // 추후 효과 구현
         switch (item_type)
         {
             case ItemType.Magnet:
+                InGameManager.instance.ActivateMagnet(3.0f);
                 Debug.Log("아이템 : 자석 효과");
                 break;
             case ItemType.Heal:
