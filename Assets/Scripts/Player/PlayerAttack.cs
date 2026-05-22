@@ -65,14 +65,6 @@ public class PlayerAttack : MonoBehaviour
 
     private void SpawnBullet(SkillData data)
     {
-        /*
-        // 프리팹 로드 (prefab_name 컬럼 활용)
-        GameObject prefab = Resources.Load<GameObject>($"Prefabs/Skill/{data.prefab_name}");
-        if (prefab == null){
-            Debug.LogError($"[System] Prefabs/{data.prefab_name} 경로에서 프리팹을 찾을 수 없습니다!");
-            return;
-        }*/
-
         // 방향 결정
         Vector2 dir = GetDirection(data);
         if (dir == Vector2.zero) return;
@@ -81,7 +73,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (obj == null)
         {
-            Debug.LogError($"{data.prefab_name} 오브젝트를 풀에서 가져올 수 없습니다.");
+            Debug.LogError($"[PlayerAttack] {data.prefab_name} 오브젝트를 풀에서 가져올 수 없습니다.");
             return;
         }
 

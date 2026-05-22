@@ -9,7 +9,7 @@ public class Enemy : PoolAble
     [Header("--- Enemy Stats ---")]
     public int enemy_id;
     public string enemy_name;
-    public float max_health;
+    public float max_hp;
     public float move_speed;
     public float base_damage;
     public float attack_range;
@@ -42,7 +42,7 @@ public class Enemy : PoolAble
         if (data == null) return;
 
         enemy_name = data.name;
-        max_health = data.max_health;
+        max_hp = data.max_hp;
         move_speed = data.move_speed;
         base_damage = data.base_damage;
         attack_range = data.attack_range;
@@ -53,7 +53,7 @@ public class Enemy : PoolAble
         EnemyHealth enemy_health = GetComponent<EnemyHealth>();
         if (enemy_health != null)
         {
-            enemy_health.InitHealth(max_health);
+            enemy_health.InitHealth(max_hp);
         }
     }
 

@@ -34,8 +34,6 @@ public class ExpSpawn : PoolAble // 오브젝트 풀 사용을 위한 PoolAble �
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("경험치 획득");
-            
             // 경험치 추가
             InGameManager.instance.GetExp(5);
 

@@ -6,7 +6,7 @@ using TMPro; // TextMeshPro를 쓰려면 사용해야 함.
 
 public class Hud : MonoBehaviour
 {
-    public enum InfoType { Exp, Gold, Level, Kill, Time, Health, BossHP } // 열거형으로 변수를 만들면 읽고 사용하기 편함.
+    public enum InfoType { Exp, Gold, Level, Kill, Time, PlayerHP, BossHP } // 열거형으로 변수를 만들면 읽고 사용하기 편함.
     public InfoType type;
 
     TMP_Text my_text;
@@ -66,19 +66,19 @@ public class Hud : MonoBehaviour
                 break;
                 // 스테이지 클리어 타임에서 현재 진행시간을 빼서 타이머에 보이게 하기.
             
-            case InfoType.Health:
-                float current_health = InGameManager.instance.health;
-                float max_health = InGameManager.instance.max_health;
-                my_slider.value = current_health / max_health;
+            case InfoType.PlayerHP:
+                float player_current_hp = InGameManager.instance.player_current_hp;
+                float player_max_hp = InGameManager.instance.player_max_hp;
+                my_slider.value = player_current_hp / player_max_hp;
                 break;
 
             case InfoType.BossHP:
-                if(InGameManager.instance.boss_health){
-                    float current_boss_health = InGameManager.instance.boss_health.CurrentHP; // 현재 보스 체력 가져오기
-                    float max_boss_health = InGameManager.instance.boss_health.MaxHP; // 최대 보스 체력 가져오기
-                    my_slider.value = current_boss_health / max_boss_health;
+                if(InGameManager.instance.boss_hp){
+                    float boss_current_hp = InGameManager.instance.boss_hp.CurrentHP; // 현재 보스 체력 가져오기
+                    float boss_max_hp = InGameManager.instance.boss_hp.MaxHP; // 최대 보스 체력 가져오기
+                    my_slider.value = boss_current_hp / boss_max_hp;
 
-                    my_slider.value = (max_boss_health > 0) ? current_boss_health / max_boss_health : 0;
+                    my_slider.value = (boss_max_hp > 0) ? boss_current_hp / boss_max_hp : 0;
                 }
                 else
                 {

@@ -42,7 +42,7 @@ public class BossBullet : PoolAble
     {
         if (other.CompareTag("Player"))
         {
-            Player.instance.health.TakeDamage(damage);
+            Player.instance.player_health.TakeDamage(damage);
             // 플레이어를 맞추면 반환
             ReleaseObject(); 
         }

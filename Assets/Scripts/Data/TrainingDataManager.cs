@@ -6,7 +6,7 @@ public class TrainingDataManager : MonoBehaviour
     // 싱글톤 구현
     public static TrainingDataManager instance;
 
-   // 파싱된 데이터를 담아둘 딕셔너리 (key 값은 id)
+    // Key: id, Value: 해당 훈련 항목의 data
     private Dictionary<int, TrainingData> _training_dict = new Dictionary<int, TrainingData>();
 
 
@@ -25,29 +25,29 @@ public class TrainingDataManager : MonoBehaviour
 
     void LoadTrainingData()
     {
-        // Resources/TrainingData.csv 파일을 읽어옴
+        // csv 파일을 읽어와서 텍스트 덩어리로 만들어줌.
         TextAsset csv_data = Resources.Load<TextAsset>("TrainingData");
 
         if (csv_data == null)
         {
-            Debug.LogError("[System] TrainingData.csv 파일을 찾을 수 없습니다.");
+            Debug.LogError("[TrainingDataManager] TrainingData.csv 파일을 찾을 수 없습니다.");
             return;
         }
 
-        // 줄 단위로 나누기
+        // 텍스트를 줄바꿈(엔터) 기준으로 쪼개기.
         string[] lines = csv_data.text.Split('\n');
 
-        // 파싱 (i=1부터 시작하여 헤더 스킵)
+        // 첫 번째 줄(0번 인덱스)은 id, name과 같은 헤더니까 1번부터 시작.
         for (int i = 1; i < lines.Length; i++)
         {
             // 비어있는 줄 스킵
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
 
-            // 쉼표로 칸 나누기
+            // 한 줄을 쉼표(,) 기준으로 구분
             string[] row = lines[i].Split(',');
 
-            TrainingData data = new TrainingData();
             // 각 칸의 데이터를 타입에 맞게 파싱 (Trim으로 유령 공백 제거)
+            TrainingData data = new TrainingData();
             data.id = int.Parse(row[0]);
             data.name = row[1];
             data.upgrade_value = float.Parse(row[2]);
@@ -59,10 +59,10 @@ public class TrainingDataManager : MonoBehaviour
             _training_dict.Add(data.id, data);
         }
         
-        Debug.Log($"[System] TrainingData 로드 완료. 총 {_training_dict.Count}개의 데이터가 저장되었습니다.");
+        Debug.Log($"[System] TrainingData 로드 완료. 총 데이터 개수: {_training_dict.Count}");
     }
 
-    // 데이터를 가져올 때 사용하는 함수
+    // 특정 ID 값을 전달 받은 후 해당 ID의 훈련 데이터를 반환하는 함수
     public TrainingData GetTrainingData(int id)
     {
         if (_training_dict.TryGetValue(id, out TrainingData data))
@@ -70,11 +70,11 @@ public class TrainingDataManager : MonoBehaviour
             return data;
         }
 
-        Debug.LogWarning($"[System] {id}번의 강화 데이터를 찾을 수 없습니다.");
+        Debug.LogError($"[TrainingDataManager] {id}번의 강화 데이터를 찾을 수 없습니다.");
         return null;
     }
 
-    // 모든 데이터를 가져올 때 사용하는 함수
+    // 모든 훈련 데이터를 가져올 때 사용하는 함수
     public List<TrainingData> GetAllTrainingData()
     {
         return new List<TrainingData>(_training_dict.Values);
