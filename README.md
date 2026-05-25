@@ -22,7 +22,7 @@ Pet + Apocalypse라는 뜻의 펫토칼립스는, 아포칼립스 세계에 떨�
 
 ### 설치 방법
 
-#### Android
+#### Android - [🎮다운로드 받기](https://github.com/Eggbob-Company/Petocalypse/releases/download/v1.0.0/Petocalypse.apk)
 #### IOS
 
 
