@@ -1697,6 +1697,7 @@ MonoBehaviour:
   health_reward_amount: 30
   gold_reward_amount: 100
   is_max_reward_trigger: 0
+  is_magnet_active: 0
   exp: 0
   level: 1
   max_level: 5
@@ -1939,6 +1940,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1123215711261293886, guid: 55e2a2d712879af4882c6243475759ed, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1592265356735362878, guid: 55e2a2d712879af4882c6243475759ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4419,6 +4424,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1832922180}
   - {fileID: 612898783}
   - {fileID: 635614791}
   - {fileID: 314554123}
@@ -4444,7 +4450,7 @@ GameObject:
   - component: {fileID: 877611587}
   - component: {fileID: 877611588}
   m_Layer: 5
-  m_Name: Health
+  m_Name: PlayerHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5205,7 +5211,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 200
   m_TargetDisplay: 0
 --- !u!224 &1010543815
 RectTransform:
@@ -5546,7 +5552,7 @@ GameObject:
   - component: {fileID: 1068662479}
   - component: {fileID: 1068662480}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: PlayerHPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24201,7 +24207,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 500
   m_TargetDisplay: 0
 --- !u!224 &1508687973
 RectTransform:
@@ -24217,7 +24223,6 @@ RectTransform:
   m_Children:
   - {fileID: 817021533}
   - {fileID: 266527754}
-  - {fileID: 1832922180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -24934,7 +24939,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 300
   m_TargetDisplay: 0
 --- !u!224 &1728607936
 RectTransform:
@@ -33936,7 +33941,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 893025463}
-  m_Father: {fileID: 1508687973}
+  m_Father: {fileID: 818441766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -42824,6 +42829,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 108716996}
   - {fileID: 1814681711}
   - {fileID: 1471790486}
   - {fileID: 619394802}
@@ -42832,14 +42838,13 @@ SceneRoots:
   - {fileID: 1867975579}
   - {fileID: 497020370}
   - {fileID: 550070021}
+  - {fileID: 888482960}
+  - {fileID: 981740168}
   - {fileID: 2000975613}
   - {fileID: 552632969}
-  - {fileID: 818441766}
   - {fileID: 709857268}
-  - {fileID: 981740168}
+  - {fileID: 818441766}
   - {fileID: 1728607936}
   - {fileID: 1508687973}
   - {fileID: 1010543815}
   - {fileID: 1911739102}
-  - {fileID: 108716996}
-  - {fileID: 888482960}
