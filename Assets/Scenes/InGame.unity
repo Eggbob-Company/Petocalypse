@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1869daa0bab1a049bcf6a5e0a5fe6e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss_health: {fileID: 0}
+  boss_hp: {fileID: 0}
   game_over_ui: {fileID: 1638170732}
   level_up_ui: {fileID: 1010543816}
   boss_hp_bar: {fileID: 1098644368}
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   is_boss_stage: 0
   is_game_over: 0
   pending_level_up_count: 0
-  health_reward_amount: 30
+  hp_reward_amount: 30
   gold_reward_amount: 100
   is_max_reward_trigger: 0
   is_magnet_active: 0
@@ -1706,8 +1706,8 @@ MonoBehaviour:
   max_game_time: 300
   boss_limit_time: 180
   game_time: 0
-  health: 0
-  max_health: 0
+  player_current_hp: 0
+  player_max_hp: 0
   boss_id: 2001
 --- !u!1 &314554122
 GameObject:
