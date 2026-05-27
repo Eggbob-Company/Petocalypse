@@ -8,15 +8,12 @@ Pet + Apocalypse라는 뜻의 펫토칼립스는, 아포칼립스 세계에 떨�
 - **엔진 :** Unity 2022.3.62f3
 - **개발 기간 :** 2026.01.08 ~ 2026.05.31 (약 5개월)
 
-## 팀원별 역할
+## 팀원 소개
 
-- 홍수진(팀장) : 게임 매니저, 오브젝트 풀링 시스템 개발
-- 정규섭 : 몬스터 로직, 레벨업 시스템, UI 개발
-- 김경현 : DB 구축, 플레이어 시스템 개발
-
-
-<img src="https://github.com/user-attachments/assets/dbc4dcf7-062a-4937-acb6-a6f72f5befe3" width="45%" />
-<img src="https://github.com/user-attachments/assets/f85a5abd-45f3-4a2e-951a-cfaac4d1e8c6" width="45%" />
+|                            홍수진 [팀장]                            |                            정규섭                           |                            김경현                            |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|<p><img src="https://github.com/user-attachments/assets/7bdec2f9-4aae-439a-b7aa-7fbf6c51424f" width="520px"/></p> | <p><img src="https://github.com/user-attachments/assets/dbc4dcf7-062a-4937-acb6-a6f72f5befe3" width="520px" /></p> | <p><img src="https://github.com/user-attachments/assets/f85a5abd-45f3-4a2e-951a-cfaac4d1e8c6" width="520px" /></p> |
+|          게임 매니저, 오브젝트 풀링 시스템 개발          |            몬스터 로직, 레벨업 시스템, UI 개발            |           DB 구축, 플레이어 시스템 개발           |
 
 <br/>
 
