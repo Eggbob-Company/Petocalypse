@@ -72,7 +72,7 @@ public class SkillUIItem : MonoBehaviour
         {
             text_name.text = "Heal";
             text_level.text = "";
-            text_desc.text = $"즉시 체력을 {InGameManager.instance.health_reward_amount} 회복합니다.";
+            text_desc.text = $"즉시 체력을 {InGameManager.instance.hp_reward_amount} 회복합니다.";
             image_icon.sprite = Resources.Load<Sprite>("Icons/Recovery_health");
         }
 
@@ -112,8 +112,8 @@ public class SkillUIItem : MonoBehaviour
             }
             else // 체력 보상 실행
             {
-                Player.instance.health.MaxLevelUpHeal(InGameManager.instance.health_reward_amount);
-                Debug.Log($"체력 회복! 현재 체력: {Player.instance.health.CurrentHP}");
+                Player.instance.player_health.MaxLevelUpHeal(InGameManager.instance.hp_reward_amount);
+                Debug.Log($"체력 회복! 현재 체력: {Player.instance.player_health.CurrentHP}");
             }
             _is_reward_slot = false;
             LevelUpPopUp.instance.OnSelect();

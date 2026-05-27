@@ -44,7 +44,6 @@ public class EnemyHealth : MonoBehaviour
 
         // 체력 감소
         _current_hp -= damage;
-        Debug.Log($"[Enemy] 입은 대미지: {damage} | 남은 체력: {_current_hp}");
 
         // 체력이 0 이하가 되면 사망 처리
         if (_current_hp <= 0)

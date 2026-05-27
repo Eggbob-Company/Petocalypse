@@ -18,7 +18,7 @@ public class EnemySpawnManager : MonoBehaviour
         _enemy_data_manager = FindObjectOfType<EnemyDataManager>(); // 데이터매니저 탐색
         if (_enemy_data_manager == null)
         {
-            Debug.LogError("씬에 EnemyDataManager가 존재하지 않습니다.");
+            Debug.LogError("[EnemySpawnManager] 씬에 EnemyDataManager가 존재하지 않습니다.");
         }
 
         SetMapRange(); // 소환에 필요한 맵 범위 초기화

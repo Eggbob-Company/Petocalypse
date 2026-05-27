@@ -4,13 +4,10 @@ using UnityEngine;
 public class SkillDataManager : MonoBehaviour
 {
     // 싱글톤 구현
-    // ObjectPoolManager에 해당 구현이 되어있어서 오브젝트 풀링을 사용하지 않는 데이터에만 추가
     public static SkillDataManager instance;
 
-    // 키 값으로 데이터 저장
-    // 키 값은 "ID_Level" 형태로 저장 (예: "100_1")
+    // Key: id_level, Value: 해당 skill data
     private Dictionary<string, SkillData> _skill_dict = new Dictionary<string, SkillData>();
-
 
     void Awake()
     {
@@ -23,29 +20,29 @@ public class SkillDataManager : MonoBehaviour
 
     void LoadSkillData()
     {
-        // Resources/SkillData.csv 파일을 읽어옴
+        // csv 파일을 읽어와서 텍스트 덩어리로 만들어줌.
         TextAsset csv_data = Resources.Load<TextAsset>("SkillData");
 
         if (csv_data == null)
         {
-            Debug.LogError("[System] SkillData.csv 파일을 찾을 수 없습니다.");
+            Debug.LogError("[SkillDataManager] SkillData.csv 파일을 찾을 수 없습니다.");
             return;
         }
 
-        // 줄 단위로 나누기
+        // 텍스트를 줄바꿈(엔터) 기준으로 쪼개기.
         string[] lines = csv_data.text.Split('\n');
 
-        // 파싱 (i=1부터 시작하여 헤더 스킵)
+        // 첫 번째 줄(0번 인덱스)은 id, name과 같은 헤더니까 1번부터 시작.
         for (int i = 1; i < lines.Length; i++)
         {
             // 비어있는 줄 스킵
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
 
-            // 쉼표로 칸 나누기
+            // 한 줄을 쉼표(,) 기준으로 구분
             string[] row = lines[i].Split(',');
 
-            SkillData data = new SkillData();
             // 각 칸의 데이터를 타입에 맞게 파싱 (Trim으로 유령 공백 제거)
+            SkillData data = new SkillData();
             data.id          = int.Parse(row[0].Trim());
             data.level       = int.Parse(row[1].Trim());
             data.damage      = float.Parse(row[2].Trim());
@@ -63,13 +60,14 @@ public class SkillDataManager : MonoBehaviour
 
             // "ID_레벨" 형태의 키 생성 (예: "100_1")
             string key = $"{data.id}_{data.level}";
+
             _skill_dict.Add(key, data);
         }
         
-        Debug.Log($"[System] SkillData 로드 완료. 총 {_skill_dict.Count}개의 데이터가 저장되었습니다.");
+        Debug.Log($"[System] SkillData 로드 완료. 총 데이터 개수: {_skill_dict.Count}");
     }
 
-    // 데이터를 가져올 때 사용하는 함수
+    // id와 level 정보를 받은 후 해당 skill 데이터를 반환하는 함수
     public SkillData GetSkillData(int id, int level)
     {
         string key = $"{id}_{level}";
@@ -78,7 +76,7 @@ public class SkillDataManager : MonoBehaviour
             return data;
         }
 
-        Debug.LogWarning($"[System] {id}번의 {level}레벨 스킬 데이터를 찾을 수 없습니다.");
+        Debug.LogError($"[SkillDataManager] {id}번 Skill의 {level}레벨 데이터를 찾을 수 없습니다.");
         return null;
     }
 

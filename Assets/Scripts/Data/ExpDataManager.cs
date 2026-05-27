@@ -4,7 +4,6 @@ using UnityEngine;
 public class ExpDataManager : MonoBehaviour
 {
     // 싱글톤 구현
-    // ObjectPoolManager에 해당 구현이 되어있어서 오브젝트 풀링을 사용하지 않는 데이터에만 추가
     public static ExpDataManager instance;
 
     // Key: 현재 레벨, Value: 다음 레벨의 요구 경험치
@@ -21,24 +20,25 @@ public class ExpDataManager : MonoBehaviour
 
     void LoadExpData()
     {
+        // csv 파일을 읽어와서 텍스트 덩어리로 만들어줌.
         TextAsset csv_data = Resources.Load<TextAsset>("ExpData");
 
         if (csv_data == null)
         {
-            Debug.LogError("[System] ExpData.csv 파일을 찾을 수 없습니다.");
+            Debug.LogError("[ExpDataManager] ExpData.csv 파일을 찾을 수 없습니다.");
             return;
         }
 
-        // 줄 단위로 나누기
+        // 텍스트를 줄바꿈(엔터) 기준으로 쪼개기.
         string[] lines = csv_data.text.Split('\n');
 
-        // 파싱 (i=1부터 시작하여 헤더 스킵)
+        // 첫 번째 줄(0번 인덱스)은 id, name과 같은 헤더니까 1번부터 시작.
         for (int i = 1; i < lines.Length; i++)
         {
             // 비어있는 줄 스킵
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
 
-            // 쉼표로 칸 나누기
+            // 한 줄을 쉼표(,) 기준으로 구분
             string[] row = lines[i].Split(',');
 
             // 각 칸의 데이터를 타입에 맞게 파싱 (Trim으로 유령 공백 제거)
@@ -48,10 +48,10 @@ public class ExpDataManager : MonoBehaviour
             _exp_dict.Add(level, reqExp);
         }
 
-        Debug.Log($"[System] ExpData 로드 완료. 최대 레벨: {_exp_dict.Count}");
+        Debug.Log($"[System] ExpData 로드 완료. 총 데이터 개수: {_exp_dict.Count}");
     }
 
-    // 현재 게임 시간 정보를 받아 발생해야 할 웨이브 데이터를 반환하는 함수
+    // 현재 레벨 정보를 전달 받은 후 다음 레벨까지 필요한 경험치를 반환하는 함수
     public int GetRequiredExp(int currentLevel)
     {
         if (_exp_dict.TryGetValue(currentLevel, out int exp))
@@ -59,7 +59,7 @@ public class ExpDataManager : MonoBehaviour
             return exp;
         }
 
-        // 데이터가 없다면 만렙으로 간주하거나 아주 큰 값 반환
+        Debug.LogError($"[ExpDataManager] {currentLevel}레벨에서 레벨 업까지 필요한 경험치 데이터를 찾을 수 없습니다");
         return int.MaxValue;
     }
 }

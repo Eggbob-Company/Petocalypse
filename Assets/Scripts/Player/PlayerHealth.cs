@@ -67,10 +67,10 @@ public class PlayerHealth : MonoBehaviour
 
         _current_hp += amount;
 
-        // 최대 체력 초과 방지 (InGameManager의 max_health 변수 활용)
-        if (_current_hp > InGameManager.instance.max_health)
+        // 최대 체력 초과 방지 (InGameManager의 player_max_hp 변수 활용)
+        if (_current_hp > InGameManager.instance.player_max_hp)
         {
-            _current_hp = InGameManager.instance.max_health;
+            _current_hp = InGameManager.instance.player_max_hp;
         }
 
         // 체력 변경 이벤트 호출 (UI 업데이트)

@@ -6,7 +6,7 @@ public class InGameManager : MonoBehaviour
 {
     // 다른 스크립트에서 쉽게 접근할 수 있도록 싱글톤(인스턴스) 패턴 사용
     public static InGameManager instance;
-    public EnemyHealth boss_health;
+    public EnemyHealth boss_hp;
 
     [Header("UI Connect")]
     public GameOverPopUp game_over_ui;
@@ -36,7 +36,7 @@ public class InGameManager : MonoBehaviour
     public int pending_level_up_count = 0; // 레벨 경험치가 한 번에 들어왔을 때, 팝업을 띄워야 하는 수
     
     [Header("Max Level Reward Settings")]
-    public float health_reward_amount = 30f;
+    public float hp_reward_amount = 30f;
     public int gold_reward_amount = 100;
 
     // 만렙 보상 여부를 체크하는 깃발
@@ -44,7 +44,7 @@ public class InGameManager : MonoBehaviour
     // 자석 효과 활성화 여부 체크
     public bool is_magnet_active = false;
 
-    [Header("Test Data")]
+    [Header("Game Data")]
     public float exp = 0f;
     public int level = 1;
     public int max_level = 5; // 임시 만렙
@@ -53,8 +53,8 @@ public class InGameManager : MonoBehaviour
     public float max_game_time = 300f; // 기본 5분
     public float boss_limit_time = 180f; // 보스 타이머: 3분
     public float game_time = 0f;
-    public float health;
-    public float max_health;
+    public float player_current_hp;
+    public float player_max_hp;
     public int boss_id = 2001;
 
     void Awake()
@@ -72,14 +72,14 @@ public class InGameManager : MonoBehaviour
         LevelUpPopUp.instance.Show();
         
         // 플레이어의 체력 이벤트 구독
-        Player.instance.health.OnHPChanged += UpdateHealthData;
+        Player.instance.player_health.OnHPChanged += UpdatePlayerHealthData;
 
         // 플레이어 사망 시 게임 결과 호출 
-        Player.instance.health.OnDead += () => ShowGameOverUI(false);
+        Player.instance.player_health.OnDead += () => ShowGameOverUI(false);
 
         // 초기 최대 체력, 현재 체력 값 세팅
-        max_health = Player.instance.max_hp;
-        health = Player.instance.health.CurrentHP;
+        player_max_hp = Player.instance.max_hp;
+        player_current_hp = Player.instance.player_health.CurrentHP;
     }
 
     // 승리 조건: 보스 처치 시 보스 스크립트에서 호출할 것
@@ -107,7 +107,7 @@ public class InGameManager : MonoBehaviour
         if (boss_prefab != null)
         {
             GameObject boss_instance = Instantiate(boss_prefab, boss_spawn_pos + new Vector2(0, 5), Quaternion.identity);
-            boss_health = boss_instance.GetComponent<EnemyHealth>();
+            boss_hp = boss_instance.GetComponent<EnemyHealth>();
             // 보스 세팅 초기화
             Enemy enemy = boss_instance.GetComponent<Enemy>();
             if(enemy != null)
@@ -117,7 +117,7 @@ public class InGameManager : MonoBehaviour
             
             Debug.Log("보스 프리팹 소환 완료!");
         }
-        else Debug.Log("보스 프리팹을 찾을 수 없습니다.");
+        else Debug.LogError("[InGameManager] 보스 프리팹을 찾을 수 없습니다.");
 
         // 보스 HP바 활성화
         if (boss_hp_bar != null) boss_hp_bar.SetActive(true);
@@ -249,9 +249,9 @@ public class InGameManager : MonoBehaviour
     }
 
     // 플레이어 체력 이벤트 구독 시 호출되는 함수
-    void UpdateHealthData(float hp)
+    void UpdatePlayerHealthData(float hp)
     {
-        health = hp;
+        player_current_hp = hp;
     }
 
     public void ShowGameOverUI(bool isVictory)
