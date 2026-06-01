@@ -1944,6 +1944,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 1123215711261293886, guid: 55e2a2d712879af4882c6243475759ed, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1592265356735362878, guid: 55e2a2d712879af4882c6243475759ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0
