@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 7834827782169585188}
   - component: {fileID: 2332472905611731093}
   - component: {fileID: 5802408277596746468}
-  - component: {fileID: 6280078666316783999}
   - component: {fileID: 2971979253203776453}
   - component: {fileID: 32194480233091847}
   - component: {fileID: 6655083673547803068}
+  - component: {fileID: 3921182131839987379}
+  - component: {fileID: 3780120958944369570}
   m_Layer: 6
   m_Name: ZombieKing
   m_TagString: Enemy
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  m_Color: {r: 0.9433962, g: 0.27144888, b: 0.27144888, a: 1}
+  m_Sprite: {fileID: -1845395467, guid: d2d1eb8432adce34a9d848e5f231d91a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,8 +117,58 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &6280078666316783999
-PolygonCollider2D:
+--- !u!114 &2971979253203776453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868527507706691438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25f9db2c545cf2449f228145ded0c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy_id: 1001
+  enemy_name: 
+  max_hp: 0
+  move_speed: 0
+  base_damage: 0
+  attack_range: 0
+  attack_rate: 0
+  exp_reward: 0
+  enemy_type: 
+--- !u!114 &32194480233091847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868527507706691438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98875370c57ee5f46a3d7e566b115590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _current_hp: 0
+  _max_hp: 0
+  _is_dead: 0
+--- !u!114 &6655083673547803068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868527507706691438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fef663a2163b247bc927bf5d22b50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fire_point: {fileID: 0}
+  projectile_count: 8
+--- !u!61 &3921182131839987379
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,67 +203,33 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.8828125}
+    oldSize: {x: 0.8333333, y: 1.1}
     newSize: {x: 1, y: 0.8828125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.25, y: 0.43359375}
-      - {x: -0.5, y: 0}
-      - {x: -0.25, y: -0.43359375}
-      - {x: 0.25, y: -0.43359375}
-      - {x: 0.5, y: 0}
-      - {x: 0.25, y: 0.43359375}
-  m_UseDelaunayMesh: 0
---- !u!114 &2971979253203776453
-MonoBehaviour:
+  serializedVersion: 2
+  m_Size: {x: 0.8333333, y: 1.1}
+  m_EdgeRadius: 0
+--- !u!95 &3780120958944369570
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6868527507706691438}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f25f9db2c545cf2449f228145ded0c04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy_id: 1001
-  enemy_name: 
-  max_health: 0
-  move_speed: 0
-  base_damage: 0
-  attack_range: 0
-  attack_rate: 0
-  exp_reward: 0
-  enemy_type: 
---- !u!114 &32194480233091847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6868527507706691438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98875370c57ee5f46a3d7e566b115590, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _current_health: 0
-  _is_dead: 0
---- !u!114 &6655083673547803068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6868527507706691438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36fef663a2163b247bc927bf5d22b50e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fire_point: {fileID: 0}
-  projectile_count: 8
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ddc3ea8ee4faf2d468f10b4801ac6418, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

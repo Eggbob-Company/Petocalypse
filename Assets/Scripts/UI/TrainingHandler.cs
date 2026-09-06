@@ -151,7 +151,7 @@ public class TrainingHandler : MonoBehaviour
     // 보유 골드 새로고침
     public void UpdateTotalUI()
     {
-        total_gold_text.text = $"Gold: {GameDataManager.instance.gold}";
+        total_gold_text.text = $"{GameDataManager.instance.gold}";
     }
 
     // 테스트용: 골드 획득
